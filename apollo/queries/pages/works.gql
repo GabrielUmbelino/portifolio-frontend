@@ -1,0 +1,21 @@
+{
+  works {
+    id
+    details
+    name
+    image {
+    	url
+      width
+      height
+    },
+    link
+    backgroundColor
+    categories {
+      description
+    }
+    technologies {
+      description
+    }
+    
+  }
+}

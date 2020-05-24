@@ -1,0 +1,7 @@
+{
+  about {
+    id # Or _id if you are using MongoDB
+    description
+		resume
+  }
+}
