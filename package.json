@@ -16,10 +16,10 @@
     "@nuxtjs/apollo": "^4.0.1-rc.1",
     "@nuxtjs/axios": "^5.3.6",
     "ant-design-vue": "^1.1.10",
-    "core-js": "^3.6.5",
     "graphql": "^15.0.0",
     "graphql-tag": "^2.10.3",
-    "nuxt": "^2.0.0",
+    "core-js": "^2.6.5",
+    "nuxt": "2.6.3",
     "strapi-sdk-javascript": "^0.3.3"
   },
   "devDependencies": {
@@ -36,7 +36,7 @@
     "jest": "^24.1.0",
     "node-sass": "^4.14.1",
     "prettier": "^1.19.1",
-    "sass-loader": "^8.0.2",
+    "sass-loader": "^7.1.0",
     "stylelint": "^10.1.0",
     "vue-jest": "^4.0.0-0"
   }
