@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import workQuery from '~/apollo/queries/pages/work.gql'
+import { post } from "~/utils/Strapi.js"
 
 export default {
   data() {
@@ -28,13 +28,34 @@ export default {
       work: {}
     }
   },
-  apollo: {
-    work: {
-      prefetch: true,
-      query: workQuery,
-      variables() {
-        return { id: this.$route.params.id }
-      }
+  mounted() {
+    this.fetch(this.$route.params.id).then(work => this.work = work)  
+  },
+  methods: {
+    async fetch(id) {
+      const data = await post(`
+        {
+          work(id: ${id}) {
+            id
+            details
+            name
+            image {
+              url
+              width
+              height
+            },
+            link
+            backgroundColor
+            categories {
+              description
+            }
+            technologies {
+              description
+            }
+          }
+        }
+      `)
+      return data.work;
     }
   }
 }
