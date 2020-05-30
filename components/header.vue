@@ -14,6 +14,7 @@
   </a-layout-header>
 </template>
 <script>
+import { post } from "~/utils/Strapi.js"
 import pagesQuery from '~/apollo/queries/pages/pages.gql'
 
 export default {
@@ -22,10 +23,13 @@ export default {
       pages: []
     }
   },
-  apollo: {
-    pages: {
-      prefetch: true,
-      query: pagesQuery
+  async mounted() {
+    this.fetch().then(pages => this.pages = pages);
+  },
+  methods: {
+    async fetch() {
+      const { pages } = await post(pagesQuery.loc.source.body)
+      return pages.sort((a, b) =>  a.order < b.order ? -1 : 1)
     }
   }
 }
