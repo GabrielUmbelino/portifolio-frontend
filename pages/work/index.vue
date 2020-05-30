@@ -16,22 +16,19 @@
 </template>
 
 <script>
+import { post } from "~/utils/Strapi.js"
 import worksQuery from '~/apollo/queries/pages/works.gql'
 
 export default {
-  data() {
-    return {
-      works: []
+  computed: {
+    works() {
+      return this.$store.getters["works/list"]
     }
   },
-  apollo: {
-    works: {
-      prefetch: true,
-      query: worksQuery
-    }
-  },
-  mounted() {
-    console.log(this.works)
+  async fetch({ store }) {
+    store.commit("works/empty")
+    const data = await post(worksQuery.loc.source.body)
+    store.commit("works/add", data.works)    
   }
 }
 </script>
