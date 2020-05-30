@@ -10,17 +10,20 @@
 
 <script>
 import aboutQuery from '~/apollo/queries/pages/about.gql'
-
+import { post } from "~/utils/Strapi"
 export default {
   data() {
     return {
-      about: []
+      about: {}
     }
   },
-  apollo: {
-    about: {
-      prefetch: true,
-      query: aboutQuery
+  async mounted() {
+    this.fetch().then(about => this.about = about)
+  },
+  methods: {
+    async fetch() {
+      const data = await post(aboutQuery.loc.source.body)
+      return data.about;
     }
   }
 }
