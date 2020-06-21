@@ -35,10 +35,12 @@ export default {
     async fetch(id) {
       const data = await post(`
         {
-          work(id: ${id}) {
+          project(id: ${id}) {
             id
-            details
-            name
+            details_en
+            details_pt
+            name_en
+            name_pt
             image {
               url
               width
@@ -47,10 +49,12 @@ export default {
             link
             backgroundColor
             categories {
-              description
+              description_en
+              description_pt
             }
             technologies {
-              description
+              description_en
+              description_pt
             }
           }
         }

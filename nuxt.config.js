@@ -47,6 +47,24 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/apollo',
+    ['nuxt-i18n', {
+      locales: [
+        {
+          name: 'Português',
+          code: 'pt',
+          iso: 'pt-BR',
+          file: 'pt-BR.js'
+        },
+        {
+          name: 'English',
+          code: 'en',
+          iso: 'en-US',
+          file: 'en-US.js'
+        },
+      ],
+      langDir: 'lang/',
+      defaultLocale: 'pt',
+    }]
   ],
   apollo: {  
     clientConfigs: {

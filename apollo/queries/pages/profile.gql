@@ -1,7 +1,7 @@
 {
-  about {
+  profile {
     id # Or _id if you are using MongoDB
-    description
-		resume
+    interests_en
+    interests_pt
   }
 }

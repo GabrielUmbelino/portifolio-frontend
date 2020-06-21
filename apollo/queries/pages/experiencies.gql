@@ -1,0 +1,9 @@
+{
+  experiencies {
+    id
+    description_en
+    description_pt
+    start_date 
+    end_date 
+  }
+}

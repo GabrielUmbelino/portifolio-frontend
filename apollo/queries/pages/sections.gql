@@ -1,0 +1,8 @@
+{
+  pages {
+    id
+    description_en
+    description_pt
+    order
+  }
+}
