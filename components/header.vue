@@ -1,29 +1,42 @@
 <template>
-  <a-layout-header>
-    <a-row  type="flex" justify="space-between">
-      <a-col class="gutter-row" :lg="1" :md="2" :xs="3">
-        <a-icon type="smile" theme="twoTone" />
-      </a-col>
-      <a-col class="gutter-row" :lg="10" :md="8" :xs="6">
-        <a-menu
-          mode="horizontal"
-          :default-selected-keys="['2']"
-          :style="{ lineHeight: '64px' }"
-        >
-          <a-menu-item v-for="section in localizedSections" :key="section.id">
-            {{ section.description }}
-          </a-menu-item>
-        </a-menu>
-      </a-col>
-      <a-col class="gutter-row" :lg="1" :md="2" :xs="3">
-        <language-switcher />
+  <div>
+    <a-layout-header>
+      <a-row type="flex" justify="space-between">
+        <a-col class="gutter-row" :lg="1" :md="2" :xs="3">
+          <a-icon type="smile" theme="twoTone" />
+        </a-col>
+        <a-col class="gutter-row" :lg="10" :md="8" :xs="6">
+          <a-menu
+            mode="horizontal"
+            :default-selected-keys="['2']"
+            :style="{ lineHeight: '64px' }"
+          >
+            <a-menu-item v-for="section in localizedSections" :key="section.id">
+              {{ section.description }}
+            </a-menu-item>
+          </a-menu>
+        </a-col>
+        <a-col class="gutter-row" :lg="1" :md="2" :xs="3">
+          <language-switcher />
+        </a-col>
+      </a-row>
+    </a-layout-header>
+    <a-row>
+      <a-col class="gutter-row" :xs="8" :offset="8">
+        <img
+          v-if="headerContent && headerContent.logo"
+          :src="apiUrl+headerContent.logo.url"
+          :width="headerContent.logo.width"
+          :height="headerContent.logo.height"
+        />
       </a-col>
     </a-row>
-  </a-layout-header>
+  </div>
 </template>
 <script>
-import { post } from '~/utils/Strapi.js'
+import { post, apiUrl } from '~/utils/Strapi.js'
 import sectionsQuery from '~/apollo/queries/pages/sections.gql'
+import headerContentQuery from '~/apollo/queries/pages/headerContent.gql'
 import LanguageSwitcher from './languageSwitcher'
 export default {
   components: {
@@ -31,22 +44,32 @@ export default {
   },
   data() {
     return {
-      sections: []
+      sections: [],
+      headerContent: {}
     }
   },
   async mounted() {
-    this.fetch().then((sections) => (this.sections = sections))
+    this.fetch().then(({ headerContent, sections }) => {
+      this.sections = sections
+      this.headerContent = headerContent
+      console.log(this.headerContent)
+    })
   },
   methods: {
     async fetch() {
       const { pages } = await post(sectionsQuery.loc.source.body)
-      return pages.sort((a, b) => (a.order < b.order ? -1 : 1))
+      const { headerContent } = await post(headerContentQuery.loc.source.body)
+
+      return {
+        headerContent,
+        sections: pages.sort((a, b) => (a.order < b.order ? -1 : 1))
+      }
     }
   },
   computed: {
     localizedSections() {
-      const lang = this.$i18n.locale || this.$i18n.defaultLocale;
-      return this.sections.map(locale => ({
+      const lang = this.$i18n.locale || this.$i18n.defaultLocale
+      return this.sections.map((locale) => ({
         id: locale.id,
         description: locale[`description_${lang}`]
       }))
