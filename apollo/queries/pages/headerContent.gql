@@ -5,6 +5,11 @@
       height
       width
     }
+    bannerImage {
+      url
+      height
+      width
+    }
     title_en
     title_pt
     description_en

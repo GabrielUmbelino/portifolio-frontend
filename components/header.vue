@@ -2,8 +2,13 @@
   <div>
     <a-layout-header>
       <a-row type="flex" justify="space-between">
-        <a-col class="gutter-row" :lg="1" :md="2" :xs="3">
-          <a-icon type="smile" theme="twoTone" />
+        <a-col class="gutter-row logo" :lg="1" :md="2" :xs="3">
+          <img
+              v-if="headerContent && headerContent.logo"
+              :src="logoUrl"
+              :width="headerContent.logo.width"
+              :height="headerContent.logo.height"
+            />
         </a-col>
         <a-col class="gutter-row" :lg="10" :md="8" :xs="6">
           <a-menu
@@ -21,16 +26,23 @@
         </a-col>
       </a-row>
     </a-layout-header>
-    <a-row>
-      <a-col class="gutter-row" :xs="8" :offset="8">
-        <img
-          v-if="headerContent && headerContent.logo"
-          :src="apiUrl+headerContent.logo.url"
-          :width="headerContent.logo.width"
-          :height="headerContent.logo.height"
-        />
-      </a-col>
-    </a-row>
+    <div :style="{ background: headerContent.backgroundColor }">
+      
+      <a-row class="header-content">
+        <a-col class="logo" :xs="8" :offset="8">
+          <img
+            v-if="headerContent && headerContent.bannerImage"
+            :src="bannerImageUrl"
+            :width="headerContent.bannerImage.width"
+            :height="headerContent.bannerImage.height"
+          />
+        </a-col>
+        <a-col class="details" :xs="8" :offset="8">
+          <h2>{{localizedHeaderContent.title}}</h2>
+          <span>{{localizedHeaderContent.description}}</span>
+        </a-col>
+      </a-row>
+    </div>
   </div>
 </template>
 <script>
@@ -73,6 +85,20 @@ export default {
         id: locale.id,
         description: locale[`description_${lang}`]
       }))
+    },
+    logoUrl() {
+      return `${apiUrl}${this.headerContent.logo.url}`;
+    },
+    bannerImageUrl() {
+      return `${apiUrl}${this.headerContent.bannerImage.url}`;
+    },
+    localizedHeaderContent() {
+      const lang = this.$i18n.locale || this.$i18n.defaultLocale;
+      return {
+        title: this.headerContent[`title_${lang}`],
+        description: this.headerContent[`description_${lang}`]
+      }
+
     }
   }
 }
@@ -85,10 +111,22 @@ export default {
   box-shadow: none
   background-color: #ffffff
   height: 66px
+  .ant-row-flex
+    height: 100%
+    .logo
+      height: 100%
+      img
+        max-height: 100%
+        max-width: 100%
+        padding: 10px
+.header-content
   .logo
-    width: 120px
-    height: 31px
-    background: rgba(255, 255, 255, 0.2)
-    margin: 16px 28px 16px 0
-    float: left
+    img
+      margin: 65px auto 40px auto
+      display: block
+  .details
+    margin-bottom: 33px
+    > *
+      text-align: center
+      display: block
 </style>
