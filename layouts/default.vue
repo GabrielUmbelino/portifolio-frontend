@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import Header from '../components/header'
-import Footer from '../components/footer'
+import Header from '~/components/layout/header'
+import Footer from '~/components/layout/footer'
 
 export default {
   components: {
@@ -29,6 +29,12 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
+}
+
+body, 
+.ant-layout,
+.ant-layout-footer {
+  background: #fff;
 }
 
 *,
