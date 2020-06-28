@@ -26,30 +26,27 @@
         </a-col>
       </a-row>
     </a-layout-header>
-    <div :style="{ background: headerContent.backgroundColor }">
-      
-      <a-row class="header-content">
-        <a-col class="logo" :xs="8" :offset="8">
-          <img
-            v-if="headerContent && headerContent.bannerImage"
-            :src="bannerImageUrl"
-            :width="headerContent.bannerImage.width"
-            :height="headerContent.bannerImage.height"
-          />
-        </a-col>
-        <a-col class="details" :xs="8" :offset="8">
-          <h2>{{localizedHeaderContent.title}}</h2>
-          <span>{{localizedHeaderContent.description}}</span>
-        </a-col>
-      </a-row>
-    </div>
+    <a-row class="header-content" :style="{ background: headerContent.backgroundColor }">
+      <a-col class="logo" :xs="8" :offset="8">
+        <img
+          v-if="headerContent && headerContent.bannerImage"
+          :src="bannerImageUrl"
+          :width="headerContent.bannerImage.width"
+          :height="headerContent.bannerImage.height"
+        />
+      </a-col>
+      <a-col class="details" :xs="8" :offset="8">
+        <h2>{{localizedHeaderContent.title}}</h2>
+        <span>{{localizedHeaderContent.description}}</span>
+      </a-col>
+    </a-row>
   </div>
 </template>
 <script>
 import { post, apiUrl } from '~/utils/Strapi.js'
 import sectionsQuery from '~/apollo/queries/pages/sections.gql'
 import headerContentQuery from '~/apollo/queries/pages/headerContent.gql'
-import LanguageSwitcher from './languageSwitcher'
+import LanguageSwitcher from '~/components/shared/languageSwitcher'
 export default {
   components: {
     LanguageSwitcher
@@ -64,7 +61,6 @@ export default {
     this.fetch().then(({ headerContent, sections }) => {
       this.sections = sections
       this.headerContent = headerContent
-      console.log(this.headerContent)
     })
   },
   methods: {

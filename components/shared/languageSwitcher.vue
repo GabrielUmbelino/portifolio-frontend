@@ -24,7 +24,7 @@ export default {
       if (!this.$i18n && !this.$i18n.locales.length) {
         return []
       }
-
+      console.log(this.$i18n)
       return this.$i18n.locales
     },
     locale() {

@@ -52,18 +52,17 @@ export default {
         {
           name: 'Português',
           code: 'pt',
-          iso: 'pt-BR',
           file: 'pt-BR.js'
         },
         {
           name: 'English',
           code: 'en',
-          iso: 'en-US',
           file: 'en-US.js'
         },
       ],
       langDir: 'lang/',
       defaultLocale: 'pt',
+      lazy: true,
     }]
   ],
   apollo: {  
@@ -85,6 +84,8 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
+    extend(config, ctx) {
+      config.resolve.alias['vue'] = 'vue/dist/vue.common'
+    }
   }
 }
