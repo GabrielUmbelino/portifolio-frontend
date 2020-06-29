@@ -35,9 +35,12 @@
           :height="headerContent.bannerImage.height"
         />
       </a-col>
-      <a-col class="details" :xs="8" :offset="8">
+      <a-col class="details" :xs="8" :offset="8" align="middle">
         <h2>{{localizedHeaderContent.title}}</h2>
         <span>{{localizedHeaderContent.description}}</span>
+        <a-button @click="headerContent.headerActionLink" type="primary">
+          {{ headerContent.headerActionText }}
+        </a-button>
       </a-col>
     </a-row>
   </div>
@@ -121,8 +124,13 @@ export default {
       margin: 65px auto 40px auto
       display: block
   .details
-    margin-bottom: 33px
+    align-content: center
+    margin-bottom: 60px
     > *
       text-align: center
       display: block
+    > h2
+      font-weight: bold
+    > .ant-btn-primary
+      margin-top: 33px
 </style>

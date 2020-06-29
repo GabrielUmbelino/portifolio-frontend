@@ -65,7 +65,6 @@ export default {
 .profile
   .video
     > div
-      height: 400px
       justify-content: center
       display: flex
   .content
@@ -76,6 +75,7 @@ export default {
         font-size: 1.5rem
         font-weight: bold
         text-transform: uppercase
+        margin-top: -8px
       span
         font-size: 1.1rem
 </style>
