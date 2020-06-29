@@ -1,30 +1,32 @@
 <template>
   <div>
     <a-layout-header>
-      <a-row type="flex" justify="space-between">
-        <a-col class="gutter-row logo" :lg="1" :md="2" :xs="3">
-          <img
-              v-if="headerContent && headerContent.logo"
-              :src="logoUrl"
-              :width="headerContent.logo.width"
-              :height="headerContent.logo.height"
-            />
-        </a-col>
-        <a-col class="gutter-row" :lg="10" :md="8" :xs="6">
-          <a-menu
-            mode="horizontal"
-            :default-selected-keys="['2']"
-            :style="{ lineHeight: '64px' }"
-          >
-            <a-menu-item v-for="section in localizedSections" :key="section.id">
-              {{ section.description }}
-            </a-menu-item>
-          </a-menu>
-        </a-col>
-        <a-col class="gutter-row" :lg="1" :md="2" :xs="3">
-          <language-switcher />
-        </a-col>
-      </a-row>
+      <a-layout-content>
+        <a-row type="flex" justify="space-between">
+          <a-col class="gutter-row logo" :lg="2" :md="4" :xs="6" align="middle">
+            <img
+                v-if="headerContent && headerContent.logo"
+                :src="logoUrl"
+                :width="headerContent.logo.width"
+                :height="headerContent.logo.height"
+              />
+          </a-col>
+          <a-col class="gutter-row" :lg="18" :md="16" :xs="12" align="middle">
+            <a-menu
+              mode="horizontal"
+              :default-selected-keys="['1']"
+              :style="{ lineHeight: '64px' }"
+            >
+              <a-menu-item v-for="section in localizedSections" :key="section.id">
+                {{ section.description }}
+              </a-menu-item>
+            </a-menu>
+          </a-col>
+          <a-col class="gutter-row" :lg="4" :md="4" :xs="6" align="middle">
+            <language-switcher />
+          </a-col>
+        </a-row>
+      </a-layout-content>
     </a-layout-header>
     <a-row class="header-content" :style="{ background: headerContent.backgroundColor }">
       <a-col class="logo" :xs="8" :offset="8">
@@ -109,15 +111,16 @@ export default {
   border-bottom: 1px solid #e8e8e8
   box-shadow: none
   background-color: #ffffff
-  height: 66px
+  .ant-layout-content
+    height: 66px
   .ant-row-flex
     height: 100%
     .logo
       height: 100%
       img
         max-height: 100%
-        max-width: 100%
         padding: 10px
+        width: auto
 .header-content
   .logo
     img
