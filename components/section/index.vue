@@ -24,16 +24,14 @@ export default {
   height: auto
   padding: 68px 0 60px 0 
   h3
+    margin: 0
     text-transform: uppercase
-    transform: rotate(270deg)
-    transform-origin: 0 0
     color: #E2EBEC
     position: absolute
     font-size: 4.64rem
     font-weight: bold
-    bottom: 0px
-    left: 0px
-    margin-bottom: -40px
+    writing-mode: tb-rl
+    transform: rotate(180deg)
   > .content
     margin-left: 90px
  </style>
