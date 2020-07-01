@@ -19,7 +19,9 @@ export default {
 }
 </script>
 <style lang="sass">
+.layout
+  max-width: 1170px
   .ant-layout-content
-    max-width: 1170px
+    max-width: 100%
     margin: auto
 </style>

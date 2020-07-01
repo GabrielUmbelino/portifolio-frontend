@@ -27,8 +27,8 @@ export default {
    ** Global CSS
    */
   css: [
-    'ant-design-vue/dist/antd.css',
-    '~/assets/styles/styles.sass'
+    'ant-design-vue/dist/antd.less',
+    '~/assets/styles/styles.less',
   ],
   /*
    ** Plugins to load before mounting the App
@@ -68,7 +68,7 @@ export default {
       lazy: true,
     }]
   ],
-  apollo: {  
+  apollo: {
     clientConfigs: {
       default: {
         httpEndpoint: 'http://localhost:1337/graphql'
@@ -87,6 +87,15 @@ export default {
     /*
      ** You can extend webpack config here
      */
+    loaders: {
+      less: {
+        javascriptEnabled: true,
+        modifyVars: {
+          'primary-color': 'rgba(222, 12, 101, 1.0)',
+          'component-background': '#ffffff',
+        }
+      }
+    },
     extend(config, ctx) {
       config.resolve.alias['vue'] = 'vue/dist/vue.common'
     }
