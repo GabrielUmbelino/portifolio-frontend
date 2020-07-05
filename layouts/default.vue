@@ -21,8 +21,8 @@ export default {
 <style lang="less">
 html {
   > body  {
-    font-family: 'Cabin';
-    font-size: 16px;
+    font-family: @font-family;
+    font-size: @font-size-base;
     word-spacing: 1px;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
@@ -32,8 +32,7 @@ html {
   }
 }
 body, 
-.ant-layout,
 .ant-layout-footer {
-  background: #fff;
+  background-color: @layout-body-background;
 }
 </style>

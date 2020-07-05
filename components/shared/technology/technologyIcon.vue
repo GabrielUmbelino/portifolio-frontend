@@ -15,7 +15,8 @@ export default {
   }
 }
 </script>
-<style scoped lang="sass">
-.anticon
-  margin: 5px
+<style scoped lang="less">
+.anticon {
+  margin: 5px;
+}
 </style>

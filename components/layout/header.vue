@@ -1,15 +1,9 @@
 <template>
   <div>
-    <a-layout-header>
+    <a-layout-header class="test-class">
       <a-layout-content>
         <a-row type="flex" justify="space-between">
-          <a-col
-            class="gutter-row"
-            :lg="20"
-            :md="18"
-            :xs="16"
-            :offsetalign="middle"
-          >
+          <a-col class="gutter-row" :lg="20" :md="18" :xs="16" offsetalign="middle">
             <a-menu
               mode="horizontal"
               :default-selected-keys="['1']"
@@ -18,9 +12,7 @@
               <a-menu-item
                 v-for="section in localizedSections"
                 :key="section.id"
-              >
-                {{ section.description }}
-              </a-menu-item>
+              >{{ section.description }}</a-menu-item>
             </a-menu>
           </a-col>
           <a-col class="gutter-row" :lg="4" :md="6" :xs="8" align="middle">
@@ -52,11 +44,14 @@
             </figure>
           </a-col>
           <a-col class="details" :xl="16" :md="14" :xs="24" align="middle">
-            <h2>{{ localizedHeaderContent.title }}</h2>
+            <h2 class="primary-title">{{ localizedHeaderContent.title }}</h2>
             <span>{{ localizedHeaderContent.description }}</span>
-            <a-button @click="headerContent.headerActionLink" type="primary">
-              {{ headerContent.headerActionText }}
-            </a-button>
+            <a-button
+              size="large"
+              v-if="headerContent.headerActionLink"
+              @click="headerContent.headerActionLink"
+              type="primary"
+            >{{ headerContent.headerActionText }}</a-button>
           </a-col>
         </a-row>
       </a-col>
@@ -121,13 +116,12 @@ export default {
 </script>
 <style lang="less">
 .ant-layout-header {
+  background-color: @layout-header-background;
   white-space: nowrap;
   border: 0;
-  border-bottom: 1px solid #e8e8e8;
   box-shadow: none;
-  background-color: #ffffff;
   .ant-layout-content {
-    height: 66px;
+    height: @layout-header-height;
   }
   .ant-row-flex {
     height: 100%;
@@ -151,9 +145,9 @@ export default {
   .logo {
     figure {
       border-radius: 100%;
-      // border: solid 3px @primary-color;
+      box-shadow: 0px 0px 6px @primary-color;
+      border: 3px solid @primary-color-1;
       position: relative;
-      background: #262627;
       width: 214px;
       height: 214px;
       img {
@@ -178,7 +172,11 @@ export default {
       display: block;
     }
     > h2 {
-      font-weight: bold;
+      font-family: 'Neoneon';
+      font-size: 2.3rem;
+    }
+    > span {
+      color: @text-color-dark;
     }
     > .ant-btn-primary {
       margin-top: 33px;

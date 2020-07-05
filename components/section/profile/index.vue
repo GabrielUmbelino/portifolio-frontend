@@ -61,21 +61,30 @@ export default {
 }
 </script>
 
-<style lang="sass">
-.profile
-  .video
-    > div
-      justify-content: center
-      display: flex
-  .content
-    > div 
-      &:first-child
-        margin-bottom: 3.125rem
-      h4
-        font-size: 1.5rem
-        font-weight: bold
-        text-transform: uppercase
-        margin-top: -8px
-      span
-        font-size: 1.1rem
+<style lang="less">
+.profile {
+  .video {    
+    > div {
+      justify-content: center;
+      display: flex;
+    }
+  }
+  .content {
+    > div {
+      &:first-child {
+        margin-bottom: 3.125rem;
+      }
+      h4 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-top: -8px;
+      }
+      span {
+        font-size: 1.1rem;
+      }
+    }
+  }
+
+}
 </style>
