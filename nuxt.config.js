@@ -1,3 +1,5 @@
+import {resolve} from 'path'
+
 export default {
   mode: 'spa',
   /*
@@ -66,8 +68,14 @@ export default {
       langDir: 'lang/',
       defaultLocale: 'pt',
       lazy: true,
-    }]
+    }],
+    ['@nuxtjs/style-resources'],
   ],
+  styleResources: {
+      less: [
+        '~/assets/styles/theme.less',
+      ]
+  },
   apollo: {
     clientConfigs: {
       default: {
@@ -90,10 +98,6 @@ export default {
     loaders: {
       less: {
         javascriptEnabled: true,
-        modifyVars: {
-          'primary-color': 'rgba(222, 12, 101, 1.0)',
-          'component-background': '#ffffff',
-        }
       }
     },
     extend(config, ctx) {
