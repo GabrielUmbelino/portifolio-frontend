@@ -1,6 +1,6 @@
 <template>
   <a-layout class="layout">
-    <a-layout-content :style="{ padding: '0 24px', minHeight: '280px' }">
+    <a-layout-content :style="{ minHeight: '280px' }">
       <Section :name="$t('profile')">
         <Profile />
       </Section>
@@ -20,10 +20,9 @@ export default {
 </script>
 <style lang="less">
 .layout {
-  max-width: 1170px;
+  margin: auto;
   .ant-layout-content {
     max-width: 100%;
-    margin: auto;
   }
 }
 </style>

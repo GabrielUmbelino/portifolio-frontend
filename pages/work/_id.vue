@@ -1,5 +1,5 @@
 <template>
-  <a-layout-content :style="{ padding: '0 24px', minHeight: '280px' }">
+  <a-layout-content :style="{ minHeight: '280px' }">
     <a-breadcrumb>
       <a-breadcrumb-item>
         <nuxt-link to="/work">
