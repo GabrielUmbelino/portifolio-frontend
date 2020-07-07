@@ -1,3 +1,5 @@
+import {resolve} from 'path'
+
 export default {
   mode: 'spa',
   /*
@@ -27,8 +29,8 @@ export default {
    ** Global CSS
    */
   css: [
-    'ant-design-vue/dist/antd.css',
-    '~/assets/styles/styles.sass'
+    'ant-design-vue/dist/antd.less',
+    '~/assets/styles/styles.less',
   ],
   /*
    ** Plugins to load before mounting the App
@@ -66,9 +68,15 @@ export default {
       langDir: 'lang/',
       defaultLocale: 'pt',
       lazy: true,
-    }]
+    }],
+    ['@nuxtjs/style-resources'],
   ],
-  apollo: {  
+  styleResources: {
+      less: [
+        '~/assets/styles/theme.less',
+      ]
+  },
+  apollo: {
     clientConfigs: {
       default: {
         httpEndpoint: 'http://localhost:1337/graphql'
@@ -87,6 +95,11 @@ export default {
     /*
      ** You can extend webpack config here
      */
+    loaders: {
+      less: {
+        javascriptEnabled: true,
+      }
+    },
     extend(config, ctx) {
       config.resolve.alias['vue'] = 'vue/dist/vue.common'
     }

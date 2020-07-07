@@ -30,15 +30,19 @@ export default {
   }
 }
 </script>
-<style scoped lang="sass">
-.ant-tag
-  margin-right: 1rem
-  margin-right: 0.9rem
-  div
-    margin: 3px 0
-    line-height: 1.6rem
-    .anticon
-      padding: 3px 3px
-    > span
-      padding: 3px 3px
+<style scoped lang="less">
+.ant-tag {
+  margin-right: 1rem;
+  margin-right: 0.9rem;
+  div {
+    margin: 3px 0;
+    line-height: 1.6rem;
+    .anticon {
+      padding: 3px 3px;
+    }
+    > span {
+      padding: 3px 3px;
+    }
+  }
+}
 </style>
