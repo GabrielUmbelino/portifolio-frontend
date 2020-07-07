@@ -172,7 +172,6 @@ export default {
       display: block;
     }
     > h2 {
-      font-family: 'Neoneon';
       font-size: 2.3rem;
     }
     > span {

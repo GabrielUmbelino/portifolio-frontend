@@ -1,9 +1,9 @@
 <template>
   <a-row class="profile">
-    <a-col class="video" :xs="6" :sm="12">
+    <a-col class="video" :lg="12" :md="24">
       <div v-html="profile.presentationVideoUrl"/>
     </a-col>
-    <a-col class="content" :xs="6" :sm="12">
+    <a-col class="content" :lg="12" :md="24">
       <div class="interests" v-if="localizedProfile.interests">
         <h4>
           {{ $t('interests') }}
@@ -63,6 +63,10 @@ export default {
 
 <style lang="less">
 .profile {
+  margin: auto;
+  > div {
+    padding: 1rem .5rem;
+  }
   .video {    
     > div {
       justify-content: center;
@@ -71,6 +75,9 @@ export default {
   }
   .content {
     > div {
+      max-width: 520px;
+      margin: auto;
+
       &:first-child {
         margin-bottom: 3.125rem;
       }
@@ -85,6 +92,10 @@ export default {
       }
     }
   }
-
+  @media (max-width: 768px) {
+    > div {
+      padding: .5rem 0;
+    }
+  }
 }
 </style>

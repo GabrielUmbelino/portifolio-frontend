@@ -2,7 +2,7 @@
   <a-layout class="layout">
     <a-layout-content
       v-if="works.length"
-      :style="{ padding: '0 24px', minHeight: '280px' }"
+      :style="{ minHeight: '280px' }"
     >
       <a-card v-for="work in works" :key="work.id">
         <h2>
