@@ -21,8 +21,8 @@ export default {
   position: relative;
   height: auto;
   padding: 68px 0 ;
-  max-width: 1170px;
   margin: auto;
+  max-width: 1170px;
   &:after {
     content: "";
     background-color: @layout-sider-background;
