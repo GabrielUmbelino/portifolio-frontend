@@ -1,5 +1,3 @@
-import {resolve} from 'path'
-
 export default {
   mode: 'universal',
   /*
@@ -35,7 +33,10 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/antd-ui'],
+  plugins: [
+    '@/plugins/antd-ui',
+    "@/plugins/vuetimeline.js"
+  ],
   /*
    ** Nuxt.js dev-modules
    */
@@ -57,11 +58,13 @@ export default {
         {
           name: 'Português',
           code: 'pt',
+          locale: 'pt-BR',
           file: 'pt-BR.js'
         },
         {
           name: 'English',
           code: 'en',
+          locale: 'en-US',
           file: 'en-US.js'
         },
       ],
