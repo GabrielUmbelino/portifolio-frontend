@@ -1,6 +1,6 @@
 export default {
   profile: 'Perfil',
-  experiencie: 'Experiencia',
+  experience: 'Experiencia',
   interests: 'Interesses',
   technologies: 'Tecnologias',
   to: 'a',
