@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-layout-header class="test-class">
+    <a-layout-header>
       <a-layout-content>
         <a-row type="flex" justify="space-between">
           <a-col class="gutter-row" :lg="20" :md="18" :xs="16" offsetalign="middle">
@@ -21,41 +21,34 @@
         </a-row>
       </a-layout-content>
     </a-layout-header>
-    <a-row
+    <a-layout-content
       class="header-content"
       :style="{ background: headerContent.backgroundColor }"
       align="middle"
     >
-      <a-col
-        :lg="{ span: 18, offset: 3 }"
-        :md="{ span: 20, offset: 2 }"
-        :sm="{ span: 22, offset: 1 }"
-        :xs="{ span: 24 }"
-      >
-        <a-row>
-          <a-col class="logo" :xl="8" :md="10" :xs="24" align="middle">
-            <figure>
-              <img
-                v-if="headerContent && headerContent.bannerImage"
-                :src="bannerImageUrl"
-                :width="headerContent.bannerImage.width"
-                :height="headerContent.bannerImage.height"
-              />
-            </figure>
-          </a-col>
-          <a-col class="details" :xl="16" :md="14" :xs="24" align="middle">
-            <h2 class="primary-title">{{ localizedHeaderContent.title }}</h2>
-            <span>{{ localizedHeaderContent.description }}</span>
-            <a-button
-              size="large"
-              v-if="headerContent.headerActionLink"
-              @click="headerContent.headerActionLink"
-              type="primary"
-            >{{ headerContent.headerActionText }}</a-button>
-          </a-col>
-        </a-row>
-      </a-col>
-    </a-row>
+      <a-row>
+        <a-col class="logo" :xl="8" :md="10" :xs="24" align="middle">
+          <figure>
+            <img
+              v-if="headerContent && headerContent.bannerImage"
+              :src="bannerImageUrl"
+              :width="headerContent.bannerImage.width"
+              :height="headerContent.bannerImage.height"
+            />
+          </figure>
+        </a-col>
+        <a-col class="details" :xl="16" :md="14" :xs="24" align="middle">
+          <h2 class="primary-title">{{ localizedHeaderContent.title }}</h2>
+          <span>{{ localizedHeaderContent.description }}</span>
+          <a-button
+            size="large"
+            v-if="headerContent.headerActionLink"
+            @click="headerContent.headerActionLink"
+            type="primary"
+          >{{ headerContent.headerActionText }}</a-button>
+        </a-col>
+      </a-row>
+    </a-layout-content>
   </div>
 </template>
 <script>
@@ -135,13 +128,13 @@ export default {
     }
   }
 }
-@media (max-width: 768px) {
-  .header-content {
-    padding: 60px 0;
-  }
-}
 .header-content {
   padding: 153px 0;
+  border-bottom: solid @grey-2 6px;
+  .ant-row {
+    max-width: 850px;
+    margin: auto;
+  }
   .logo {
     figure {
       border-radius: 100%;
@@ -180,6 +173,11 @@ export default {
     > .ant-btn-primary {
       margin-top: 33px;
     }
+  }
+}
+@media (max-width: 768px) {
+  .header-content {
+    padding: 60px 0;
   }
 }
 </style>

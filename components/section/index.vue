@@ -3,6 +3,7 @@
     <h3 class="secondary-title">{{ name }}</h3>
     <div class="content">
       <slot></slot>
+      <hr />
     </div>
   </div>
 </template>
@@ -17,19 +18,18 @@ export default {
 </script>
 <style lang="less">
 .section {
-  border-bottom: solid 2px @text-color-primary;
   position: relative;
   height: auto;
-  padding: 68px 0 ;
+  padding: 2rem 0 ;
   margin: auto;
   max-width: 1170px;
-  &:after {
+  &:before {
     content: "";
     background-color: @layout-sider-background;
     height: 100%;
-    width: calc(100px + 30%);
+    width: calc(100px + 50%);
     position: absolute;
-    margin-left: -30%;
+    margin-left: -50%;
     top: 0;
     left: 0px;
     bottom: 0;
@@ -41,22 +41,39 @@ export default {
     text-transform: uppercase;
     color: @text-color-primary;
     position: absolute;
-    font-size: 4.64rem;
+    font-size: 3.1rem;
     font-weight: bold;
     writing-mode: tb-rl;
     transform: rotate(180deg);
     z-index: 1;
   }
   > .content {
-    padding: 0 60px;
-    margin-left: 90px;
+    padding: 0 90px;
+    margin-left: 100px;
+    z-index: 0;
+    hr {
+      background-color: @heading-color;
+      padding: 1px;
+      border: none;
+      margin: 1.5rem 0;
+    }
+    &:after {
+      content: "";
+    }
+  }
+  &:first-child {
+    padding-top: 4.8rem;
   }
 }
 @media (max-width: 768px) {
   .section {
-    padding: 30px 0;
-    &:after {
-      width: calc(80px + 30%);
+    padding-top: 1.875;
+    padding-bottom: 1.875;
+    &:first-child {
+      padding-top: 1.875;
+    }
+    &:before {
+      width: calc(80px + 50%);
     }
     h3 {
       font-size: 3.125rem;

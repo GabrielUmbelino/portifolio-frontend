@@ -1,9 +1,6 @@
 <template>
-  <a-row class="profile" v-if="profile">
-    <a-col class="video" :lg="12" :md="24">
-      <div v-html="profile.presentationVideoUrl"/>
-    </a-col>
-    <a-col class="content" :lg="12" :md="24">
+  <a-row class="experience">
+    <a-col class="content" :lg="22" :md="24">
       <div class="interests" v-if="localizedProfile.interests">
         <h4>
           {{ $t('interests') }}
@@ -12,7 +9,7 @@
           {{ localizedProfile.interests }}
         </span>
       </div>
-      <div class="technologies">
+      <div class="technologies" v-if="profile.technologies">
         <h4>
           {{ $t('technologies') }}
         </h4>
@@ -36,15 +33,22 @@ export default {
   components: {
     Technology
   },
-  async asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
-    const { profile } = await post(profileQuery.loc.source.body);
-    return { profile }
+  data() {
+    return {
+      profile: {}
+    }
+  },
+  async mounted() {
+    this.fetch().then((profile) => (this.profile = profile))
+  },
+  methods: {
+    async fetch() {
+      const data = await post(profileQuery.loc.source.body)
+      return data.profile
+    }
   },
   computed: {
     localizedProfile() {
-      if (!this.profile) {
-        return 
-      } 
       const lang = this.$i18n.locale || this.$i18n.defaultLocale
       return {
         interests: this.profile[`interests_${lang}`]
@@ -55,25 +59,20 @@ export default {
 </script>
 
 <style lang="less">
-.profile {
+.experience {
   margin: auto;
-  .video {    
-    padding: 0;
-    margin-bottom: 3.125rem;
-    > div {
-      justify-content: left;
-      display: flex;
-      > * {
-        max-width: 100%;
-      }
-    }
+  > div {
+    padding: 1rem .5rem;
   }
+
   .content {
-    padding: 0 .5rem;
     > div {
       max-width: 520px;
       margin: auto;
-      margin-bottom: 3.125rem;
+
+      &:first-child {
+        margin-bottom: 3.125rem;
+      }
       h4 {
         font-size: 1.5rem;
         font-weight: bold;
@@ -88,12 +87,6 @@ export default {
   @media (max-width: 768px) {
     > div {
       padding: .5rem 0;
-    }
-    .video {
-      padding: .5rem 0  ;
-      > div {
-        justify-content: center;
-      }
     }
   }
 }
