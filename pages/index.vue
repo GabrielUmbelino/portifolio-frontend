@@ -4,7 +4,7 @@
       <Section :name="$t('profile')">
         <Profile :profile="profile" />
       </Section>
-      <Section :name="$t('experiencie')">
+      <Section :name="$t('experience')">
         <Experience :experiencies="experiencies" />
       </Section>
     </a-layout-content>
