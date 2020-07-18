@@ -1,6 +1,6 @@
 <template>
   <div class="section">
-    <h3 class="secondary-title">{{ name }}</h3>
+    <h3 class="primary-title">{{ name }}</h3>
     <div class="content">
       <slot></slot>
       <hr />
@@ -39,10 +39,8 @@ export default {
   h3 {
     margin: 0;
     text-transform: uppercase;
-    color: @text-color-primary;
     position: absolute;
     font-size: 3.1rem;
-    font-weight: bold;
     writing-mode: tb-rl;
     transform: rotate(180deg);
     z-index: 1;

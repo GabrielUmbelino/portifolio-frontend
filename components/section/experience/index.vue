@@ -1,65 +1,48 @@
 <template>
-  <a-row class="experience">
+  <a-row class="experiencies">
     <a-col class="content" :lg="22" :md="24">
-      <div class="interests" v-if="localizedProfile.interests">
-        <h4>
-          {{ $t('interests') }}
-        </h4>
-        <span>
-          {{ localizedProfile.interests }}
-        </span>
-      </div>
-      <div class="technologies" v-if="profile.technologies">
-        <h4>
-          {{ $t('technologies') }}
-        </h4>
-        <Technology
-          v-for="t in profile.technologies"
-          :key="t.id"
-          :name="t.name"
-          :svgIcon="t.svgIcon"
-        />
+      <div>
+        <ExperienceTimeline :experiencies="localizedExperiencies"/>
       </div>
     </a-col>
   </a-row>
 </template>
 
 <script>
-import profileQuery from '~/apollo/queries/pages/profile.gql'
-import Technology from '~/components/shared/technology'
-import { post } from '~/utils/Strapi'
-
+import ExperienceTimeline from '~/components/section/experience/experience-timeline'
 export default {
-  components: {
-    Technology
-  },
-  data() {
-    return {
-      profile: {}
-    }
-  },
-  async mounted() {
-    this.fetch().then((profile) => (this.profile = profile))
-  },
-  methods: {
-    async fetch() {
-      const data = await post(profileQuery.loc.source.body)
-      return data.profile
-    }
-  },
+  props: [ "experiencies" ],
+  components: { ExperienceTimeline },
   computed: {
-    localizedProfile() {
-      const lang = this.$i18n.locale || this.$i18n.defaultLocale
-      return {
-        interests: this.profile[`interests_${lang}`]
+    localizedExperiencies() {
+      if (!this.experiencies || !this.experiencies.length) {
+        return [];
       }
+      const lang = this.$i18n.locale || this.$i18n.defaultLocale;
+      const parseDate = (start, end) => {
+        const startPeriod = new Date(start);
+        const endPeriod = new Date(end);
+        const locale = this.$i18n.locales.find((locale) => locale.code === lang)
+        const startMonth = startPeriod.toLocaleString(locale, { month: 'long' }).substring(0, 3).capitalize()
+        const startYear = startPeriod.getFullYear()
+        const endMonth = endPeriod.toLocaleString(locale, { month: 'long' }).substring(0, 3).capitalize()
+        const endYear = endPeriod.getFullYear()
+
+        return `${startMonth}/${startYear} ${this.$t('to')} ${endMonth}/${endYear}`
+      }
+      return this.experiencies.map(experience => ({
+        ...experience,
+        period: parseDate(experience.start_date, experience.end_date),
+        description: experience[`description_${lang}`],
+        job_title: experience[`job_title_${lang}`],
+      })).sort((a,b) => new Date(b.start_date) - new Date(a.start_date));
     }
   }
 }
 </script>
 
 <style lang="less">
-.experience {
+.experiencies {
   margin: auto;
   > div {
     padding: 1rem .5rem;
@@ -67,8 +50,9 @@ export default {
 
   .content {
     > div {
-      max-width: 520px;
+      max-width: 752px;
       margin: auto;
+      margin-bottom: 4rem;
 
       &:first-child {
         margin-bottom: 3.125rem;
