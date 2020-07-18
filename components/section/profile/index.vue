@@ -1,7 +1,7 @@
 <template>
-  <a-row class="profile" v-if="profile">
+  <a-row class="profile">
     <a-col class="video" :lg="12" :md="24">
-      <div v-html="profile.presentationVideoUrl"/>
+      <div v-html="localizedProfile.presentationVideoUrl" />
     </a-col>
     <a-col class="content" :lg="12" :md="24">
       <div class="interests" v-if="localizedProfile.interests">
@@ -17,7 +17,7 @@
           {{ $t('technologies') }}
         </h4>
         <Technology
-          v-for="t in profile.technologies"
+          v-for="t in localizedProfile.technologies"
           :key="t.id"
           :name="t.name"
           :svgIcon="t.svgIcon"
@@ -28,25 +28,21 @@
 </template>
 
 <script>
-import profileQuery from '~/apollo/queries/pages/profile.gql'
 import Technology from '~/components/shared/technology'
-import { post } from '~/utils/Strapi'
-
 export default {
   components: {
     Technology
   },
-  async asyncData({isDev, route, store, env, params, query, req, res, redirect, error}) {
-    const { profile } = await post(profileQuery.loc.source.body);
-    return { profile }
-  },
+  props: ['profile'],
   computed: {
     localizedProfile() {
-      if (!this.profile) {
-        return 
-      } 
       const lang = this.$i18n.locale || this.$i18n.defaultLocale
+      if (!this.profile) {
+        return
+      }
+
       return {
+        ...this.profile,
         interests: this.profile[`interests_${lang}`]
       }
     }
@@ -57,7 +53,7 @@ export default {
 <style lang="less">
 .profile {
   margin: auto;
-  .video {    
+  .video {
     padding: 0;
     margin-bottom: 3.125rem;
     > div {
@@ -69,7 +65,7 @@ export default {
     }
   }
   .content {
-    padding: 0 .5rem;
+    padding: 0 0.5rem;
     > div {
       max-width: 520px;
       margin: auto;
@@ -87,10 +83,10 @@ export default {
   }
   @media (max-width: 768px) {
     > div {
-      padding: .5rem 0;
+      padding: 0.5rem 0;
     }
     .video {
-      padding: .5rem 0  ;
+      padding: 0.5rem 0;
       > div {
         justify-content: center;
       }

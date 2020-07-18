@@ -1,45 +1,56 @@
 @import '~ant-design-vue/lib/style/themes/default.less' ;
-// --title-color-gabriel-: #022A3B;
 // --black: #262627;
-// --normal-co0lor-gabriel-: #53FBE6;
-// --primary-color-gabriel-: #00B9B9;
-// --title-color: #3C005A;
+// --title-color: #022A3B;
+// --primary-color: #53FBE6;
+// --primary-color-1: #00B9B9;
+// --secondary-color: #FF5E6E;
+// --secondary-color-1: #DC1F32;
 // --grey-1: #6B767A;
 // --grey-2: #EBF3F3;
+
 // --white: #FFFFFF;
-// --highlight-color-gabriel-: #FF5E6E;
+// --highlight-color: #FF5E6E;
 // --normal-color: #FF6ECA;
-// --primary-color: #FF00A2;
-// --highlight-color: #D8ED1F;
 
 
 
-@primary-color: #00B9B9; // primary color for all components
-@primary-color-1: #53FBE6; // primary color for all components
+@primary-color-1: #53FBE6; // --primary-color
+@primary-color: #00B9B9; // --normal-color
+@primary-title-text-color: @primary-color-1;
+@primary-title-shadow-color: @primary-color;
+
+
+@secondary-color-1: #DC1F32; // --primary-color
+@secondary-color: #FF5E6E; // --normal-color
+@secondary-title-text-color: @secondary-color-1;
+@secondary-title-shadow-color: @secondary-color;
+
+
+@heading-color: #022A3B; // --title-color
+@text-color: #262627; // --black
+@grey-1: #6B767A; // --grey-1
+@grey-2: #EBF3F3; // --grey-2
+@white: #EBF3F3; // --white
+
+
 @link-color: #1890ff; // link color
 @success-color: #52c41a; // success state color
 @warning-color: #faad14; // warning state color
 @error-color: #f5222d; // error state color
 @font-size-base: 16px; // major text font size
-@heading-color: #022A3B; // heading text color
-@text-color: #262627; // major text color
 @text-color-secondary: rgba(0, 0, 0, 0.45); // secondary text color
 @disabled-color: rgba(0, 0, 0, 0.25); // disable state color
 @border-radius-base: 4px; // major border radius
 @border-color-base: #d9d9d9; // major border color
 @font-family: 'Cabin';
-@text-color-primary: #EBF3F3;
-@text-color-secondary: #526488;
-@primary-title-text-color: #FF5E6E;
-@primary-title-shadow-color: #DC1F32;
-@secondary-title-text-color: @primary-color-1;
-@secondary-title-shadow-color: @primary-color;
-@grey-1: #6B767A;
-@grey-2: #EBF3F3;
+
 
 // buttons
 @btn-primary-bg: @primary-color;
 @btn-primary-border: @primary-color-1;
+
+@btn-danger-bg: @secondary-color;
+@btn-danger-border: @secondary-color-1;
 @btn-border-radius-base: 0;
 
 

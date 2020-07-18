@@ -38,7 +38,7 @@
           </figure>
         </a-col>
         <a-col class="details" :xl="16" :md="14" :xs="24" align="middle">
-          <h2 class="primary-title">{{ localizedHeaderContent.title }}</h2>
+          <h2 class="secondary-title">{{ localizedHeaderContent.title }}</h2>
           <span>{{ localizedHeaderContent.description }}</span>
           <a-button
             size="large"
@@ -138,8 +138,8 @@ export default {
   .logo {
     figure {
       border-radius: 100%;
-      box-shadow: 0px 0px 6px @primary-color;
-      border: 3px solid @primary-color-1;
+      box-shadow: 0px 0px 6px @primary-title-shadow-color;
+      border: 3px solid @primary-title-text-color;
       position: relative;
       width: 214px;
       height: 214px;

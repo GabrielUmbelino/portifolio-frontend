@@ -1,6 +1,9 @@
 {
   experiencies {
     id
+    company
+    job_title_en
+    job_title_pt
     description_en
     description_pt
     start_date 
