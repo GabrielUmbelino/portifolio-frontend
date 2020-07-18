@@ -32,8 +32,8 @@ export default {
 </script>
 <style scoped lang="less">
 .ant-tag {
-  margin-right: 1rem;
-  margin-right: 0.9rem;
+  margin-right: .9rem;
+  margin-bottom: .9rem;
   div {
     margin: 3px 0;
     line-height: 1.6rem;

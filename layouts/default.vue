@@ -29,10 +29,7 @@ html {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
+    background-color: @layout-body-background;
   }
-}
-body, 
-.ant-layout-footer {
-  background-color: @layout-body-background;
 }
 </style>

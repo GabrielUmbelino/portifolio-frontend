@@ -4,6 +4,9 @@
       <Section :name="$t('profile')">
         <Profile />
       </Section>
+      <Section :name="$t('experience')">
+        <Experience />
+      </Section>
     </a-layout-content>
   </a-layout>
 </template>
@@ -11,10 +14,12 @@
 <script>
 import Section from '~/components/section';
 import Profile from '~/components/section/profile';
+import Experience from '~/components/section/experience';
 export default {
   components: {
     Section,
-    Profile
+    Profile,
+    Experience
   }
 }
 </script>
