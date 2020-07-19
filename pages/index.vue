@@ -41,6 +41,14 @@ export default {
   margin: auto;
   .ant-layout-content {
     max-width: 100%;
+    .section:last-child {
+      margin-bottom: 0;
+      .content {
+        hr {
+          display: none;
+        }
+      }
+    }
   }
 }
 </style>

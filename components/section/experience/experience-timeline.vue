@@ -9,11 +9,11 @@ export default {
     theme: {
       type: String,
       default: 'light'
-    },
+    }
   },
   render(h, { props, options }) {
-    return (props.experiencies.map((e, i) => {
-      return <vue-timeline-update
+    return props.experiencies.map((e, i) => (
+      <vue-timeline-update
         light={props.theme}
         dateString={e.period}
         date={new Date(e.start_date)}
@@ -21,9 +21,8 @@ export default {
         description={e.description}
         icon=""
         is-last={props.experiencies.length === i + 1}
-      >
-      </vue-timeline-update>
-    }))
+      ></vue-timeline-update>
+    ))
   }
 }
 </script>
@@ -35,7 +34,7 @@ article.gb-vue-timeline-update {
       background-color: @heading-color;
       color: @white;
       padding: 2px 13px 4px 13px;
-      font-size: .8rem;
+      font-size: 0.8rem;
       line-height: 1.3rem;
     }
   }
@@ -58,7 +57,6 @@ article.gb-vue-timeline-update {
       margin-top: 24px;
       background-color: #f1eeff;
     }
-    
   }
   div.gb-vue-timeline-update__right {
     div.gb-vue-timeline-update__information {

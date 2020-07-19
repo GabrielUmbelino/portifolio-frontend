@@ -65,10 +65,9 @@ export default {
     }
   }
   .content {
-    padding: 0 0.5rem;
+    padding: 0 1rem;
     > div {
       max-width: 520px;
-      margin: auto;
       margin-bottom: 3.125rem;
       h4 {
         font-size: 1.5rem;
@@ -86,7 +85,6 @@ export default {
       padding: 0.5rem 0;
     }
     .video {
-      padding: 0.5rem 0;
       > div {
         justify-content: center;
       }
