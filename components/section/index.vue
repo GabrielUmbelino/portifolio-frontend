@@ -12,7 +12,7 @@ export default {
   props: {
     name: {
       type: String
-    }
+    },
   }
 }
 </script>
@@ -20,15 +20,17 @@ export default {
 .section {
   position: relative;
   height: auto;
-  padding: 2rem 0 ;
-  margin: auto;
+  margin: @section-margin auto;
   max-width: 1170px;
+  &:last-child {
+    margin-bottom: (@section-margin / 2)
+  }
   &:before {
     content: "";
     background-color: @layout-sider-background;
-    height: 100%;
     width: calc(100px + 50%);
     position: absolute;
+    margin-top: -@section-margin-first;
     margin-left: -50%;
     top: 0;
     left: 0px;
@@ -44,33 +46,35 @@ export default {
     writing-mode: tb-rl;
     transform: rotate(180deg);
     z-index: 1;
+    left: 0;
   }
   > .content {
-    padding: 0 90px;
-    margin-left: 100px;
+    padding: 0 5.62rem;
+    margin-left: 6.25rem;
     z-index: 0;
+    > div {
+      padding-bottom: @section-margin;
+    }
     hr {
       background-color: @heading-color;
       padding: 1px;
       border: none;
-      margin: 1.5rem 0;
+      margin: 0;
     }
     &:after {
       content: "";
     }
   }
-  &:first-child {
-    padding-top: 4.8rem;
-  }
 }
 @media (max-width: 768px) {
   .section {
-    padding-top: 1.875;
-    padding-bottom: 1.875;
+    margin-top: @section-margin-mobile;
+    margin-bottom: @section-margin-mobile;
     &:first-child {
-      padding-top: 1.875;
+      margin-top: @section-margin-mobile;
     }
     &:before {
+      margin-top: -@section-margin-mobile;
       width: calc(80px + 50%);
     }
     h3 {

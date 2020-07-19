@@ -2,7 +2,7 @@
   <a-row class="experiencies">
     <a-col class="content" :lg="22" :md="24">
       <div>
-        <ExperienceTimeline :experiencies="localizedExperiencies"/>
+        <ExperienceTimeline :experiencies="localizedExperiencies" />
       </div>
     </a-col>
   </a-row>
@@ -11,31 +11,46 @@
 <script>
 import ExperienceTimeline from '~/components/section/experience/experience-timeline'
 export default {
-  props: [ "experiencies" ],
   components: { ExperienceTimeline },
+  props: {
+    experiencies: {
+      type: Array,
+      required: true
+    }
+  },
   computed: {
     localizedExperiencies() {
       if (!this.experiencies || !this.experiencies.length) {
-        return [];
+        return []
       }
-      const lang = this.$i18n.locale || this.$i18n.defaultLocale;
+      const lang = this.$i18n.locale || this.$i18n.defaultLocale
       const parseDate = (start, end) => {
-        const startPeriod = new Date(start);
-        const endPeriod = new Date(end);
+        const startPeriod = new Date(start)
+        const endPeriod = new Date(end)
         const locale = this.$i18n.locales.find((locale) => locale.code === lang)
-        const startMonth = startPeriod.toLocaleString(locale, { month: 'long' }).substring(0, 3).capitalize()
+        const startMonth = startPeriod
+          .toLocaleString(locale, { month: 'long' })
+          .substring(0, 3)
+          .capitalize()
         const startYear = startPeriod.getFullYear()
-        const endMonth = endPeriod.toLocaleString(locale, { month: 'long' }).substring(0, 3).capitalize()
+        const endMonth = endPeriod
+          .toLocaleString(locale, { month: 'long' })
+          .substring(0, 3)
+          .capitalize()
         const endYear = endPeriod.getFullYear()
 
-        return `${startMonth}/${startYear} ${this.$t('to')} ${endMonth}/${endYear}`
+        return `${startMonth}/${startYear} ${this.$t(
+          'to'
+        )} ${endMonth}/${endYear}`
       }
-      return this.experiencies.map(experience => ({
-        ...experience,
-        period: parseDate(experience.start_date, experience.end_date),
-        description: experience[`description_${lang}`],
-        job_title: experience[`job_title_${lang}`],
-      })).sort((a,b) => new Date(b.start_date) - new Date(a.start_date));
+      return this.experiencies
+        .map((experience) => ({
+          ...experience,
+          period: parseDate(experience.start_date, experience.end_date),
+          description: experience[`description_${lang}`],
+          job_title: experience[`job_title_${lang}`]
+        }))
+        .sort((a, b) => new Date(b.start_date) - new Date(a.start_date))
     }
   }
 }
@@ -44,19 +59,11 @@ export default {
 <style lang="less">
 .experiencies {
   margin: auto;
-  > div {
-    padding: 1rem .5rem;
-  }
-
   .content {
+    margin: auto;
+    max-width: 752px;
+    float: none;
     > div {
-      max-width: 752px;
-      margin: auto;
-      margin-bottom: 4rem;
-
-      &:first-child {
-        margin-bottom: 3.125rem;
-      }
       h4 {
         font-size: 1.5rem;
         font-weight: bold;
@@ -70,7 +77,7 @@ export default {
   }
   @media (max-width: 768px) {
     > div {
-      padding: .5rem 0;
+      padding: 0.5rem 0;
     }
   }
 }

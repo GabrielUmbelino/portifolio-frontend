@@ -33,7 +33,12 @@ export default {
   components: {
     Technology
   },
-  props: ['profile'],
+  props: {
+    profile: {
+      type: Object,
+      required: true
+    },
+  },
   computed: {
     localizedProfile() {
       const lang = this.$i18n.locale || this.$i18n.defaultLocale
@@ -65,10 +70,9 @@ export default {
     }
   }
   .content {
-    padding: 0 0.5rem;
+    padding: 0 1rem;
     > div {
       max-width: 520px;
-      margin: auto;
       margin-bottom: 3.125rem;
       h4 {
         font-size: 1.5rem;
@@ -79,6 +83,9 @@ export default {
       span {
         font-size: 1.1rem;
       }
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
   }
   @media (max-width: 768px) {
@@ -86,7 +93,6 @@ export default {
       padding: 0.5rem 0;
     }
     .video {
-      padding: 0.5rem 0;
       > div {
         justify-content: center;
       }
