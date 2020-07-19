@@ -17,16 +17,14 @@ export default {
 }
 </script>
 <style lang="less">
-@section-margin: 2rem;
-@section-margin-first: 4.8rem;
-@section-margin-mobile: 1.875rem;
-
 .section {
   position: relative;
   height: auto;
-  margin: @section-margin 0 ;
-  margin: auto;
+  margin: @section-margin auto;
   max-width: 1170px;
+  &:last-child {
+    margin-bottom: (@section-margin / 2)
+  }
   &:before {
     content: "";
     background-color: @layout-sider-background;
@@ -54,18 +52,18 @@ export default {
     padding: 0 5.62rem;
     margin-left: 6.25rem;
     z-index: 0;
+    > div {
+      padding-bottom: @section-margin;
+    }
     hr {
       background-color: @heading-color;
       padding: 1px;
       border: none;
-      margin: 1.5rem 0;
+      margin: 0;
     }
     &:after {
       content: "";
     }
-  }
-  &:first-child {
-    margin-top: @section-margin-first
   }
 }
 @media (max-width: 768px) {

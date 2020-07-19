@@ -33,7 +33,12 @@ export default {
   components: {
     Technology
   },
-  props: ['profile'],
+  props: {
+    profile: {
+      type: Object,
+      required: true
+    },
+  },
   computed: {
     localizedProfile() {
       const lang = this.$i18n.locale || this.$i18n.defaultLocale
@@ -77,6 +82,9 @@ export default {
       }
       span {
         font-size: 1.1rem;
+      }
+      &:last-child {
+        margin-bottom: 0;
       }
     }
   }
