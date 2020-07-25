@@ -5,7 +5,7 @@ export const state = () => ({
 
 export const mutations = {
   setSections(state, sections) {
-    state.sections.push(...sections)
+    state.sections = sections;
   },
   setContent(state, content) {
     state.content = { ...content }
