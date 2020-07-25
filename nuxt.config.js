@@ -57,13 +57,13 @@ export default {
     ['nuxt-i18n', {
       locales: [
         {
-          name: 'Português',
+          name: 'POR',
           code: 'pt',
           locale: 'pt-BR',
           file: 'pt-BR.js'
         },
         {
-          name: 'English',
+          name: 'ENG',
           code: 'en',
           locale: 'en-US',
           file: 'en-US.js'
