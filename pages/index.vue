@@ -23,8 +23,8 @@ import Experience from '~/components/section/experience';
 import profileQuery from '~/apollo/queries/pages/profile.gql'
 import projectsQuery from '~/apollo/queries/pages/projects.gql'
 import experienciesQuery from '~/apollo/queries/pages/experiencies.gql'
-// import sectionsQuery from '~/apollo/queries/pages/sections.gql'
-// import headerContentQuery from '~/apollo/queries/pages/headerContent.gql'
+import sectionsQuery from '~/apollo/queries/pages/sections.gql'
+import headerContentQuery from '~/apollo/queries/pages/headerContent.gql'
 
 export default {
   components: {
@@ -33,20 +33,20 @@ export default {
     Project,
     Experience,
   },
-  async asyncData() {
+  async asyncData({ store }) {
     const { profile } = await post(profileQuery.loc.source.body)
     const { experiencies } = await post(experienciesQuery.loc.source.body)
     const { works: projects } = await post(projectsQuery.loc.source.body)
-    // TODO send header coontent in store
-    // const { pages } = await post(sectionsQuery.loc.source.body)
-    // const { headerContent } = await post(headerContentQuery.loc.source.body)
+    const { pages: sections } = await post(sectionsQuery.loc.source.body)
+    const { headerContent } = await post(headerContentQuery.loc.source.body)
+
+    store.commit('header/setSections', sections.sort((a, b) => (a.order < b.order ? -1 : 1)))
+    store.commit('header/setHeaderContent', headerContent)
 
     return {
       profile,
       experiencies,
       projects,
-      // headerContent,
-      // sections: pages.sort((a, b) => (a.order < b.order ? -1 : 1))
     }
   },
 }
