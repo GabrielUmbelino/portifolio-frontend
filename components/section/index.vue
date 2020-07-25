@@ -12,7 +12,7 @@ export default {
   props: {
     name: {
       type: String
-    },
+    }
   }
 }
 </script>
@@ -21,16 +21,16 @@ export default {
   position: relative;
   height: auto;
   margin: @section-margin auto;
-  max-width: 1170px;
+  max-width: 1270px;
   &:last-child {
-    margin-bottom: (@section-margin / 2)
+    margin-bottom: (@section-margin / 2);
   }
   &:before {
-    content: "";
+    content: '';
     background-color: @layout-sider-background;
     width: calc(100px + 50%);
     position: absolute;
-    margin-top: -@section-margin-first;
+    margin-top: -@section-margin;
     margin-left: -50%;
     top: 0;
     left: 0px;
@@ -52,17 +52,27 @@ export default {
     padding: 0 5.62rem;
     margin-left: 6.25rem;
     z-index: 0;
+    position: relative;
     > div {
+      position: static;
       padding-bottom: @section-margin;
+      &:before {
+        content: '';
+        position: absolute;
+        left: 12px;
+        bottom: 2px;
+        margin-left: @section-margin;
+        background-repeat: no-repeat;
+        background-position: center;
+        padding: 36px;
+        display: block;
+      }
     }
     hr {
       background-color: @heading-color;
       padding: 1px;
       border: none;
       margin: 0;
-    }
-    &:after {
-      content: "";
     }
   }
 }

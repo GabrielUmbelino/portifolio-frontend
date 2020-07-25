@@ -1,12 +1,17 @@
 <template>
   <div class="projects">
     <a-row v-for="p in localizedProjects" :key="p.id">
-      <a-col class="thumbnail" :lg="8" :md="24">
+      <a-col class="thumbnail" :xs="24" :lg="10" :xl="8">
         <figure>
-          <img :src="`${baseUrl}${p.thumbnail.url}`" :alt="p.name">
+          <img
+            :src="`${baseUrl}${p.thumbnail.url}`"
+            :alt="p.name"
+            :width="p.thumbnail.width"
+            :height="p.thumbnail.height"
+          />
         </figure>
       </a-col>
-      <a-col class="content" :lg="16" :md="24">
+      <a-col class="content" :xs="24" :lg="14" :xl="16">
         <div class="details" v-if="p.details">
           <h4>
             {{ p.name }}
@@ -15,7 +20,12 @@
             {{ p.details }}
           </span>
         </div>
-        <a-button type="link" size="large" @click="$router.push(`/projects/${p.id}`)" icon="link">
+        <a-button
+          type="link"
+          size="large"
+          @click="$router.push(`/projects/${p.id}`)"
+          icon="link"
+        >
           Details
         </a-button>
         <!-- <div class="technologies">
@@ -66,35 +76,46 @@ export default {
       }))
     },
     baseUrl() {
-      return apiUrl;
+      return apiUrl
     }
   }
 }
 </script>
 
 <style lang="less">
-.projects {
+div.projects {
   margin: auto;
-  max-width: 770px;
-    > .ant-row {
-      padding-bottom: 4.25rem;
-      &:last-child {
-        padding-bottom: 0;
+  margin-right: 0;
+  max-width: calc(860px + 3rem);
+  padding-right: 3rem;
+  &:before {
+    background-image: url('~static/images/sections/projects.png');
+  }
+  > .ant-row {
+    padding-bottom: 4.25rem;
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }
+  .thumbnail {
+    padding: 0;
+    figure {
+      justify-content: left;
+      display: flex;
+      float: right;
+      img {
+        max-height: 149px;
+        max-width: 282px;
+        width: auto;
+        height: auto;
+        display: block;
+        position: relative;
       }
     }
-    .thumbnail {
-      padding: 0;
-      figure {
-        justify-content: left;
-        display: flex;
-        img {
-          max-width: 100%;
-        }
-      }
-    } 
+  }
   .content {
     padding: 0;
-    padding-left: 4rem;
+    padding-left: 3.3125rem;
     .details {
       max-width: 520px;
       margin-bottom: 0.5rem;
@@ -114,7 +135,10 @@ export default {
       color: @btn-primary-bg;
     }
   }
-  @media (max-width: 768px) {
+}
+@media (max-width: 768px) {
+  .projects {
+    padding-right: 0;
     .details {
       padding: 0.5rem 0;
     }
@@ -123,8 +147,23 @@ export default {
     }
     .thumbnail {
       margin-bottom: @section-margin-mobile;
-      > div {
+      figure {
+        img {
+          max-height: 149px;
+          max-width: 282px;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 990px) {
+  .projects {
+    .thumbnail {
+      figure {
         justify-content: center;
+        margin: auto;
+        float: none;
+        padding-bottom: 2rem;
       }
     }
   }

@@ -39,7 +39,7 @@ article.gb-vue-timeline-update {
     }
   }
   div.gb-vue-timeline-update__center {
-    margin-right: 54px;
+    margin-right: 65px;
     margin-left: 43px;
     .gb-vue-timeline-update__bullet.gb-base-number.gb-base-number--small {
       width: 24px;

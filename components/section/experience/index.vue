@@ -1,6 +1,6 @@
 <template>
   <a-row class="experiencies">
-    <a-col class="content" :lg="22" :md="24">
+    <a-col class="content" :lg="22" :xs="24">
       <div>
         <ExperienceTimeline :experiencies="localizedExperiencies" />
       </div>
@@ -57,27 +57,36 @@ export default {
 </script>
 
 <style lang="less">
-.experiencies {
-  margin: auto;
-  .content {
+section .content {
+  div.experiencies {
     margin: auto;
-    max-width: 752px;
-    float: none;
-    > div {
-      h4 {
-        font-size: 1.5rem;
-        font-weight: bold;
-        text-transform: uppercase;
-        margin-top: -8px;
-      }
-      span {
-        font-size: 1.1rem;
+    &:before {
+      right: 10px;
+      left: initial;
+      margin-left: 0;
+      margin-right: @section-margin;
+      background-image: url('~static/images/sections/experiencies.png');
+    }
+    .content {
+      margin: auto;
+      max-width: 836px;
+      float: right;
+      > div {
+        h4 {
+          // font-size: 1.5rem;
+          font-weight: bold;
+          text-transform: uppercase;
+          margin-top: -8px;
+        }
+        span {
+          // font-size: 1.1rem;
+        }
       }
     }
-  }
-  @media (max-width: 768px) {
-    > div {
-      padding: 0.5rem 0;
+    @media (max-width: 768px) {
+      > div {
+        padding: 0.5rem 0;
+      }
     }
   }
 }
