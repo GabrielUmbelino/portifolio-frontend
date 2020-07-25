@@ -3,7 +3,7 @@
     <a-layout-header>
       <a-layout-content>
         <a-row type="flex" justify="space-between">
-          <a-col class="gutter-row" :lg="20" :md="18" :xs="16" offsetalign="middle">
+          <a-col class="gutter-row menu-items" :xs="20" align="left">
             <a-menu
               mode="horizontal"
               :default-selected-keys="['1']"
@@ -12,16 +12,23 @@
               <a-menu-item
                 v-for="section in localizedSections"
                 :key="section.id"
-              >{{ section.description }}</a-menu-item>
+                @click="e => onMenuClicked(e, section.url)"
+              >
+                <a-icon v-if="section.icon_type" :type="section.icon_type" theme="filled" />
+
+                <TechnologyIcon v-else-if="section.icon_svg" :svgIcon="section.icon_svg"/>
+                {{ section.description }}
+              </a-menu-item>
             </a-menu>
           </a-col>
-          <a-col class="gutter-row" :lg="4" :md="6" :xs="8" align="middle">
+          <a-col class="gutter-row language-switcher" :xs="4" align="right">
             <language-switcher />
           </a-col>
         </a-row>
       </a-layout-content>
     </a-layout-header>
     <a-layout-content
+      v-if="headerContent"
       class="header-content"
       :style="{ background: headerContent.backgroundColor }"
       align="middle"
@@ -43,7 +50,7 @@
           <a-button
             size="large"
             v-if="headerContent.headerActionLink"
-            @click="headerContent.headerActionLink"
+            @click="headerContent.headerActionLink(section.url)"
             type="primary"
           >{{ headerContent.headerActionText }}</a-button>
         </a-col>
@@ -52,49 +59,36 @@
   </div>
 </template>
 <script>
-import { post, apiUrl } from '~/utils/Strapi.js'
-import sectionsQuery from '~/apollo/queries/pages/sections.gql'
-import headerContentQuery from '~/apollo/queries/pages/headerContent.gql'
+import { apiUrl } from '~/utils/Strapi.js'
 import LanguageSwitcher from '~/components/shared/languageSwitcher'
+import TechnologyIcon from '~/components/shared/technology/technologyIcon'
 export default {
   components: {
-    LanguageSwitcher
-  },
-  data() {
-    return {
-      sections: [],
-      headerContent: {}
-    }
-  },
-  async mounted() {
-    this.fetch().then(({ headerContent, sections }) => {
-      this.sections = sections
-      this.headerContent = headerContent
-    })
-  },
-  methods: {
-    async fetch() {
-      const { pages } = await post(sectionsQuery.loc.source.body)
-      const { headerContent } = await post(headerContentQuery.loc.source.body)
-
-      return {
-        headerContent,
-        sections: pages.sort((a, b) => (a.order < b.order ? -1 : 1))
-      }
-    }
+    LanguageSwitcher,
+    TechnologyIcon
   },
   computed: {
+    sections() {
+      return this.$store.state.header.sections
+    },
+    headerContent() {
+      return this.$store.state.header.headerContent
+    },
     localizedSections() {
+      if (!this.sections || !this.sections.length) {
+        return []
+      }
+
       const lang = this.$i18n.locale || this.$i18n.defaultLocale
-      return this.sections.map((locale) => ({
-        id: locale.id,
-        description: locale[`description_${lang}`]
+      return this.sections.map((section) => ({
+        ...section,
+        description: section[`description_${lang}`]
       }))
     },
-    logoUrl() {
-      return `${apiUrl}${this.headerContent.logo.url}`
-    },
     bannerImageUrl() {
+      if (!this.headerContent || !this.headerContent.bannerImage) {
+        return ''
+      }
       return `${apiUrl}${this.headerContent.bannerImage.url}`
     },
     localizedHeaderContent() {
@@ -109,6 +103,8 @@ export default {
 </script>
 <style lang="less">
 .ant-layout-header {
+  max-width: 1290px;
+  margin: auto;
   background-color: @layout-header-background;
   white-space: nowrap;
   border: 0;
@@ -118,14 +114,6 @@ export default {
   }
   .ant-row-flex {
     height: 100%;
-    .logo {
-      height: 100%;
-      img {
-        max-height: 100%;
-        padding: 10px;
-        width: auto;
-      }
-    }
   }
 }
 .header-content {
@@ -161,8 +149,9 @@ export default {
     align-content: center;
     padding: 0 20px;
     > * {
-      text-align: center;
+      text-align: left;
       display: block;
+      float: left;
     }
     > h2 {
       font-size: 2.3rem;
@@ -176,6 +165,9 @@ export default {
   }
 }
 @media (max-width: 768px) {
+  .ant-layout-header {
+    padding: 0 5px;
+  }
   .header-content {
     padding: 60px 0;
   }
