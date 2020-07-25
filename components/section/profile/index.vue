@@ -24,6 +24,7 @@
         />
       </div>
     </a-col>
+    <div class="image" v-html="$store.state.header.content.profile_background" />
   </a-row>
 </template>
 
@@ -58,9 +59,6 @@ export default {
 <style lang="less">
 div.profile {
   margin: auto;
-  &:before {
-    background-image: url('~static/images/sections/profile.png');
-  }
   .video {
     padding: 0;
     margin-bottom: 3.125rem;

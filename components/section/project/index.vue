@@ -41,6 +41,7 @@
         </div> -->
       </a-col>
     </a-row>
+    <div class="image" v-html="$store.state.header.content.projects_background"/>
   </div>
 </template>
 
@@ -88,9 +89,6 @@ div.projects {
   margin-right: 0;
   max-width: calc(860px + 3rem);
   padding-right: 3rem;
-  &:before {
-    background-image: url('~static/images/sections/projects.png');
-  }
   > .ant-row {
     padding-bottom: 4.25rem;
     &:last-child {

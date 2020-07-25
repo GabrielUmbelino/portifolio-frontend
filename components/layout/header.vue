@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="">
     <a-layout-header>
       <a-layout-content>
         <a-row type="flex" justify="space-between">
@@ -67,12 +67,21 @@ export default {
     LanguageSwitcher,
     TechnologyIcon
   },
+  methods: {
+    onMenuClicked(e, route) {
+      if ('resume' === route) {
+        console.log('download resume not implemented yet')
+      } else if (this.$route.fullPath !== route) {
+        this.$router.push(route);
+      }
+    }
+  },
   computed: {
     sections() {
       return this.$store.state.header.sections
     },
     headerContent() {
-      return this.$store.state.header.headerContent
+      return this.$store.state.header.content
     },
     localizedSections() {
       if (!this.sections || !this.sections.length) {
@@ -109,11 +118,15 @@ export default {
   white-space: nowrap;
   border: 0;
   box-shadow: none;
+
   .ant-layout-content {
     height: @layout-header-height;
   }
   .ant-row-flex {
     height: 100%;
+    .ant-menu-horizontal {
+      border: none;
+    }
   }
 }
 .header-content {

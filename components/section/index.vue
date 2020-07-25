@@ -56,15 +56,13 @@ export default {
     > div {
       position: static;
       padding-bottom: @section-margin;
-      &:before {
-        content: '';
+      > .image {
         position: absolute;
-        left: 12px;
-        bottom: 2px;
+        left: 17px;
+        bottom: -5px;
         margin-left: @section-margin;
         background-repeat: no-repeat;
         background-position: center;
-        padding: 36px;
         display: block;
       }
     }

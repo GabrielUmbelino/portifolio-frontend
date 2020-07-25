@@ -5,6 +5,7 @@
         <ExperienceTimeline :experiencies="localizedExperiencies" />
       </div>
     </a-col>
+    <div class="image" v-html="$store.state.header.content.experiencies_background"/>
   </a-row>
 </template>
 
@@ -60,12 +61,11 @@ export default {
 section .content {
   div.experiencies {
     margin: auto;
-    &:before {
+    > .image {
       right: 10px;
       left: initial;
       margin-left: 0;
       margin-right: @section-margin;
-      background-image: url('~static/images/sections/experiencies.png');
     }
     .content {
       margin: auto;
@@ -73,13 +73,9 @@ section .content {
       float: right;
       > div {
         h4 {
-          // font-size: 1.5rem;
           font-weight: bold;
           text-transform: uppercase;
           margin-top: -8px;
-        }
-        span {
-          // font-size: 1.1rem;
         }
       }
     }
