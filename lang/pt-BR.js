@@ -5,5 +5,7 @@ export default {
   technologies: 'Tecnologias',
   projects: 'Projetos',
   details: 'Detalhes',
+  contact: 'Contato',
   to: 'a',
+  send_a_message: 'Envie uma mensagem :)'
 }

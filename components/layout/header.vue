@@ -7,13 +7,13 @@
             <a-menu
               v-if="localizedSections.length"
               mode="horizontal"
-              :default-selected-keys="['1']"
+              :default-selected-keys="defaultSectionId"
               :style="{ lineHeight: '64px' }"
             >
               <a-menu-item
-                :id="section.description.toLowerCase()+'_'+section.id"
+
                 v-for="section in localizedSections"
-                :key="section.description.toLowerCase()+'_'+section.id"
+                :key="section.id"
                 @click="e => onMenuClicked(e, section.url)"
               >
                 <a-icon v-if="section.icon_type" :type="section.icon_type" theme="filled" />
@@ -108,6 +108,10 @@ export default {
         title: this.headerContent[`title_${lang}`],
         description: this.headerContent[`description_${lang}`]
       }
+    },
+    defaultSectionId() {
+      const [firstSection] = this.localizedSections;
+      return [firstSection.id]
     }
   }
 }

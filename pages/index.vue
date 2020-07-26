@@ -10,6 +10,9 @@
       <Section :name="$t('projects')">
         <Project :projects="projects" />
       </Section>
+      <Section :name="$t('contact')">
+        <Contact />
+      </Section>
     </a-layout-content>
   </a-layout>
 </template>
@@ -20,6 +23,7 @@ import Section from '~/components/section';
 import Profile from '~/components/section/profile';
 import Project from '~/components/section/project';
 import Experience from '~/components/section/experience';
+import Contact from '~/components/section/contact';
 import profileQuery from '~/apollo/queries/pages/profile.gql'
 import projectsQuery from '~/apollo/queries/pages/projects.gql'
 import experienciesQuery from '~/apollo/queries/pages/experiencies.gql'
@@ -32,6 +36,7 @@ export default {
     Profile,
     Project,
     Experience,
+    Contact,
   },
   async asyncData({ store }) {
     const { profile } = await post(profileQuery.loc.source.body)
