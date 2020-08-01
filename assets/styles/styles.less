@@ -16,13 +16,24 @@
 }
 .ant-btn {
   border-width: 3px;
+  font-weight: bold;
+  font-family: 'Titillium';
+  text-transform: uppercase;
   &-primary {
     background-color: @btn-primary-bg;
     border-color: @btn-primary-border;
+    &:hover {
+      border-color: @btn-primary-border;
+      background-color: @btn-primary-border;
+    }
   }
   &-danger {
     background-color: @btn-danger-bg;
     border-color: @btn-danger-border;
+    &:hover {
+      border-color: @btn-danger-border;
+      background-color: @btn-danger-border;
+    }
   }
 }
 
