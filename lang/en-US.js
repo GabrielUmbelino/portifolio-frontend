@@ -7,5 +7,6 @@ export default {
   details: 'Details',
   contact: 'Contact',
   to: 'to',
-  send_a_message: 'Send a message :)'
+  send_a_message: 'Send a message :)',
+  message_sended: 'Message sended, thanks!'
 }

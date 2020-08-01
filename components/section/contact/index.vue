@@ -1,13 +1,16 @@
 <template>
   <div class="contact">
     <a-row>
-      <a-col class="form" :xs="24" :lg="10" :xl="8">
-        <p>
+      <a-col class="form" :xs="24" :lg="12" :xl="11">
+        <p v-if="emailSended">
+          {{ $t('message_sended') }}
+        </p>
+        <p v-else>
           {{ $t('send_a_message') }}
         </p>
-        <Form @emailSended="emailsended = true" />
+        <Form @emailSended="onEmailSended"/>
       </a-col>
-      <a-col class="background" :xs="24" :lg="14" :xl="16">
+      <a-col class="background" :xs="24" :lg="12" :xl="13">
         <div
           class="image"
           v-html="$store.state.header.content.contact_background"
@@ -28,46 +31,50 @@ export default {
     return {
       emailSended: false
     }
+  },
+  methods: {
+    onEmailSended(emailSended) {
+      this.emailSended = emailSended
+    }
   }
 }
 </script>
 
 <style lang="less">
-div.contact {
-  margin: auto;
-  margin-right: 0;
-  width: 100%;
-  > .ant-row {
-    padding-bottom: 4.25rem;
-  }
-  .form {
-    > div {
-      padding: 1px;
+section > {
+  .content > {
+    div.contact {
+      margin: auto;
+      margin-right: 0;
+      padding-bottom: 0;
+      width: 100%;
+      > .ant-row {
+        padding-bottom: 0;
+      }
+      .form {
+        > div {
+          padding: 1px;
+        }
+      }
+      .background {
+        padding: 0;
+        > .image {
+          right: 10px;
+          left: initial;
+          svg {
+            max-width: 100%;
+            margin: auto;
+            display: block;
+          }
+        }
+      }
     }
-  }
-  .background {
-    padding: 0;
-    > .image {
-      right: 10px;
-      left: initial;
-      margin-left: 0;
-      margin-right: @section-margin;
-    }
-  }
-}
-@media (max-width: 768px) {
-  .contact {
-    padding-right: 0;
-  }
-}
-@media (max-width: 990px) {
-  .projects {
-    .thumbnail {
-      figure {
-        justify-content: center;
-        margin: auto;
-        float: none;
-        padding-bottom: 2rem;
+    @media (max-width: 768px) {
+      .contact {
+        padding-right: 0;
+        .background {
+          padding: 0;
+        }
       }
     }
   }

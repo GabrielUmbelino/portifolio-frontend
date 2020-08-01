@@ -1,45 +1,54 @@
 <template>
-  <a-form
-    :form="form"
-    :label-col="{ span: 5 }"
-    :wrapper-col="{ span: 12 }"
-    @submit="handleSubmit"
-  >
-    <a-form-item label="Note">
+  <a-form :form="form" :wrapper-col="{ span: 24 }" @submit="handleSubmit">
+    <a-form-item>
       <a-input
-        v-decorator="[
-          'note',
-          { rules: [{ required: true, message: 'Please input your note!' }] }
-        ]"
-      />
-    </a-form-item>
-    <a-form-item label="Gender">
-      <a-select
-        v-decorator="[
-          'gender',
-          { rules: [{ required: true, message: 'Please select your gender!' }] }
-        ]"
-        placeholder="Select a option and change input text above"
-        @change="handleSelectChange"
+        placeholder="Nome"
+        :decorator="nameDecorator"
+        allow-clear
+        :maxLength="120"
       >
-        <a-select-option value="male">
-          male
-        </a-select-option>
-        <a-select-option value="female">
-          female
-        </a-select-option>
-      </a-select>
+        <ion-icon name="person" slot="prefix"></ion-icon>
+      </a-input>
     </a-form-item>
-    <a-form-item :wrapper-col="{ span: 12, offset: 5 }">
-      <a-button type="primary" html-type="submit">
-        Submit
+    <a-form-item>
+      <a-input
+        placeholder="E-Mail"
+        :decorator="emailDecorator"
+        allow-clear
+        :maxLength="120"
+      >
+        <ion-icon name="mail" slot="prefix"></ion-icon>
+      </a-input>
+    </a-form-item>
+    <a-form-item>
+      <a-textarea
+        placeholder="Message"
+        :decorator="messageDecorator"
+        :rows="4"
+        allow-clear
+        :maxLength="200"
+      >
+      </a-textarea>
+    </a-form-item>
+    <a-form-item :wrapper-col="{ span: 24 }" align="right">
+      <a-button type="primary" html-type="submit" size="large">
+        Enviar
       </a-button>
     </a-form-item>
   </a-form>
 </template>
 
 <script>
+import { Icon } from 'ant-design-vue'
+
+const IconFont = Icon.createFromIconfontCN({
+  scriptUrl: '//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js'
+})
+
 export default {
+  components: {
+    IconFont
+  },
   data() {
     return {
       formLayout: 'horizontal',
@@ -60,6 +69,26 @@ export default {
       this.form.setFieldsValue({
         note: `Hi, ${value === 'male' ? 'man' : 'lady'}!`
       })
+    }
+  },
+  computed: {
+    nameDecorator() {
+      return [
+        'Nome',
+        { rules: [{ required: true, message: 'Please input your name!' }] }
+      ]
+    },
+    emailDecorator() {
+      return [
+        'E-Mail',
+        { rules: [{ required: true, message: 'Please input your email!' }] }
+      ]
+    },
+    messageDecorator() {
+      return [
+        'Message',
+        { rules: [{ required: true, message: 'Please input your message!' }] }
+      ]
     }
   }
 }

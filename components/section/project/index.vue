@@ -135,8 +135,9 @@ div.projects {
   }
 }
 @media (max-width: 768px) {
-  .projects {
+  div.projects {
     padding-right: 0;
+    max-width: 100%;
     .details {
       padding: 0.5rem 0;
     }
