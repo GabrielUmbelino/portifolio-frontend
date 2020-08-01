@@ -8,7 +8,7 @@
         <p v-else>
           {{ $t('send_a_message') }}
         </p>
-        <Form @emailSended="onEmailSended"/>
+        <Form @emailSended="onEmailSended" />
       </a-col>
       <a-col class="background" :xs="24" :lg="12" :xl="13">
         <div
@@ -52,15 +52,18 @@ section > {
         padding-bottom: 0;
       }
       .form {
+        z-index: 1;
         > div {
           padding: 1px;
         }
       }
       .background {
+        z-index: 0;
         padding: 0;
         > .image {
           right: 10px;
           left: initial;
+          bottom: 0;
           svg {
             max-width: 100%;
             margin: auto;

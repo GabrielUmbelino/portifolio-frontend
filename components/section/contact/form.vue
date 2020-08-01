@@ -1,9 +1,15 @@
 <template>
   <a-form :form="form" :wrapper-col="{ span: 24 }" @submit="handleSubmit">
+    <a-alert
+      v-if="alert.show"
+      :message="alert.message"
+      :type="alert.type"
+      show-icon
+    />
     <a-form-item>
       <a-input
-        placeholder="Nome"
-        :decorator="nameDecorator"
+        :placeholder="$t('name')"
+        v-decorator="nameDecorator"
         allow-clear
         :maxLength="120"
       >
@@ -12,8 +18,8 @@
     </a-form-item>
     <a-form-item>
       <a-input
-        placeholder="E-Mail"
-        :decorator="emailDecorator"
+        :placeholder="$t('email')"
+        v-decorator="emailDecorator"
         allow-clear
         :maxLength="120"
       >
@@ -22,8 +28,8 @@
     </a-form-item>
     <a-form-item>
       <a-textarea
-        placeholder="Message"
-        :decorator="messageDecorator"
+        :placeholder="$t('message')"
+        v-decorator="messageDecorator"
         :rows="4"
         allow-clear
         :maxLength="200"
@@ -31,65 +37,110 @@
       </a-textarea>
     </a-form-item>
     <a-form-item :wrapper-col="{ span: 24 }" align="right">
-      <a-button type="primary" html-type="submit" size="large">
-        Enviar
+      <a-button
+        type="primary"
+        html-type="submit"
+        size="large"
+        :loading="loading"
+      >
+        {{ $t('send') }}
       </a-button>
     </a-form-item>
   </a-form>
 </template>
 
 <script>
-import { Icon } from 'ant-design-vue'
-
-const IconFont = Icon.createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js'
-})
+import { sendEmail } from '~/utils/Strapi'
 
 export default {
-  components: {
-    IconFont
-  },
   data() {
     return {
-      formLayout: 'horizontal',
-      form: this.$form.createForm(this, { name: 'coordinated' })
+      loading: false,
+      alert: {
+        show: false,
+        type: null,
+        message: null
+      }
     }
+  },
+  beforeCreate() {
+    this.form = this.$form.createForm(this, { name: 'contact' })
   },
   methods: {
     handleSubmit(e) {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log('Received values of form: ', values)
+          this.loading = true
+          sendEmail(
+            values[this.$t('name')],
+            values[this.$t('message')],
+            values[this.$t('email')]
+          ).then(
+            (res) => this.show(this.$t('message_sent_successfully'), 'success'),
+            (err) => this.show(this.$t('problem_sending_message'), 'error'),
+            () => (this.loading = false)
+          )
         }
       })
     },
-    handleSelectChange(value) {
-      console.log(value)
-      this.form.setFieldsValue({
-        note: `Hi, ${value === 'male' ? 'man' : 'lady'}!`
-      })
+    showAlert(message, type) {
+      this.state.alert = {
+        show: true,
+        message,
+        type
+      }
+    },
+    hideAlert() {
+      this.state.alert = {
+        show: false,
+        type: null,
+        message: null
+      }
     }
   },
   computed: {
     nameDecorator() {
       return [
-        'Nome',
-        { rules: [{ required: true, message: 'Please input your name!' }] }
+        this.$t('name'),
+        {
+          rules: [
+            { required: true, message: this.$t('please_input_your_name') }
+          ]
+        }
       ]
     },
     emailDecorator() {
       return [
-        'E-Mail',
-        { rules: [{ required: true, message: 'Please input your email!' }] }
+        this.$t('email'),
+        {
+          rules: [
+            { type: 'email', message: this.$t('please_input_a_valid_email') },
+            { required: true, message: this.$t('please_input_your_email') }
+          ]
+        }
       ]
     },
     messageDecorator() {
       return [
-        'Message',
-        { rules: [{ required: true, message: 'Please input your message!' }] }
+        this.$t('message'),
+        {
+          rules: [
+            { required: true, message: this.$t('please_input_your_message') }
+          ]
+        }
       ]
     }
   }
 }
 </script>
+<style lang="less">
+.ant-form {
+  .ant-form-item {
+    .ant-btn {
+      padding: 4px 46px;
+      height: 40px;
+    }
+  }
+}
+</style>

@@ -13,4 +13,26 @@ const post = async (body) => {
   return response.data
 }
 
-export { apiUrl, post, strapi }
+const sendEmail = async (name, email, message) => {
+
+  const config = await strapi.request('get', `/email/settings/${process.env.ENV || 'development'}`)
+  console.log('sendEmail() configs:', config);
+
+  return await strapi.request('post', '/email', {
+    to: config.sendmail_default_from,
+    from: email,
+    replyTo: config.sendmail_default_replyto,
+    subject: 'Mensagem do portifolio',
+    text: `from: ${name}; message: ${message}`,
+    html: `
+      <p>
+        <strong>from: ${name}</strong> </br>
+      </p>
+      <span>
+        ${message}
+      </span>
+    `,
+  })
+}
+
+export { apiUrl, post, strapi, sendEmail }
