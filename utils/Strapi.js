@@ -1,8 +1,8 @@
 import Strapi from 'strapi-sdk-javascript/build/main'
+const apiUrl = process.env.API_URL || 'https://portifolio-gabrielu.herokuapp.com'
+const strapi = new Strapi(apiUrl)
 
 const post = async (body) => {
-  const apiUrl = process.env.API_URL || 'http://localhost:1337'
-  const strapi = new Strapi(apiUrl)
   const response = await strapi.request('post', '/graphql', {
     data: {
       query: `
@@ -14,10 +14,7 @@ const post = async (body) => {
 }
 
 const sendEmail = async (name, email, message) => {
-  const apiUrl = 'https://portifolio-gabrielu.herokuapp.com'
-  const strapi = new Strapi(apiUrl)
   const config = await strapi.request('get', `/email/settings/${process.env.ENV || 'development'}`)
-  console.log('sendEmail() configs:', config, name, email, message);
 
   return await strapi.request('post', '/email', {
     to: config.sendmail_default_from,
