@@ -1,5 +1,5 @@
 <template>
-  <div class="contact">
+  <div class="contact" id="contact">
     <a-row>
       <a-col class="form" :xs="24" :lg="12" :xl="11">
         <p v-if="emailSended">
