@@ -31,13 +31,13 @@ import sectionsQuery from '~/apollo/queries/pages/sections.gql'
 import contentQuery from '~/apollo/queries/pages/content.gql'
 
 export default {
- head: {
-    script: [
-      {
-        src: 'https://unpkg.com/ionicons@5.0.0/dist/ionicons.js'
-      }
-    ],
-  },
+//  head: {
+//     script: [
+//       {
+//         src: 'https://unpkg.com/ionicons@5.0.0/dist/ionicons.js'
+//       }
+//     ],
+//   },
   components: {
     Section,
     Profile,
