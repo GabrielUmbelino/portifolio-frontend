@@ -26,7 +26,6 @@
           <a-col class="gutter-row language-switcher" :xs="4" align="right">
             <language-switcher />
           </a-col>
-          aaaaa
         </a-row>
       </a-layout-content>
     </a-layout-header>
@@ -84,7 +83,10 @@ export default {
       return this.$store.state.header.sections
     },
     headerContent() {
-      return this.$store.state.header.content
+      return {
+        ...this.$store.state.header.content,
+        HeaderActionText: this.$store.state.header.content[`HeaderActionText_${lang}`]
+      }
     },
     localizedSections() {
       if (!this.sections || !this.sections.length) {
@@ -107,7 +109,7 @@ export default {
       const lang = this.$i18n.locale || this.$i18n.defaultLocale
       return {
         title: this.headerContent[`title_${lang}`],
-        description: this.headerContent[`description_${lang}`]
+        description: this.headerContent[`description_${lang}`],
       }
     },
     defaultSectionId() {
