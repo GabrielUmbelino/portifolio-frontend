@@ -14,9 +14,9 @@ const post = async (body) => {
 }
 
 const sendEmail = async (name, email, message) => {
-
+  console.log('sendEmail() process.env.API_URL:', apiUrl, process.env.API_URL);
   const config = await strapi.request('get', `/email/settings/${process.env.ENV || 'development'}`)
-  console.log('sendEmail() configs:', config);
+  console.log('sendEmail() configs:', config, name, email, message);
 
   return await strapi.request('post', '/email', {
     to: config.sendmail_default_from,
