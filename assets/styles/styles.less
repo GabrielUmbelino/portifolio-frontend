@@ -1,5 +1,6 @@
 @import './font';
 @import './theme';
+@import './forms';
 
 .primary-title {
   font-family: 'Neoneon';
@@ -13,14 +14,29 @@
   text-shadow: 0px 0px 6px @secondary-title-shadow-color;
   font-weight: 500;
 }
-.ant-btn-primary {
-  background-color: @btn-primary-bg;
-  border-color: @btn-primary-border;
+.ant-btn {
+  border-width: 3px;
+  font-weight: bold;
+  font-family: 'Titillium';
+  text-transform: uppercase;
+  &-primary {
+    background-color: @btn-primary-bg;
+    border-color: @btn-primary-border;
+    &:hover {
+      border-color: @btn-primary-border;
+      background-color: @btn-primary-border;
+    }
+  }
+  &-danger {
+    background-color: @btn-danger-bg;
+    border-color: @btn-danger-border;
+    &:hover {
+      border-color: @btn-danger-border;
+      background-color: @btn-danger-border;
+    }
+  }
 }
-.ant-btn-danger {
-  background-color: @btn-danger-bg;
-  border-color: @btn-danger-border;
-}
+
 
 a, a:hover, a:visited {
   color: @primary-color;

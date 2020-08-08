@@ -68,11 +68,12 @@ typings/
 # nuxt.js build output
 .nuxt
 
-# Nuxt generate
-dist
 
 # vuepress build output
 .vuepress/dist
+
+# Nuxt generate
+dist
 
 # Serverless directories
 .serverless
@@ -88,3 +89,4 @@ sw.*
 
 # Vim swap files
 *.swp
+package-lock.json
