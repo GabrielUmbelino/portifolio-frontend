@@ -11,7 +11,7 @@
               :style="{ lineHeight: '64px' }"
             >
               <a-menu-item
-
+  
                 v-for="section in localizedSections"
                 :key="section.id"
                 @click="e => onMenuClicked(e, section.url)"
@@ -26,6 +26,7 @@
           <a-col class="gutter-row language-switcher" :xs="4" align="right">
             <language-switcher />
           </a-col>
+          aaaaa
         </a-row>
       </a-layout-content>
     </a-layout-header>
