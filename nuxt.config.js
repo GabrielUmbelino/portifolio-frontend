@@ -17,8 +17,8 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
   env: {
-    API_URL: process.env.API_URL,
-    GRAPHQL_URL: process.env.GRAPHQL_URL,
+    API_URL: process.env.API_URL || 'http://localhost:1337',
+    GRAPHQL_URL: process.env.GRAPHQL_URL || 'http://localhost:1337/graphql',
   },
   /*
    ** Customize the progress-bar color

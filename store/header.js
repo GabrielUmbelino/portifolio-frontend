@@ -1,6 +1,7 @@
 export const state = () => ({
   sections: [],
-  content: {}
+  content: {},
+  apiUrl: ''
 })
 
 export const mutations = {
@@ -9,5 +10,8 @@ export const mutations = {
   },
   setContent(state, content) {
     state.content = { ...content }
+  },
+  setApiUrl(state, apiUrl) {
+    state.apiUrl = apiUrl
   }
 }

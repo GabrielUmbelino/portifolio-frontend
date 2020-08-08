@@ -18,12 +18,12 @@
 </template>
 
 <script>
-import { post } from '~/utils/Strapi'
-import Section from '~/components/section';
-import Profile from '~/components/section/profile';
-import Project from '~/components/section/project';
-import Experience from '~/components/section/experience';
-import Contact from '~/components/section/contact';
+import { post, apiUrl } from '~/utils/Strapi'
+import Section from '~/components/section'
+import Profile from '~/components/section/profile'
+import Project from '~/components/section/project'
+import Experience from '~/components/section/experience'
+import Contact from '~/components/section/contact'
 import profileQuery from '~/apollo/queries/pages/profile.gql'
 import projectsQuery from '~/apollo/queries/pages/projects.gql'
 import experienciesQuery from '~/apollo/queries/pages/experiencies.gql'
@@ -31,19 +31,19 @@ import sectionsQuery from '~/apollo/queries/pages/sections.gql'
 import contentQuery from '~/apollo/queries/pages/content.gql'
 
 export default {
-//  head: {
-//     script: [
-//       {
-//         src: 'https://unpkg.com/ionicons@5.0.0/dist/ionicons.js'
-//       }
-//     ],
-//   },
+  head: {
+    script: [
+      {
+        src: 'https://unpkg.com/ionicons@5.0.0/dist/ionicons.js'
+      }
+    ]
+  },
   components: {
     Section,
     Profile,
     Project,
     Experience,
-    Contact,
+    Contact
   },
   async asyncData({ store }) {
     const { profile } = await post(profileQuery.loc.source.body)
@@ -52,15 +52,19 @@ export default {
     const { pages: sections } = await post(sectionsQuery.loc.source.body)
     const { headerContent: content } = await post(contentQuery.loc.source.body)
 
-    store.commit('header/setSections', sections.sort((a, b) => (a.order < b.order ? -1 : 1)))
+    store.commit(
+      'header/setSections',
+      sections.sort((a, b) => (a.order < b.order ? -1 : 1))
+    )
     store.commit('header/setContent', content)
+    store.commit('header/setApiUrl', apiUrl)
 
     return {
       profile,
       experiencies,
-      projects,
+      projects
     }
-  },
+  }
 }
 </script>
 <style lang="less">

@@ -1,53 +1,55 @@
 <template>
-  <a-form :form="form" :wrapper-col="{ span: 24 }" @submit="handleSubmit">
+  <div>
     <a-alert
       v-if="alert.show"
       :message="alert.message"
       :type="alert.type"
       show-icon
+      closable
     />
-    <a-form-item>
-      <a-input
-        :placeholder="$t('name')"
-        v-decorator="nameDecorator"
-        allow-clear
-        :maxLength="120"
-      >
-        <ion-icon name="person" slot="prefix"></ion-icon>
-      </a-input>
-    </a-form-item>
-    <a-form-item>
-      <a-input
-        :placeholder="$t('email')"
-        v-decorator="emailDecorator"
-        allow-clear
-        :maxLength="120"
-      >
-        <ion-icon name="mail" slot="prefix"></ion-icon>
-      </a-input>
-    </a-form-item>
-    <a-form-item>
-      <a-textarea
-        :placeholder="$t('message')"
-        v-decorator="messageDecorator"
-        :rows="4"
-        allow-clear
-        :maxLength="200"
-      >
-      </a-textarea>
-    </a-form-item>
-    <a-form-item :wrapper-col="{ span: 24 }" align="right">
-      <a-button
-        type="primary"
-        html-type="submit"
-        size="large"
-        :loading="loading"
-      >
-        <!-- {{ $t('send') }} -->
-        Eviar essa porra
-      </a-button>
-    </a-form-item>
-  </a-form>
+    <a-form :form="form" :wrapper-col="{ span: 24 }" @submit="handleSubmit">
+      <a-form-item>
+        <a-input
+          :placeholder="$t('name')"
+          v-decorator="nameDecorator"
+          allow-clear
+          :maxLength="120"
+        >
+          <ion-icon name="person" slot="prefix"></ion-icon>
+        </a-input>
+      </a-form-item>
+      <a-form-item>
+        <a-input
+          :placeholder="$t('email')"
+          v-decorator="emailDecorator"
+          allow-clear
+          :maxLength="120"
+        >
+          <ion-icon name="mail" slot="prefix"></ion-icon>
+        </a-input>
+      </a-form-item>
+      <a-form-item>
+        <a-textarea
+          :placeholder="$t('message')"
+          v-decorator="messageDecorator"
+          :rows="4"
+          allow-clear
+          :maxLength="200"
+        >
+        </a-textarea>
+      </a-form-item>
+      <a-form-item :wrapper-col="{ span: 24 }" align="right">
+        <a-button
+          type="primary"
+          html-type="submit"
+          size="large"
+          :loading="loading"
+        >
+          {{ !loading  ? $t('send') : $t('sending') }}
+        </a-button>
+      </a-form-item>
+    </a-form>
+  </div>
 </template>
 
 <script>
@@ -72,31 +74,29 @@ export default {
       e.preventDefault()
       this.form.validateFields((err, values) => {
         if (!err) {
-          this.loading = true
-          sendEmail(
+          this.sendEmail(
             values[this.$t('name')],
-            values[this.$t('message')],
-            values[this.$t('email')]
-          ).then(
-            (res) => this.show(this.$t('message_sent_successfully'), 'success'),
-            (err) => this.show(this.$t('problem_sending_message'), 'error'),
-            () => (this.loading = false)
+            values[this.$t('email')],
+            values[this.$t('message')]
           )
         }
       })
     },
+    async sendEmail(name, email, message) {
+      this.loading = true
+      const response = await sendEmail(name, email, message, this.$store.state.header.apiUrl)
+      if (response) {
+        this.showAlert(this.$t('message_sent_successfully'), 'success')
+      } else {
+        this.showAlert(this.$t('problem_sending_message'), 'error')
+      }
+      this.loading = false
+    },
     showAlert(message, type) {
-      this.state.alert = {
+      this.alert = {
         show: true,
         message,
         type
-      }
-    },
-    hideAlert() {
-      this.state.alert = {
-        show: false,
-        type: null,
-        message: null
       }
     }
   },
@@ -142,6 +142,10 @@ export default {
       padding: 4px 46px;
       height: 40px;
     }
+  }
+
+  .ant-alert {
+    margin: 25px 0;
   }
 }
 </style>

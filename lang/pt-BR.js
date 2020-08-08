@@ -10,6 +10,7 @@ export default {
   send_a_message: 'Envie uma mensagem :)',
   message_sended: 'Mensagem evniada, obrigado!',
   send: "Enviar",
+  sending: "Enviando",
   name: "Nome",
   email: "E-Mail",
   message: "Menssagem",
