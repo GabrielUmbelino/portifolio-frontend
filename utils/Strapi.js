@@ -1,5 +1,5 @@
 import Strapi from 'strapi-sdk-javascript/build/main'
-const apiUrl = process.env.API_URL || 'https://portifolio-gabrielu.herokuapp.com'
+const apiUrl = 'https://portifolio-gabrielu.herokuapp.com'
 const strapi = new Strapi(apiUrl)
 
 const post = async (body) => {

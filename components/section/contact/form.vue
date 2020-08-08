@@ -43,7 +43,8 @@
         size="large"
         :loading="loading"
       >
-        {{ $t('send') }}
+        <!-- {{ $t('send') }} -->
+        Eviar essa porra
       </a-button>
     </a-form-item>
   </a-form>
