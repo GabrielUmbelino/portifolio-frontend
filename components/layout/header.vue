@@ -51,10 +51,12 @@
           <span>{{ localizedHeaderContent.description }}</span>
           <a-button
             size="large"
-            v-if="headerContent.headerActionLink"
-            @click="headerContent.headerActionLink(section.url)"
+            v-if="headerContent.header_action_link"
+            @click="navigateToActionLink"
             type="primary"
-          >{{ headerContent.headerActionText }}</a-button>
+          >
+          {{ localizedHeaderContent.header_action_text }}
+          </a-button>
         </a-col>
       </a-row>
     </a-layout-content>
@@ -74,8 +76,15 @@ export default {
       if ('resume' === route) {
         console.log('download resume not implemented yet')
       } else if (this.$route.fullPath !== route) {
-        this.$router.push(route);
+        if (route) {
+          this.$router.push({ hash: route });
+        } else {
+          this.$router.push('/');
+        }
       }
+    },
+    navigateToActionLink() {
+     this.$router.push({ hash: this.headerContent.header_action_link });
     }
   },
   computed: {
@@ -83,10 +92,7 @@ export default {
       return this.$store.state.header.sections
     },
     headerContent() {
-      return {
-        ...this.$store.state.header.content,
-        HeaderActionText: this.$store.state.header.content[`HeaderActionText_${lang}`]
-      }
+      return this.$store.state.header.content
     },
     localizedSections() {
       if (!this.sections || !this.sections.length) {
@@ -110,6 +116,7 @@ export default {
       return {
         title: this.headerContent[`title_${lang}`],
         description: this.headerContent[`description_${lang}`],
+        header_action_text: this.$store.state.header.content[`header_action_text_${lang}`]
       }
     },
     defaultSectionId() {
