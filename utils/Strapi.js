@@ -15,7 +15,7 @@ const post = async (body) => {
     
   } catch (error) {
     console.log(error.message)
-    throw error.message;
+    throw `${apiUrl} : ${error.message}`;
   }
 
   return response.data
