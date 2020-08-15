@@ -17,8 +17,7 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
   env: {
-    API_URL: process.env.API_URL || 'http://localhost:1337',
-    GRAPHQL_URL: process.env.GRAPHQL_URL || 'http://localhost:1337/graphql',
+    API_URL: process.env.API_URL,
   },
   /*
    ** Customize the progress-bar color
@@ -107,5 +106,14 @@ export default {
     extend(config, ctx) {
       config.resolve.alias['vue'] = 'vue/dist/vue.common'
     }
-  }
+  },
+  router: {
+    scrollBehavior(to) {
+      if (to.hash) {
+        const { top } = document.querySelector(to.hash).getBoundingClientRect();
+        return window.scrollTo({ top, behavior: 'smooth' });
+      }
+      return window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+  },
 }
