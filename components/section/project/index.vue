@@ -4,10 +4,18 @@
       <a-col class="thumbnail" :xs="24" :lg="10" :xl="8">
         <figure>
           <img
-            :src="`${baseUrl}${p.thumbnail.url}`"
+            v-if="p.mobile_mockup_image"
+            :src="`${baseUrl}${p.mobile_mockup_image.url}`"
             :alt="p.name"
-            :width="p.thumbnail.width"
-            :height="p.thumbnail.height"
+            :width="p.mobile_mockup_image.width"
+            :height="p.mobile_mockup_image.height"
+          />
+          <img
+            v-else-if="p.web_mockup_image"
+            :src="`${baseUrl}${p.web_mockup_image.url}`"
+            :alt="p.name"
+            :width="p.web_mockup_image.width"
+            :height="p.web_mockup_image.height"
           />
         </figure>
       </a-col>

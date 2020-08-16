@@ -17,12 +17,12 @@ query Work($id: ID!) {
 			name
       svgIcon
     }
-    thumbnail {
+    mobile_mockup_image {
       url
       height
       width
     }
-		image {
+		web_mockup_image {
       url
       height
       width

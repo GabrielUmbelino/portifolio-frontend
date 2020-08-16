@@ -20,4 +20,6 @@ export default {
   please_input_your_message: "Please input your message!",
   problem_sending_message: "Problem to send message",
   message_sent_successfully: "Mensagem sent successfully!",
+  see_project: "See Project",
+  see_repository: "See Repository",
 }

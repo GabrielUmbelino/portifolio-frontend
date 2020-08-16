@@ -1,7 +1,7 @@
 query {
   works {
     id # Or _id if you are using MongoDB
-		name_en
+    name_en
     name_pt
     role_en
     role_pt
@@ -17,12 +17,12 @@ query {
 			name
       svgIcon
     }
-    thumbnail {
+    mobile_mockup_image {
       url
       height
       width
     }
-		image {
+		web_mockup_image {
       url
       height
       width
