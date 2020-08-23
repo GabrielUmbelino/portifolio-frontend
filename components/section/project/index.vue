@@ -4,6 +4,7 @@
       <a-col class="thumbnail" :xs="24" :lg="10" :xl="8">
         <figure>
           <img
+            v-if="p.thumbnail"
             :src="`${baseUrl}${p.thumbnail.url}`"
             :alt="p.name"
             :width="p.thumbnail.width"
@@ -28,17 +29,6 @@
         >
           Details
         </a-button>
-        <!-- <div class="technologies">
-          <h4>
-            {{ $t('technologies') }}
-          </h4>
-          <Technology
-            v-for="t in p.technologies"
-            :key="t.id"
-            :name="t.name"
-            :svgIcon="t.svgIcon"
-          />
-        </div> -->
       </a-col>
     </a-row>
     <div class="image" v-html="$store.state.header.content.projects_background"/>

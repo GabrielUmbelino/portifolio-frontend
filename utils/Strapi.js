@@ -2,15 +2,14 @@ import Strapi from 'strapi-sdk-javascript/build/main'
 const apiUrl = process.env.API_URL || 'http://localhost:1337'
 const strapi = new Strapi(apiUrl)
 
-const post = async (body) => {
+const post = async (query, variables = {}) => {
   let response;
   try {
     response =  await strapi.request('post', '/graphql', {
       data: {
-        query: `
-          query ${body}
-        `
-      }
+        query,
+        variables,
+      },
     })
     
   } catch (error) {

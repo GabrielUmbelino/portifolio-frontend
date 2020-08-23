@@ -1,4 +1,4 @@
-{
+query {
   profile {
     id # Or _id if you are using MongoDB
 		interests_en

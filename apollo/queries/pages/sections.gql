@@ -1,4 +1,4 @@
-{
+query {
   pages {
     id
     description_en

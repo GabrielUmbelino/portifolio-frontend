@@ -1,5 +1,5 @@
-query {
-  works {
+query Work($id: ID!) {
+  work(id: $id) {
     id # Or _id if you are using MongoDB
     name_en
     name_pt
