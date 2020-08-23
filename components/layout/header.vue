@@ -4,7 +4,7 @@
         <a-row type="flex" justify="space-between">
           <a-col class="gutter-row menu-items" :xs="20" align="left">
             <a-menu
-              v-if="localizedSections.length"
+              v-if="sections && sections.length"
               mode="horizontal"
               :default-selected-keys="defaultSectionId"
               :style="{ lineHeight: '64px' }"
@@ -74,7 +74,7 @@ export default {
 </script>
 <style lang="less">
 .ant-layout-header {
-  max-width: 1290px;
+  max-width: @layout-header-width;
   margin: auto;
   background-color: @layout-header-background;
   white-space: nowrap;

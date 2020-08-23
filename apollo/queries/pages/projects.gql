@@ -7,7 +7,7 @@ query {
     role_pt
     details_en
     details_pt
-    link
+    repository
     backgroundColor
     categories {
       description_en
@@ -17,12 +17,12 @@ query {
 			name
       svgIcon
     }
-    mobile_mockup_image {
+    mockup_image {
       url
       height
       width
     }
-		web_mockup_image {
+		thumbnail {
       url
       height
       width

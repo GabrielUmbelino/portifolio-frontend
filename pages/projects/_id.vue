@@ -1,22 +1,24 @@
 <template>
-  <div>
-    <header-banner-project
-      v-if="work"
+  <div v-if="work">
+    <project-header
       :name="localizedWork.name"
-      :mobileMockupImage="work.mobile_mockup_image"
-      :webMockupImage="work.web_mockup_image"
-      :repositoryUrl="work.repository"
-      :previewUrl="work.link"
       :backgroundColor="work.backgroundColor"
+      :repository="work.repository"
+      :mockUrl="mockUrl"
+      :isMobile="isMobile"
     />
     <a-layout class="layout">
       <a-layout-content :style="{ minHeight: '280px' }">
-          <b>
-            {{ localizedWork.name }}
-          </b>
-          <p>
-            {{ localizedWork.description }}
-          </p>
+        <div class="section" v-if="localizedWork">
+          <div class="content">
+            <h2>
+              {{ localizedWork.name }}
+            </h2>
+            <p>
+              {{ localizedWork.details }}
+            </p>
+          </div>
+        </div>
       </a-layout-content>
     </a-layout>
   </div>
@@ -24,13 +26,10 @@
 
 <script>
 import { post, apiUrl } from '~/utils/Strapi'
-
-import HeaderBannerProject from '~/components/layout/header-banner-project'
-
 import projectQuery from '~/apollo/queries/pages/project.gql'
 import contentQuery from '~/apollo/queries/pages/content.gql'
 import sectionsQuery from '~/apollo/queries/pages/sections.gql'
-
+import ProjectHeader from '~/components/shared/project/project-header'
 export default {
   head: {
     script: [
@@ -40,7 +39,7 @@ export default {
     ]
   },
   components: {
-    HeaderBannerProject
+    ProjectHeader
   },
   async asyncData({ store }) {
     const { pages: sections } = await post(sectionsQuery.loc.source.body)
@@ -49,11 +48,6 @@ export default {
       sections.sort((a, b) => (a.order < b.order ? -1 : 1))
     )
     store.commit('header/setApiUrl', apiUrl)
-  },
-  data() {
-    return {
-      work: null
-    }
   },
   apollo: {
     work: {
@@ -67,15 +61,28 @@ export default {
   computed: {
     localizedWork() {
       if (!this.work) {
-        return []
+        return null
       }
 
       const lang = this.$i18n.locale || this.$i18n.defaultLocale
 
       return {
         name: this.work[`name_${lang}`],
-        description: this.work[`description_${lang}`]
+        details: this.work[`details_${lang}`]
       }
+    },
+    isMobile() {
+      return (
+        this.work.mockup_image &&
+        this.work.mockup_image.width < this.work.mockup_image.height
+      )
+    },
+    mockUrl() {
+      if (!this.work.mockup_image) {
+        return null
+      }
+
+      return `${apiUrl}${this.work.mockup_image.url}`
     }
   }
 }
@@ -83,8 +90,19 @@ export default {
 <style lang="less">
 .layout {
   margin: auto;
+
   .ant-layout-content {
     max-width: 100%;
+    .content {
+      padding: 40px 10px;
+      width: 800px;
+      max-width: 100%;
+      margin: auto;
+      h2 {
+        font-size: 3rem;
+        text-align: center;
+      }
+    }
   }
 }
 </style>

@@ -66,6 +66,7 @@ export default {
     max-width: 850px;
     margin: auto;
   }
+
   .logo {
     figure {
       border-radius: 100%;
@@ -74,6 +75,7 @@ export default {
       position: relative;
       width: 214px;
       height: 214px;
+
       img {
         position: absolute;
         margin: auto;
@@ -88,20 +90,25 @@ export default {
       }
     }
   }
+
   .details {
     align-content: center;
     padding: 0 20px;
+
     > * {
       text-align: left;
       display: block;
       float: left;
     }
+
     > h2 {
       font-size: 2.3rem;
     }
+
     > span {
       color: @text-color-dark;
     }
+
     > .ant-btn-primary {
       margin-top: 33px;
     }
