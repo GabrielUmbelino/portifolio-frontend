@@ -3,8 +3,8 @@
     <a-col class="video" :xs="24" :lg="10" :xl="9">
       <div v-html="localizedProfile.presentationVideoUrl" />
     </a-col>
-    <a-col class="content" :xs="24" :lg="14"  :xl="15">
-      <div class="interests" v-if="localizedProfile.interests">
+    <a-col class="content" :xs="24" :lg="14" :xl="15">
+      <div v-if="localizedProfile.interests" class="interests">
         <h4>
           {{ $t('interests') }}
         </h4>
@@ -16,29 +16,32 @@
         <h4>
           {{ $t('technologies') }}
         </h4>
-        <Technology
+        <Tag
           v-for="t in localizedProfile.technologies"
           :key="t.id"
           :name="t.name"
-          :svgIcon="t.svgIcon"
+          :svg-icon="t.svgIcon"
         />
       </div>
     </a-col>
-    <div class="image" v-html="$store.state.header.content.profile_background" />
+    <div
+      class="image"
+      v-html="$store.state.header.content.profile_background"
+    />
   </a-row>
 </template>
 
 <script>
-import Technology from '~/components/shared/technology'
+import Tag from '~/components/shared/tag'
 export default {
   components: {
-    Technology
+    Tag
   },
   props: {
     profile: {
       type: Object,
       required: true
-    },
+    }
   },
   computed: {
     localizedProfile() {

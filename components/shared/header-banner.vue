@@ -20,10 +20,10 @@
         <h2 class="secondary-title">{{ localizedHeaderContent.title }}</h2>
         <span>{{ localizedHeaderContent.description }}</span>
         <a-button
-          size="large"
           v-if="headerContent.header_action_link"
-          @click="navigateToActionLink"
           type="primary"
+          size="large"
+          @click="navigateToActionLink"
         >
           {{ localizedHeaderContent.header_action_text }}
         </a-button>
@@ -54,6 +54,11 @@ export default {
           `header_action_text_${lang}`
         ]
       }
+    }
+  },
+  methods: {
+    navigateToActionLink() {
+      this.$router.push({ path: '/' + this.headerContent.header_action_text })
     }
   }
 }

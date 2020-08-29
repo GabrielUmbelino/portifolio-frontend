@@ -1,19 +1,24 @@
 <template>
   <a-layout-content
-    class="header-content"
+    class="project-header"
     align="middle"
-    :class="{ 'hasMock': mockUrl }"
+    :class="{ hasMock: mockUrl }"
     :style="{ background: backgroundColor }"
   >
     <div>
       <a-row>
         <a-col v-if="mockUrl" :xl="13" :md="14" :sm="24" :xs="24">
           <div class="mock">
-            <mobile-mock v-if="mockUrl && isMobile" :image="mockUrl" :name="name"/>
-            <web-mock v-else :image="mockUrl" :name="name"/>
+            <MobileMock
+              v-if="mockUrl && isMobile"
+              :image="mockUrl"
+              :name="name"
+            />
+            <WebMock v-else :image="mockUrl" :name="name" />
           </div>
         </a-col>
-        <a-col class="details"
+        <a-col
+          class="details"
           :xl="details.xl"
           :md="details.md"
           :sm="details.sm"
@@ -21,11 +26,11 @@
         >
           <h2 class="secondary-title">{{ name }}</h2>
           <a-button
-            size="large"
             v-if="repository"
-            @click="repository"
             type="primary"
             icon="github"
+            size="large"
+            @click="repository"
           >
             {{ $t('see_repository') }}
           </a-button>
@@ -35,28 +40,30 @@
   </a-layout-content>
 </template>
 <script>
-import MobileMock from '~/components/shared/project/mobile-mock';
-import WebMock from '~/components/shared/project/web-mock';
+import MobileMock from '~/components/project/mobile-mock'
+import WebMock from '~/components/project/web-mock'
 
 export default {
   components: {
     MobileMock,
-    WebMock,
+    WebMock
   },
   props: {
     name: {
       type: String,
       required: true
-    }, 
+    },
     backgroundColor: {
       type: String,
       required: true
     },
     repository: {
-      type: String
+      type: String,
+      default: null
     },
     mockUrl: {
-      type: String
+      type: String,
+      default: null
     },
     isMobile: {
       type: Boolean
@@ -79,24 +86,38 @@ export default {
         sm: 24,
         xs: 24
       }
-    },
+    }
   }
 }
 </script>
 <style lang="less">
-.header-content {
+.project-header {
   border-bottom: solid @grey-2 6px;
+
   > div {
     max-width: @layout-header-width;
     margin: auto;
   }
+
   .ant-row {
     display: flex;
     align-items: stretch;
   }
+
   &.hasMock {
+    .mock {
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      margin: 0;
+      margin-right: 60px;
+      margin-top: 70px;
+    }
+
     .details {
       align-items: baseline;
+      padding: 150px 0;
+      padding-left: 60px;
 
       h2 {
         text-align: left;
@@ -104,18 +125,9 @@ export default {
     }
   }
 
-  .mock {
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    margin: 0;
-    margin-right: 60px;
-    margin-top: 70px;
-  }
-
   .details {
     padding: 150px 0;
-    padding-left: 60px;
+    padding-left: 20px;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -128,10 +140,24 @@ export default {
       margin-top: 0px;
     }
   }
-}
 
-@media (max-width: 768px) {
-  .header-content {
+  @media (max-width: 999px) {
+    &.hasMock {
+      .mock {
+        margin-right: 20px;
+      }
+
+      .details {
+        padding-left: 20px;
+
+        h2 {
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
     .ant-row {
       display: flex;
       flex-flow: column-reverse;

@@ -1,8 +1,8 @@
 <script>
-import TechnologyIcon from '~/components/shared/technology/technologyIcon'
+import SvgIcon from '~/components/shared/tag/svg-icon'
 export default {
   functional: true,
-  components: { TechnologyIcon },
+  components: { SvgIcon },
   props: {
     name: {
       type: String,
@@ -10,20 +10,15 @@ export default {
     },
     svgIcon: {
       type: String,
-      required: true
+      default: null
     }
   },
   render(h, { props }) {
     return (
-      <a-tag >
+      <a-tag>
         <div>
-          { 
-            props.svgIcon && 
-            <TechnologyIcon svgIcon={ props.svgIcon } />
-          }
-          <span>
-            { props.name }
-          </span>
+          {props.svgIcon && <SvgIcon svg-icon={props.svgIcon} />}
+          <span>{props.name}</span>
         </div>
       </a-tag>
     )
@@ -32,8 +27,8 @@ export default {
 </script>
 <style scoped lang="less">
 .ant-tag {
-  margin-right: .9rem;
-  margin-bottom: .9rem;
+  margin-right: 0.9rem;
+  margin-bottom: 0.9rem;
   div {
     margin: 3px 0;
     line-height: 1.6rem;
