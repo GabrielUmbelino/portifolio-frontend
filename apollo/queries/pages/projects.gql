@@ -27,5 +27,8 @@ query {
       height
       width
     }
+    project_period
+    team_size
+    happy_customers
   }
 }
