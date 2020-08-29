@@ -9,7 +9,7 @@ export default {
   },
   render(h, { props }) {
     const svgComponent = {
-      template : props.svgIcon
+      template: props.svgIcon
     }
     return <a-icon component={svgComponent} />
   }

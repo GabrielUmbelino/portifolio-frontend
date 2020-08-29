@@ -1,54 +1,48 @@
 <template>
-    <a-layout-header>
-      <a-layout-content>
-        <a-row type="flex" justify="space-between">
-          <a-col class="gutter-row menu-items" :xs="20" align="left">
-            <a-menu
-              v-if="sections && sections.length"
-              mode="horizontal"
-              :default-selected-keys="defaultSectionId"
-              :style="{ lineHeight: '64px' }"
+  <a-layout-header>
+    <a-layout-content>
+      <a-row type="flex" justify="space-between">
+        <a-col class="gutter-row menu-items" :xs="20" align="left">
+          <a-menu
+            v-if="sections && sections.length"
+            mode="horizontal"
+            :default-selected-keys="defaultSectionId"
+            :style="{ lineHeight: '64px' }"
+          >
+            <a-menu-item
+              v-for="section in localizedSections"
+              :key="section.id"
+              @click="(e) => onMenuClicked(e, section.url)"
             >
-              <a-menu-item
-  
-                v-for="section in localizedSections"
-                :key="section.id"
-                @click="e => onMenuClicked(e, section.url)"
-              >
-                <a-icon v-if="section.icon_type" :type="section.icon_type" theme="filled" />
+              <a-icon
+                v-if="section.icon_type"
+                :type="section.icon_type"
+                theme="filled"
+              />
 
-                <TechnologyIcon v-else-if="section.icon_svg" :svgIcon="section.icon_svg"/>
-                {{ section.description }}
-              </a-menu-item>
-            </a-menu>
-          </a-col>
-          <a-col class="gutter-row language-switcher" :xs="4" align="right">
-            <language-switcher />
-          </a-col>
-        </a-row>
-      </a-layout-content>
-    </a-layout-header>
+              <SvgIcon
+                v-else-if="section.icon_svg"
+                :svg-icon="section.icon_svg"
+              />
+              {{ section.description }}
+            </a-menu-item>
+          </a-menu>
+        </a-col>
+        <a-col class="gutter-row language-switcher" :xs="4" align="right">
+          <LanguageSwitcher />
+        </a-col>
+      </a-row>
+    </a-layout-content>
+  </a-layout-header>
 </template>
 <script>
-import LanguageSwitcher from '~/components/shared/languageSwitcher'
-import TechnologyIcon from '~/components/shared/technology/technologyIcon'
+import LanguageSwitcher from '~/components/shared/language-switcher'
+import SvgIcon from '~/components/shared/tag/svg-icon'
+
 export default {
   components: {
     LanguageSwitcher,
-    TechnologyIcon
-  },
-  methods: {
-    onMenuClicked(e, route) {
-      if ('resume' === route) {
-        console.log('download resume not implemented yet')
-      } else if (this.$route.fullPath !== route) {
-        if (route) {
-          this.$router.push({ path: '/', hash: route });
-        } else {
-          this.$router.push('/');
-        }
-      }
-    }
+    SvgIcon
   },
   computed: {
     sections() {
@@ -66,8 +60,21 @@ export default {
       }))
     },
     defaultSectionId() {
-      const [firstSection] = this.localizedSections;
+      const [firstSection] = this.localizedSections
       return [firstSection.id]
+    }
+  },
+  methods: {
+    onMenuClicked(e, route) {
+      if (route === 'resume') {
+        console.log('download resume not implemented yet')
+      } else if (this.$route.fullPath !== route) {
+        if (route) {
+          this.$router.push({ path: '/', hash: route })
+        } else {
+          this.$router.push('/')
+        }
+      }
     }
   }
 }

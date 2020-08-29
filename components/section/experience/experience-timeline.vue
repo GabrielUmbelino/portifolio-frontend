@@ -4,7 +4,7 @@ export default {
   props: {
     experiencies: {
       type: Array,
-      required: false
+      default: () => []
     },
     theme: {
       type: String,

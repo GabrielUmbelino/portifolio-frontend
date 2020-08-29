@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <header-banner />
+  <div class="home">
+    <HeaderBanner />
     <a-layout class="layout">
       <a-layout-content :style="{ minHeight: '280px' }">
         <Section :name="$t('profile')">
@@ -35,13 +35,6 @@ import sectionsQuery from '~/apollo/queries/pages/sections.gql'
 import contentQuery from '~/apollo/queries/pages/content.gql'
 
 export default {
-  head: {
-    script: [
-      {
-        src: 'https://unpkg.com/ionicons@5.0.0/dist/ionicons.js'
-      }
-    ]
-  },
   components: {
     HeaderBanner,
     Section,
@@ -69,14 +62,23 @@ export default {
       experiencies,
       projects
     }
+  },
+  head: {
+    script: [
+      {
+        src: 'https://unpkg.com/ionicons@5.0.0/dist/ionicons.js'
+      }
+    ]
   }
 }
 </script>
 <style lang="less">
-.layout {
-  margin: auto;
-  .ant-layout-content {
-    max-width: 100%;
+.home {
+  .layout {
+    margin: auto;
+    .ant-layout-content {
+      max-width: 100%;
+    }
   }
 }
 </style>

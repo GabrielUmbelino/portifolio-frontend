@@ -13,7 +13,7 @@
         </figure>
       </a-col>
       <a-col class="content" :xs="24" :lg="14" :xl="16">
-        <div class="details" v-if="p.details">
+        <div v-if="p.details" class="details">
           <h4>
             {{ p.name }}
           </h4>
@@ -24,25 +24,24 @@
         <a-button
           type="link"
           size="large"
-          @click="$router.push(`/projects/${p.id}`)"
           icon="link"
+          @click="$router.push(`/projects/${p.id}`)"
         >
           Details
         </a-button>
       </a-col>
     </a-row>
-    <div class="image" v-html="$store.state.header.content.projects_background"/>
+    <div
+      class="image"
+      v-html="$store.state.header.content.projects_background"
+    />
   </div>
 </template>
 
 <script>
-import Technology from '~/components/shared/technology'
 import { apiUrl } from '~/utils/Strapi.js'
 
 export default {
-  components: {
-    Technology
-  },
   props: {
     projects: {
       type: Array,

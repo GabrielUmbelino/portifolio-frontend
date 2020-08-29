@@ -1,25 +1,38 @@
 <template>
-  <div v-if="work">
-    <project-header
+  <div v-if="work" class="work-details">
+    <ProjectHeader
       :name="localizedWork.name"
-      :backgroundColor="work.backgroundColor"
+      :background-color="work.backgroundColor"
       :repository="work.repository"
-      :mockUrl="mockUrl"
-      :isMobile="isMobile"
+      :mock-url="mockUrl"
+      :is-mobile="isMobile"
     />
     <a-layout class="layout">
-      <a-layout-content :style="{ minHeight: '280px' }">
-        <div class="section" v-if="localizedWork">
-          <div class="content">
-            <h2>
-              {{ localizedWork.name }}
-            </h2>
-            <p>
-              {{ localizedWork.details }}
-            </p>
-          </div>
+      <a-layout-content>
+        <div class="content">
+          <a-row type="flex">
+            <a-col class="description" :xs="24">
+              <h2>
+                {{ localizedWork.name }}
+              </h2>
+              <p>
+                {{ localizedWork.details }}
+              </p>
+            </a-col>
+            <a-col :xl="12" :xs="24">
+              <Technologies :technologies="work.technologies" />
+            </a-col>
+            <a-col :xl="12" :xs="24">
+              <Categories :categories="localizedWork.categories" />
+            </a-col>
+          </a-row>
         </div>
       </a-layout-content>
+      <ProjectStats
+        :project-period="work.project_period"
+        :team-size="work.team_size"
+        :happy-customers="work.happy_customers"
+      />
     </a-layout>
   </div>
 </template>
@@ -27,19 +40,18 @@
 <script>
 import { post, apiUrl } from '~/utils/Strapi'
 import projectQuery from '~/apollo/queries/pages/project.gql'
-import contentQuery from '~/apollo/queries/pages/content.gql'
 import sectionsQuery from '~/apollo/queries/pages/sections.gql'
-import ProjectHeader from '~/components/shared/project/project-header'
+import ProjectHeader from '~/components/project/project-header'
+import ProjectStats from '~/components/project/project-stats'
+import Technologies from '~/components/shared/technologies.js'
+import Categories from '~/components/shared/categories.js'
+
 export default {
-  head: {
-    script: [
-      {
-        src: 'https://unpkg.com/ionicons@5.0.0/dist/ionicons.js'
-      }
-    ]
-  },
   components: {
-    ProjectHeader
+    ProjectHeader,
+    Technologies,
+    Categories,
+    ProjectStats
   },
   async asyncData({ store }) {
     const { pages: sections } = await post(sectionsQuery.loc.source.body)
@@ -49,15 +61,6 @@ export default {
     )
     store.commit('header/setApiUrl', apiUrl)
   },
-  apollo: {
-    work: {
-      prefetch: true,
-      query: projectQuery,
-      variables() {
-        return { id: this.$route.params.id }
-      }
-    }
-  },
   computed: {
     localizedWork() {
       if (!this.work) {
@@ -65,10 +68,14 @@ export default {
       }
 
       const lang = this.$i18n.locale || this.$i18n.defaultLocale
+      const categories = this.work.categories.map((category) => ({
+        description: category[`description_${lang}`]
+      }))
 
       return {
         name: this.work[`name_${lang}`],
-        details: this.work[`details_${lang}`]
+        details: this.work[`details_${lang}`],
+        categories
       }
     },
     isMobile() {
@@ -84,12 +91,32 @@ export default {
 
       return `${apiUrl}${this.work.mockup_image.url}`
     }
+  },
+  head: {
+    script: [
+      {
+        src: 'https://unpkg.com/ionicons@5.0.0/dist/ionicons.js'
+      }
+    ]
+  },
+  apollo: {
+    // TODO move this request to asyncData
+    work: {
+      prefetch: true,
+      query: projectQuery,
+      variables() {
+        return { id: this.$route.params.id }
+      }
+    }
   }
 }
 </script>
 <style lang="less">
-.layout {
-  margin: auto;
+.work-details {
+  font-size: 1.2rem;
+  .layout {
+    margin: auto;
+  }
 
   .ant-layout-content {
     max-width: 100%;
@@ -98,9 +125,22 @@ export default {
       width: 800px;
       max-width: 100%;
       margin: auto;
-      h2 {
-        font-size: 3rem;
-        text-align: center;
+      .ant-row-flex {
+        .ant-col {
+          margin-bottom: 3.125rem;
+          &.description {
+            h2 {
+              font-size: 2.125rem;
+              text-align: left;
+              font-weight: bold;
+              margin-bottom: 15px;
+              line-height: 52px;
+            }
+            p {
+              margin: 0;
+            }
+          }
+        }
       }
     }
   }

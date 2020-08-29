@@ -12,12 +12,18 @@ module.exports = {
     'prettier',
     'prettier/vue',
     'plugin:prettier/recommended',
-    'plugin:nuxt/recommended'
+    'plugin:nuxt/recommended',
+    'eslint:recommended',
   ],
   plugins: [
     'prettier'
   ],
-  // add your custom rules here
+  globals: {
+    $nuxt: true
+  },
   rules: {
-  }
+    "vue/component-name-in-template-casing": ["error", "PascalCase"],
+    "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
+    "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off"
+  },
 }

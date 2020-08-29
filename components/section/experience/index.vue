@@ -5,14 +5,20 @@
         <ExperienceTimeline :experiencies="localizedExperiencies" />
       </div>
     </a-col>
-    <div class="image" v-html="$store.state.header.content.experiencies_background"/>
+    <div
+      class="image"
+      v-html="$store.state.header.content.experiencies_background"
+    />
   </a-row>
 </template>
 
 <script>
 import ExperienceTimeline from '~/components/section/experience/experience-timeline'
+
 export default {
-  components: { ExperienceTimeline },
+  components: {
+    ExperienceTimeline
+  },
   props: {
     experiencies: {
       type: Array,
@@ -66,6 +72,8 @@ section .content {
       left: initial;
       margin-left: 0;
       margin-right: @section-margin;
+      bottom: -7px;
+      z-index: -1;
     }
     .content {
       margin: auto;
