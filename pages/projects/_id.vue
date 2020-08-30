@@ -33,6 +33,11 @@
         :team-size="work.team_size"
         :happy-customers="work.happy_customers"
       />
+      <ProjectImages
+        :mock-url-list="localizedWork.mockUrlList"
+        :is-mobile="localizedWork.isProjectImagesMobile"
+        :background-color="work.backgroundColor"
+      />
     </a-layout>
   </div>
 </template>
@@ -43,6 +48,7 @@ import projectQuery from '~/apollo/queries/pages/project.gql'
 import sectionsQuery from '~/apollo/queries/pages/sections.gql'
 import ProjectHeader from '~/components/project/project-header'
 import ProjectStats from '~/components/project/project-stats'
+import ProjectImages from '~/components/project/project-images'
 import Technologies from '~/components/shared/technologies.js'
 import Categories from '~/components/shared/categories.js'
 
@@ -51,7 +57,8 @@ export default {
     ProjectHeader,
     Technologies,
     Categories,
-    ProjectStats
+    ProjectStats,
+    ProjectImages
   },
   async asyncData({ store }) {
     const { pages: sections } = await post(sectionsQuery.loc.source.body)
@@ -71,11 +78,24 @@ export default {
       const categories = this.work.categories.map((category) => ({
         description: category[`description_${lang}`]
       }))
+      const isProjectImagesMobile =
+        this.work.mobile_images && this.work.mobile_images.length > 0
+      let mockUrlList = []
+
+      if (isProjectImagesMobile) {
+        mockUrlList = this.work.mobile_images.map(
+          ({ url }) => `${apiUrl}${url}`
+        )
+      } else {
+        mockUrlList = this.work.images.map(({ url }) => `${apiUrl}${url}`)
+      }
 
       return {
         name: this.work[`name_${lang}`],
         details: this.work[`details_${lang}`],
-        categories
+        categories,
+        isProjectImagesMobile,
+        mockUrlList
       }
     },
     isMobile() {

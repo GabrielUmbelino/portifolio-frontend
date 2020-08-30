@@ -47,7 +47,7 @@ export default {
 .project-stats {
   background-color: @heading-color;
   .ant-layout-content {
-    width: 800px;
+    width: 940px;
     max-width: 100%;
     margin: auto;
     padding: 50px 10px;

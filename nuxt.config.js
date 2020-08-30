@@ -1,5 +1,8 @@
 export default {
   mode: 'universal',
+  generate: {
+    fallback: true
+  },
   /*
    ** Headers of the page
    */
@@ -18,7 +21,7 @@ export default {
   },
   env: {
     API_URL: process.env.API_URL,
-    GRAPHQL_URL: process.env.GRAPHQL_URL,
+    GRAPHQL_URL: process.env.GRAPHQL_URL
   },
   /*
    ** Customize the progress-bar color
@@ -27,17 +30,11 @@ export default {
   /*
    ** Global CSS
    */
-  css: [
-    'ant-design-vue/dist/antd.less',
-    '~/assets/styles/styles.less',
-  ],
+  css: ['ant-design-vue/dist/antd.less', '~/assets/styles/styles.less'],
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [
-    '@/plugins/antd-ui',
-    "@/plugins/vuetimeline.js"
-  ],
+  plugins: ['@/plugins/antd-ui', '@/plugins/vuetimeline.js'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -54,31 +51,32 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/apollo',
-    ['nuxt-i18n', {
-      locales: [
-        {
-          name: 'POR',
-          code: 'pt',
-          locale: 'pt-BR',
-          file: 'pt-BR.js'
-        },
-        {
-          name: 'ENG',
-          code: 'en',
-          locale: 'en-US',
-          file: 'en-US.js'
-        },
-      ],
-      langDir: 'lang/',
-      defaultLocale: 'pt',
-      lazy: true,
-    }],
-    ['@nuxtjs/style-resources'],
+    [
+      'nuxt-i18n',
+      {
+        locales: [
+          {
+            name: 'POR',
+            code: 'pt',
+            locale: 'pt-BR',
+            file: 'pt-BR.js'
+          },
+          {
+            name: 'ENG',
+            code: 'en',
+            locale: 'en-US',
+            file: 'en-US.js'
+          }
+        ],
+        langDir: 'lang/',
+        defaultLocale: 'pt',
+        lazy: true
+      }
+    ],
+    ['@nuxtjs/style-resources']
   ],
   styleResources: {
-      less: [
-        '~/assets/styles/theme.less',
-      ]
+    less: ['~/assets/styles/theme.less']
   },
   apollo: {
     clientConfigs: {
@@ -101,20 +99,20 @@ export default {
      */
     loaders: {
       less: {
-        javascriptEnabled: true,
+        javascriptEnabled: true
       }
     },
     extend(config, ctx) {
-      config.resolve.alias['vue'] = 'vue/dist/vue.common'
+      config.resolve.alias.vue = 'vue/dist/vue.common'
     }
   },
   router: {
     scrollBehavior(to) {
       if (to.hash) {
-        const { top } = document.querySelector(to.hash).getBoundingClientRect();
-        return window.scrollTo({ top, behavior: 'smooth' });
+        const { top } = document.querySelector(to.hash).getBoundingClientRect()
+        return window.scrollTo({ top, behavior: 'smooth' })
       }
-      return window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-  },
+      return window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }
 }
