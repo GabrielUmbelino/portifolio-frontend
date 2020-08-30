@@ -3,32 +3,12 @@ query {
     id # Or _id if you are using MongoDB
     name_en
     name_pt
-    role_en
-    role_pt
     details_en
     details_pt
-    repository
-    backgroundColor
-    categories {
-      description_en
-      description_pt
-    }
-    technologies {
-			name
-      svgIcon
-    }
-    mockup_image {
-      url
-      height
-      width
-    }
 		thumbnail {
       url
       height
       width
     }
-    project_period
-    team_size
-    happy_customers
   }
 }

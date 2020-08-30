@@ -27,6 +27,16 @@ query Work($id: ID!) {
       height
       width
     }
+    mobile_images {
+      url
+      height
+      width
+    }
+    images {
+      url
+      height
+      width
+    }
     project_period
     team_size
     happy_customers
