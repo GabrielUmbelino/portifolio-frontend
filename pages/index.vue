@@ -41,7 +41,7 @@ export default {
     Profile,
     Project,
     Experience,
-    Contact
+    Contact,
   },
   async asyncData({ store }) {
     const { profile } = await post(profileQuery.loc.source.body)
@@ -60,16 +60,16 @@ export default {
     return {
       profile,
       experiencies,
-      projects
+      projects,
     }
   },
   head: {
     script: [
       {
-        src: 'https://unpkg.com/ionicons@5.0.0/dist/ionicons.js'
-      }
-    ]
-  }
+        src: 'https://unpkg.com/ionicons@5.0.0/dist/ionicons.js',
+      },
+    ],
+  },
 }
 </script>
 <style lang="less">

@@ -4,16 +4,16 @@ export default {
   props: {
     projectPeriod: {
       type: Number,
-      required: true
+      required: true,
     },
     teamSize: {
       type: Number,
-      required: true
+      required: true,
     },
     happyCustomers: {
       type: Number,
-      required: true
-    }
+      required: true,
+    },
   },
   render(h, { props, parent }) {
     if (!props.projectPeriod || !props.teamSize || !props.happyCustomers) {
@@ -40,7 +40,7 @@ export default {
         </a-layout-content>
       </a-layout>
     )
-  }
+  },
 }
 </script>
 <style lang="less">

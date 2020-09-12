@@ -13,14 +13,14 @@ import Footer from '~/components/layout/footer'
 export default {
   components: {
     Header,
-    Footer
-  }
+    Footer,
+  },
 }
 </script>
 
 <style lang="less">
 html {
-  > body  {
+  > body {
     font-family: @font-family;
     font-size: @font-size-base;
     word-spacing: 1px;

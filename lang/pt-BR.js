@@ -25,5 +25,5 @@ export default {
   kind: 'Tipo',
   months_of_development: 'Meses de desenvolvimento',
   team_members: 'Membros da equipe',
-  happy_customers: 'Clientes Felizes'
+  happy_customers: 'Clientes Felizes',
 }

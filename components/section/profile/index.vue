@@ -35,13 +35,13 @@
 import Tag from '~/components/shared/tag'
 export default {
   components: {
-    Tag
+    Tag,
   },
   props: {
     profile: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   computed: {
     localizedProfile() {
@@ -52,10 +52,10 @@ export default {
 
       return {
         ...this.profile,
-        interests: this.profile[`interests_${lang}`]
+        interests: this.profile[`interests_${lang}`],
       }
-    }
-  }
+    },
+  },
 }
 </script>
 

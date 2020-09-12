@@ -52,15 +52,15 @@ export default {
         description: this.headerContent[`description_${lang}`],
         header_action_text: this.$store.state.header.content[
           `header_action_text_${lang}`
-        ]
+        ],
       }
-    }
+    },
   },
   methods: {
     navigateToActionLink() {
       this.$router.push({ path: '/' + this.headerContent.header_action_text })
-    }
-  }
+    },
+  },
 }
 </script>
 <style lang="less">
@@ -75,7 +75,7 @@ export default {
   .logo {
     figure {
       border-radius: 100%;
-      box-shadow: 0px 0px 6px @primary-title-shadow-color;
+      box-shadow: 0 0 6px @primary-title-shadow-color;
       border: 3px solid @primary-title-text-color;
       position: relative;
       width: 214px;

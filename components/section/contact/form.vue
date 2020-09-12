@@ -10,31 +10,31 @@
     <a-form :form="form" :wrapper-col="{ span: 24 }" @submit="handleSubmit">
       <a-form-item>
         <a-input
-          :placeholder="$t('name')"
           v-decorator="nameDecorator"
+          :placeholder="$t('name')"
           allow-clear
-          :maxLength="120"
+          :max-length="120"
         >
-          <ion-icon name="person" slot="prefix"></ion-icon>
+          <ion-icon slot="prefix" name="person"></ion-icon>
         </a-input>
       </a-form-item>
       <a-form-item>
         <a-input
-          :placeholder="$t('email')"
           v-decorator="emailDecorator"
+          :placeholder="$t('email')"
           allow-clear
-          :maxLength="120"
+          :max-length="120"
         >
-          <ion-icon name="mail" slot="prefix"></ion-icon>
+          <ion-icon slot="prefix" name="mail"></ion-icon>
         </a-input>
       </a-form-item>
       <a-form-item>
         <a-textarea
-          :placeholder="$t('message')"
           v-decorator="messageDecorator"
+          :placeholder="$t('message')"
           :rows="4"
           allow-clear
-          :maxLength="200"
+          :max-length="200"
         >
         </a-textarea>
       </a-form-item>
@@ -45,7 +45,7 @@
           size="large"
           :loading="loading"
         >
-          {{ !loading  ? $t('send') : $t('sending') }}
+          {{ !loading ? $t('send') : $t('sending') }}
         </a-button>
       </a-form-item>
     </a-form>
@@ -62,9 +62,42 @@ export default {
       alert: {
         show: false,
         type: null,
-        message: null
-      }
+        message: null,
+      },
     }
+  },
+  computed: {
+    nameDecorator() {
+      return [
+        this.$t('name'),
+        {
+          rules: [
+            { required: true, message: this.$t('please_input_your_name') },
+          ],
+        },
+      ]
+    },
+    emailDecorator() {
+      return [
+        this.$t('email'),
+        {
+          rules: [
+            { type: 'email', message: this.$t('please_input_a_valid_email') },
+            { required: true, message: this.$t('please_input_your_email') },
+          ],
+        },
+      ]
+    },
+    messageDecorator() {
+      return [
+        this.$t('message'),
+        {
+          rules: [
+            { required: true, message: this.$t('please_input_your_message') },
+          ],
+        },
+      ]
+    },
   },
   beforeCreate() {
     this.form = this.$form.createForm(this, { name: 'contact' })
@@ -84,7 +117,12 @@ export default {
     },
     async sendEmail(name, email, message) {
       this.loading = true
-      const response = await sendEmail(name, email, message, this.$store.state.header.apiUrl)
+      const response = await sendEmail(
+        name,
+        email,
+        message,
+        this.$store.state.header.apiUrl
+      )
       if (response) {
         this.showAlert(this.$t('message_sent_successfully'), 'success')
       } else {
@@ -96,43 +134,10 @@ export default {
       this.alert = {
         show: true,
         message,
-        type
+        type,
       }
-    }
+    },
   },
-  computed: {
-    nameDecorator() {
-      return [
-        this.$t('name'),
-        {
-          rules: [
-            { required: true, message: this.$t('please_input_your_name') }
-          ]
-        }
-      ]
-    },
-    emailDecorator() {
-      return [
-        this.$t('email'),
-        {
-          rules: [
-            { type: 'email', message: this.$t('please_input_a_valid_email') },
-            { required: true, message: this.$t('please_input_your_email') }
-          ]
-        }
-      ]
-    },
-    messageDecorator() {
-      return [
-        this.$t('message'),
-        {
-          rules: [
-            { required: true, message: this.$t('please_input_your_message') }
-          ]
-        }
-      ]
-    }
-  }
 }
 </script>
 <style lang="less">

@@ -1,5 +1,5 @@
 <template>
-  <div class="contact" id="contact">
+  <div id="contact" class="contact">
     <a-row>
       <a-col class="form" :xs="24" :lg="12" :xl="11">
         <p v-if="emailSended">
@@ -25,18 +25,18 @@ import Form from '~/components/section/contact/form.vue'
 
 export default {
   components: {
-    Form
+    Form,
   },
   data() {
     return {
-      emailSended: false
+      emailSended: false,
     }
   },
   methods: {
     onEmailSended(emailSended) {
       this.emailSended = emailSended
-    }
-  }
+    },
+  },
 }
 </script>
 

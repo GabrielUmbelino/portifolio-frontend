@@ -58,7 +58,7 @@ export default {
     Technologies,
     Categories,
     ProjectStats,
-    ProjectImages
+    ProjectImages,
   },
   async asyncData({ store }) {
     const { pages: sections } = await post(sectionsQuery.loc.source.body)
@@ -76,7 +76,7 @@ export default {
 
       const lang = this.$i18n.locale || this.$i18n.defaultLocale
       const categories = this.work.categories.map((category) => ({
-        description: category[`description_${lang}`]
+        description: category[`description_${lang}`],
       }))
       const isProjectImagesMobile =
         this.work.mobile_images && this.work.mobile_images.length > 0
@@ -95,7 +95,7 @@ export default {
         details: this.work[`details_${lang}`],
         categories,
         isProjectImagesMobile,
-        mockUrlList
+        mockUrlList,
       }
     },
     isMobile() {
@@ -110,14 +110,14 @@ export default {
       }
 
       return `${apiUrl}${this.work.mockup_image.url}`
-    }
+    },
   },
   head: {
     script: [
       {
-        src: 'https://unpkg.com/ionicons@5.0.0/dist/ionicons.js'
-      }
-    ]
+        src: 'https://unpkg.com/ionicons@5.0.0/dist/ionicons.js',
+      },
+    ],
   },
   apollo: {
     // TODO move this request to asyncData
@@ -126,9 +126,9 @@ export default {
       query: projectQuery,
       variables() {
         return { id: this.$route.params.id }
-      }
-    }
-  }
+      },
+    },
+  },
 }
 </script>
 <style lang="less">

@@ -45,14 +45,14 @@ export default {
   props: {
     projects: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
   computed: {
     localizedProjects() {
       const lang = this.$i18n.locale || this.$i18n.defaultLocale
       if (!this.projects || !this.projects.length) {
-        return
+        return []
       }
 
       return this.projects.map((p) => ({
@@ -60,15 +60,17 @@ export default {
         name: p[`name_${lang}`],
         role: p[`role_${lang}`],
         details: p[`details_${lang}`],
-        categories: p.categories.map((c) => ({
-          description: c[`description_${lang}`]
-        }))
+        categories:
+          p.categories &&
+          p.categories.map((c) => ({
+            description: c[`description_${lang}`],
+          })),
       }))
     },
     baseUrl() {
       return apiUrl
-    }
-  }
+    },
+  },
 }
 </script>
 

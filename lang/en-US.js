@@ -25,5 +25,5 @@ export default {
   kind: 'Kind',
   months_of_development: 'Months of Development',
   team_members: 'Team Members',
-  happy_customers: 'Happy Customers'
+  happy_customers: 'Happy Customers',
 }

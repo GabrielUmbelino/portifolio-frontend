@@ -12,9 +12,9 @@ export default {
   props: {
     name: {
       type: String,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 }
 </script>
 <style lang="less">
@@ -26,7 +26,7 @@ export default {
   &:last-child {
     margin-bottom: (@section-margin / 2);
   }
-  &:before {
+  &::before {
     content: '';
     background-color: @layout-sider-background;
     width: calc(100px + 50%);
@@ -34,7 +34,7 @@ export default {
     margin-top: -@section-margin;
     margin-left: -50%;
     top: 0;
-    left: 0px;
+    left: 0;
     bottom: 0;
     right: 0;
     z-index: 0;
@@ -82,7 +82,7 @@ export default {
     &:first-child {
       margin-top: @section-margin-mobile;
     }
-    &:before {
+    &::before {
       margin-top: -@section-margin-mobile;
       width: calc(80px + 50%);
     }

@@ -4,16 +4,16 @@ export default {
   props: {
     image: {
       type: String,
-      required: true
+      required: true,
     },
     name: {
       type: String,
-      default: ''
+      default: '',
     },
     showHalf: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
   render(h, { props }) {
     const mockClass = props.showHalf ? 'mobile-mock half' : 'mobile-mock'
@@ -25,7 +25,7 @@ export default {
         </figure>
       </div>
     )
-  }
+  },
 }
 </script>
 
@@ -44,9 +44,9 @@ export default {
     position: relative;
     width: @mock-width;
     margin: auto;
-    padding: 0px 0px;
+    padding: 0;
 
-    &:before {
+    &::before {
       content: '';
       top: 0;
       left: 0;
@@ -62,7 +62,7 @@ export default {
     img {
       height: auto;
       width: @image-width;
-      padding: 47px 0px;
+      padding: 47px 0;
       margin: auto;
     }
   }

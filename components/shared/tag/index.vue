@@ -6,12 +6,12 @@ export default {
   props: {
     name: {
       type: String,
-      required: true
+      required: true,
     },
     svgIcon: {
       type: String,
-      default: null
-    }
+      default: null,
+    },
   },
   render(h, { props }) {
     return (
@@ -22,7 +22,7 @@ export default {
         </div>
       </a-tag>
     )
-  }
+  },
 }
 </script>
 <style scoped lang="less">

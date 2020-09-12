@@ -5,8 +5,8 @@
     </a>
     <a-menu slot="overlay">
       <a-menu-item
-        v-for="locale in locales"
-        :key="locale.code"
+        v-for="l in locales"
+        :key="l.code"
         :to="switchLocalePath(locale.code)"
       >
         <nuxt-link :to="switchLocalePath(locale.code)">{{
@@ -34,7 +34,7 @@ export default {
       return this.$i18n.locales.find(
         (locale) => locale.code === this.$i18n.locale
       )
-    }
-  }
+    },
+  },
 }
 </script>

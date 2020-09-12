@@ -2,17 +2,7 @@ form.ant-form {
   .ant-form-item-control,
   .ant-form-item-control.has-error {
     .ant-input-affix-wrapper {
-      &:hover,
-      &:visited,
-      &:active {
-        .ant-input {
-          color: @input-text-active;
-        }
-        ion-icon {
-          color: @input-text-active;
-        }
-      }
-      ion-icon {
+      .ion-icon {
         color: @input-text;
       }
       .ant-input {
@@ -25,6 +15,17 @@ form.ant-form {
         .selected {
           color: @input-text-active;
           border-color: @input-border-color-active;
+        }
+      }
+
+      &:hover,
+      &:visited,
+      &:active {
+        .ant-input {
+          color: @input-text-active;
+        }
+        .ion-icon {
+          color: @input-text-active;
         }
       }
     }

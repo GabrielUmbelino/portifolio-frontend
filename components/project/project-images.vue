@@ -6,20 +6,20 @@ export default {
   functional: true,
   components: {
     MobileMock,
-    WebMock
+    WebMock,
   },
   props: {
     mockUrlList: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     isMobile: {
-      type: Boolean
+      type: Boolean,
     },
     backgroundColor: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   render(h, { props }) {
     if (!props.mockUrlList || !props.mockUrlList.length) {
@@ -49,7 +49,7 @@ export default {
         </div>
       </a-layout-content>
     )
-  }
+  },
 }
 </script>
 <style lang="less">

@@ -3,25 +3,21 @@ const apiUrl = process.env.API_URL || 'http://localhost:1337'
 const strapi = new Strapi(apiUrl)
 
 const post = async (query, variables = {}) => {
-  let response;
-  try {
-    response =  await strapi.request('post', '/graphql', {
-      data: {
-        query,
-        variables,
-      },
-    })
-    
-  } catch (error) {
-    console.log(error.message)
-    throw `${apiUrl} : ${error.message}`;
-  }
+  const response = await strapi.request('post', '/graphql', {
+    data: {
+      query,
+      variables,
+    },
+  })
 
   return response.data
 }
 
 const sendEmail = async (name, email, message, baseURL) => {
-  const emailSettings = await strapi.request('get', `/email/settings/production`)
+  const emailSettings = await strapi.request(
+    'get',
+    `/email/settings/production`
+  )
   return await strapi.request('post', '/email', {
     baseURL,
     data: {
@@ -37,7 +33,7 @@ const sendEmail = async (name, email, message, baseURL) => {
           ${message}
         </span>
       `,
-    }
+    },
   })
 }
 

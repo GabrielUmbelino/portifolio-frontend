@@ -1,10 +1,17 @@
 export default {
+  /*
+   ** Nuxt rendering mode
+   ** See https://nuxtjs.org/api/configuration-mode
+   */
   mode: 'universal',
-  generate: {
-    fallback: true
-  },
+  /*
+   ** Nuxt target
+   ** See https://nuxtjs.org/api/configuration-target
+   */
+  target: 'server',
   /*
    ** Headers of the page
+   ** See https://nuxtjs.org/api/configuration-head
    */
   head: {
     title: process.env.npm_package_name || '',
@@ -14,27 +21,30 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || ''
-      }
+        content: process.env.npm_package_description || '',
+      },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
   env: {
     API_URL: process.env.API_URL,
-    GRAPHQL_URL: process.env.GRAPHQL_URL
+    GRAPHQL_URL: process.env.GRAPHQL_URL,
   },
-  /*
-   ** Customize the progress-bar color
-   */
-  loading: { color: '#fff' },
   /*
    ** Global CSS
    */
   css: ['ant-design-vue/dist/antd.less', '~/assets/styles/styles.less'],
+  styleResources: { less: ['~/assets/styles/theme.less'] },
   /*
    ** Plugins to load before mounting the App
+   ** https://nuxtjs.org/guide/plugins
    */
   plugins: ['@/plugins/antd-ui', '@/plugins/vuetimeline.js'],
+  /*
+   ** Auto import components
+   ** See https://nuxtjs.org/api/configuration-components
+   */
+  components: true,
   /*
    ** Nuxt.js dev-modules
    */
@@ -42,13 +52,12 @@ export default {
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
     // Doc: https://github.com/nuxt-community/stylelint-module
-    '@nuxtjs/stylelint-module'
+    '@nuxtjs/stylelint-module',
   ],
   /*
    ** Nuxt.js modules
    */
   modules: [
-    // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/apollo',
     [
@@ -59,39 +68,32 @@ export default {
             name: 'POR',
             code: 'pt',
             locale: 'pt-BR',
-            file: 'pt-BR.js'
+            file: 'pt-BR.js',
           },
           {
             name: 'ENG',
             code: 'en',
             locale: 'en-US',
-            file: 'en-US.js'
-          }
+            file: 'en-US.js',
+          },
         ],
         langDir: 'lang/',
         defaultLocale: 'pt',
-        lazy: true
-      }
+        lazy: true,
+      },
     ],
-    ['@nuxtjs/style-resources']
+    ['@nuxtjs/style-resources'],
   ],
-  styleResources: {
-    less: ['~/assets/styles/theme.less']
-  },
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: 'http://localhost:1337/graphql'
-      }
-    }
+        httpEndpoint: 'http://localhost:1337/graphql',
+      },
+    },
   },
   /*
-   ** Axios module configuration
-   ** See https://axios.nuxtjs.org/options
-   */
-  axios: {},
-  /*
    ** Build configuration
+   ** See https://nuxtjs.org/api/configuration-build/
    */
   build: {
     /*
@@ -99,20 +101,11 @@ export default {
      */
     loaders: {
       less: {
-        javascriptEnabled: true
-      }
+        javascriptEnabled: true,
+      },
     },
-    extend(config, ctx) {
+    extend(config) {
       config.resolve.alias.vue = 'vue/dist/vue.common'
-    }
+    },
   },
-  router: {
-    scrollBehavior(to) {
-      if (to.hash) {
-        const { top } = document.querySelector(to.hash).getBoundingClientRect()
-        return window.scrollTo({ top, behavior: 'smooth' })
-      }
-      return window.scrollTo({ top: 0, behavior: 'smooth' })
-    }
-  }
 }

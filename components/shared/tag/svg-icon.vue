@@ -4,15 +4,15 @@ export default {
   props: {
     svgIcon: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   render(h, { props }) {
     const svgComponent = {
-      template: props.svgIcon
+      template: props.svgIcon,
     }
     return <a-icon component={svgComponent} />
-  }
+  },
 }
 </script>
 <style scoped lang="less">

@@ -4,12 +4,12 @@ export default {
   props: {
     experiencies: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     theme: {
       type: String,
-      default: 'light'
-    }
+      default: 'light',
+    },
   },
   render(h, { props, options }) {
     return props.experiencies.map((e, i) => (
@@ -23,7 +23,7 @@ export default {
         is-last={props.experiencies.length === i + 1}
       ></vue-timeline-update>
     ))
-  }
+  },
 }
 </script>
 <style lang="less">

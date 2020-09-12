@@ -1,7 +1,7 @@
 import Tag from '~/components/shared/tag'
 export default {
   components: {
-    Tag
+    Tag,
   },
   functional: true,
   render(h, { props, parent }) {
@@ -17,5 +17,5 @@ export default {
         ))}
       </div>
     )
-  }
+  },
 }

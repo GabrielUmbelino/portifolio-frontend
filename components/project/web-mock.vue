@@ -4,16 +4,16 @@ export default {
   props: {
     image: {
       type: String,
-      required: true
+      required: true,
     },
     name: {
       type: String,
-      default: ''
+      default: '',
     },
     showSmall: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
   render(h, { props }) {
     const mockClass = props.showSmall ? 'web-mock small' : 'web-mock'
@@ -25,7 +25,7 @@ export default {
         </figure>
       </div>
     )
-  }
+  },
 }
 </script>
 
@@ -38,25 +38,13 @@ export default {
 .web-mock {
   overflow: hidden;
   display: flex;
-
-  &.small {
-    max-height: 500px;
-    figure {
-      width: @mock-small-width;
-      img {
-        width: @image-small-width;
-        padding: 22px 36px 51px 36px;
-      }
-    }
-  }
-
   figure {
     position: relative;
     width: @mock-width;
     margin: auto;
-    padding: 0px 0px;
+    padding: 0;
 
-    &:before {
+    &::before {
       content: '';
       top: 0;
       left: 0;
@@ -74,6 +62,17 @@ export default {
       margin: auto;
       width: @image-width;
       padding: 44px 72px 102px 72px;
+    }
+  }
+
+  &.small {
+    max-height: 500px;
+    figure {
+      width: @mock-small-width;
+      img {
+        width: @image-small-width;
+        padding: 22px 36px 51px 36px;
+      }
     }
   }
 }

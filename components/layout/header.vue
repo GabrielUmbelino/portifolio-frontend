@@ -42,7 +42,7 @@ import SvgIcon from '~/components/shared/tag/svg-icon'
 export default {
   components: {
     LanguageSwitcher,
-    SvgIcon
+    SvgIcon,
   },
   computed: {
     sections() {
@@ -56,27 +56,25 @@ export default {
       const lang = this.$i18n.locale || this.$i18n.defaultLocale
       return this.sections.map((section) => ({
         ...section,
-        description: section[`description_${lang}`]
+        description: section[`description_${lang}`],
       }))
     },
     defaultSectionId() {
       const [firstSection] = this.localizedSections
       return [firstSection.id]
-    }
+    },
   },
   methods: {
     onMenuClicked(e, route) {
-      if (route === 'resume') {
-        console.log('download resume not implemented yet')
-      } else if (this.$route.fullPath !== route) {
+      if (this.$route.fullPath !== route) {
         if (route) {
           this.$router.push({ path: '/', hash: route })
         } else {
           this.$router.push('/')
         }
       }
-    }
-  }
+    },
+  },
 }
 </script>
 <style lang="less">

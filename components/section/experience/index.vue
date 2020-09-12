@@ -17,13 +17,13 @@ import ExperienceTimeline from '~/components/section/experience/experience-timel
 
 export default {
   components: {
-    ExperienceTimeline
+    ExperienceTimeline,
   },
   props: {
     experiencies: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
   computed: {
     localizedExperiencies() {
@@ -32,34 +32,35 @@ export default {
       }
       const lang = this.$i18n.locale || this.$i18n.defaultLocale
       const parseDate = (start, end) => {
-        const startPeriod = new Date(start)
-        const endPeriod = new Date(end)
-        const locale = this.$i18n.locales.find((locale) => locale.code === lang)
-        const startMonth = startPeriod
-          .toLocaleString(locale, { month: 'long' })
-          .substring(0, 3)
-          .capitalize()
-        const startYear = startPeriod.getFullYear()
-        const endMonth = endPeriod
-          .toLocaleString(locale, { month: 'long' })
-          .substring(0, 3)
-          .capitalize()
-        const endYear = endPeriod.getFullYear()
+        // const startPeriod = new Date(start)
+        // const endPeriod = new Date(end)
+        // const locale = this.$i18n.locales.find((locale) => locale.code === lang)
+        // const startMonth = startPeriod
+        //   .toLocaleString(locale, { month: 'long' })
+        //   .substring(0, 3)
+        //   .capitalize()
+        // const startYear = startPeriod.getFullYear()
+        // const endMonth = endPeriod
+        //   .toLocaleString(locale, { month: 'long' })
+        //   .substring(0, 3)
+        //   .capitalize()
+        // const endYear = endPeriod.getFullYear()
 
-        return `${startMonth}/${startYear} ${this.$t(
-          'to'
-        )} ${endMonth}/${endYear}`
+        // return `${startMonth}/${startYear} ${this.$t(
+        //   'to'
+        // )} ${endMonth}/${endYear}`
+        return ''
       }
       return this.experiencies
         .map((experience) => ({
           ...experience,
           period: parseDate(experience.start_date, experience.end_date),
           description: experience[`description_${lang}`],
-          job_title: experience[`job_title_${lang}`]
+          job_title: experience[`job_title_${lang}`],
         }))
         .sort((a, b) => new Date(b.start_date) - new Date(a.start_date))
-    }
-  }
+    },
+  },
 }
 </script>
 

@@ -46,28 +46,28 @@ import WebMock from '~/components/project/web-mock'
 export default {
   components: {
     MobileMock,
-    WebMock
+    WebMock,
   },
   props: {
     name: {
       type: String,
-      required: true
+      required: true,
     },
     backgroundColor: {
       type: String,
-      required: true
+      required: true,
     },
     repository: {
       type: String,
-      default: null
+      default: null,
     },
     mockUrl: {
       type: String,
-      default: null
+      default: null,
     },
     isMobile: {
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
   computed: {
     details() {
@@ -76,7 +76,7 @@ export default {
           xl: 11,
           md: 10,
           sm: 24,
-          xs: 24
+          xs: 24,
         }
       }
 
@@ -84,10 +84,10 @@ export default {
         xl: 24,
         md: 24,
         sm: 24,
-        xs: 24
+        xs: 24,
       }
-    }
-  }
+    },
+  },
 }
 </script>
 <style lang="less">
@@ -102,6 +102,22 @@ export default {
   .ant-row {
     display: flex;
     align-items: stretch;
+  }
+
+  .details {
+    padding: 150px 0;
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    > h2 {
+      font-size: 4.1rem;
+    }
+
+    > .ant-btn-primary {
+      margin-top: 0;
+    }
   }
 
   &.hasMock {
@@ -122,22 +138,6 @@ export default {
       h2 {
         text-align: left;
       }
-    }
-  }
-
-  .details {
-    padding: 150px 0;
-    padding-left: 20px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-
-    > h2 {
-      font-size: 4.1rem;
-    }
-
-    > .ant-btn-primary {
-      margin-top: 0px;
     }
   }
 
