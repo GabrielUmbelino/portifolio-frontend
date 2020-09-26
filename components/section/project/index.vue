@@ -18,7 +18,7 @@
             {{ p.name }}
           </h4>
           <span>
-            {{ p.details }}
+            {{ p.problem }}
           </span>
         </div>
         <a-button
@@ -59,7 +59,7 @@ export default {
         ...p,
         name: p[`name_${lang}`],
         role: p[`role_${lang}`],
-        details: p[`details_${lang}`],
+        problem: p[`problem_${lang}`],
         categories:
           p.categories &&
           p.categories.map((c) => ({

@@ -11,19 +11,39 @@
       <a-layout-content>
         <div class="content">
           <a-row type="flex">
-            <a-col class="description" :xs="24">
-              <h2>
-                {{ localizedWork.name }}
-              </h2>
-              <p>
-                {{ localizedWork.details }}
-              </p>
+            <a-col
+              v-if="
+                localizedWork.project_roles &&
+                localizedWork.project_roles.length
+              "
+              :xs="24"
+            >
+              <Roles :roles="localizedWork.project_roles" />
             </a-col>
-            <a-col :xl="12" :xs="24">
+            <a-col
+              v-if="
+                localizedWork.SoftwareAndResources &&
+                localizedWork.SoftwareAndResources.length
+              "
+              :xs="24"
+            >
+              <SoftwareAndResources
+                :software-and-resources="localizedWork.SoftwareAndResources"
+              />
+            </a-col>
+            <a-col
+              v-if="work.technologies && work.technologies.length"
+              :xs="24"
+            >
               <Technologies :technologies="work.technologies" />
             </a-col>
-            <a-col :xl="12" :xs="24">
-              <Categories :categories="localizedWork.categories" />
+            <a-col v-if="localizedWork.problem" class="description" :xs="24">
+              <h2>
+                {{ $t('problem') }}
+              </h2>
+              <p>
+                {{ localizedWork.problem }}
+              </p>
             </a-col>
           </a-row>
         </div>
@@ -50,15 +70,17 @@ import ProjectHeader from '~/components/project/project-header'
 import ProjectStats from '~/components/project/project-stats'
 import ProjectImages from '~/components/project/project-images'
 import Technologies from '~/components/shared/technologies.js'
-import Categories from '~/components/shared/categories.js'
+import SoftwareAndResources from '~/components/shared/softwareAndResources.js'
+import Roles from '~/components/shared/roles.js'
 
 export default {
   components: {
     ProjectHeader,
     Technologies,
-    Categories,
     ProjectStats,
     ProjectImages,
+    SoftwareAndResources,
+    Roles,
   },
   async asyncData({ store }) {
     const { pages: sections } = await post(sectionsQuery.loc.source.body)
@@ -92,7 +114,7 @@ export default {
 
       return {
         name: this.work[`name_${lang}`],
-        details: this.work[`details_${lang}`],
+        problem: this.work[`problem_${lang}`],
         categories,
         isProjectImagesMobile,
         mockUrlList,

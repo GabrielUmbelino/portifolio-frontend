@@ -30,6 +30,9 @@ export default {
     API_URL: process.env.API_URL,
     GRAPHQL_URL: process.env.GRAPHQL_URL,
   },
+  generate: {
+    fallback: 'index.html',
+  },
   /*
    ** Global CSS
    */

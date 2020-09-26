@@ -3,10 +3,8 @@ query Work($id: ID!) {
     id # Or _id if you are using MongoDB
     name_en
     name_pt
-    role_en
-    role_pt
-    details_en
-    details_pt
+    problem_en
+    problem_pt
     repository
     backgroundColor
     categories {
