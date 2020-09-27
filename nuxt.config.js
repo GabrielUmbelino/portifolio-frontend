@@ -6,6 +6,9 @@ export default {
    ** See https://nuxtjs.org/api/configuration-mode
    */
   mode: 'universal',
+  generate: {
+    routes: ['projects/1', 'projects/2'],
+  },
   /*
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
@@ -31,9 +34,6 @@ export default {
   env: {
     API_URL: process.env.API_URL,
     GRAPHQL_URL: process.env.GRAPHQL_URL,
-  },
-  generate: {
-    fallback: 'index.html',
   },
   /*
    ** Global CSS
