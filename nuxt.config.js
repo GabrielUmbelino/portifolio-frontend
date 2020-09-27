@@ -69,6 +69,8 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/apollo',
+    '@nuxtjs/router',
+    '@nuxtjs/style-resources',
     [
       'nuxt-i18n',
       {
@@ -91,7 +93,6 @@ export default {
         lazy: true,
       },
     ],
-    ['@nuxtjs/style-resources'],
   ],
   apollo: {
     clientConfigs: {
