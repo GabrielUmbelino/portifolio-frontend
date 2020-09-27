@@ -1,6 +1,12 @@
+<template>
+  <div :class="{ small: showSmall }" class="web-mock">
+    <figure>
+      <img :src="image" :alt="name" />
+    </figure>
+  </div>
+</template>
 <script>
 export default {
-  functional: true,
   props: {
     image: {
       type: String,
@@ -12,32 +18,25 @@ export default {
     },
     showSmall: {
       type: Boolean,
-      default: true,
     },
-  },
-  render(h, { props }) {
-    const mockClass = props.showSmall ? 'web-mock small' : 'web-mock'
-
-    return (
-      <div class={mockClass}>
-        <figure>
-          <img src={props.image} alt={props.name} />
-        </figure>
-      </div>
-    )
   },
 }
 </script>
-
-<style lang="less" scope>
-@image-small-width: 420px;
-@image-width: 820px;
-@mock-width: @image-width + 80px;
-@mock-small-width: @image-width + 40px;
+<style lang="less">
+@image-small-width: 300px;
+@image-width: 500px;
+@mock-width: @image-width + 40px;
+@mock-small-width: @image-width + 30px;
+@mock-padding: 22px 36px 51px 36px;
+@mock-padding-small: 17px 14px 42px 14px;
 
 .web-mock {
   overflow: hidden;
   display: flex;
+  position: relative;
+  width: fit-content;
+  margin: auto;
+
   figure {
     position: relative;
     width: @mock-width;
@@ -61,29 +60,29 @@ export default {
       height: auto;
       margin: auto;
       width: @image-width;
-      padding: 44px 72px 102px 72px;
+      padding: @mock-padding;
+    }
+  }
+
+  @media (max-width: 999px) {
+    figure {
+      width: @mock-small-width;
+      img {
+        width: @image-small-width;
+        padding: @mock-padding-small;
+      }
     }
   }
 
   &.small {
     max-height: 500px;
+    max-width: 100%;
+
     figure {
       width: @mock-small-width;
       img {
         width: @image-small-width;
-        padding: 22px 36px 51px 36px;
-      }
-    }
-  }
-}
-@media (max-width: 900) {
-  .web-mock {
-    max-height: 500px;
-    figure {
-      width: @mock-small-width;
-      img {
-        width: @image-small-width;
-        padding: 22px 36px 51px 36px;
+        padding: @mock-padding-small;
       }
     }
   }

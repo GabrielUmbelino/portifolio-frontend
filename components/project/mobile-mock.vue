@@ -12,7 +12,6 @@ export default {
     },
     showHalf: {
       type: Boolean,
-      default: true,
     },
   },
   render(h, { props }) {
@@ -35,6 +34,10 @@ export default {
 .mobile-mock {
   overflow: hidden;
   display: flex;
+  position: relative;
+  width: fit-content;
+  margin: auto;
+  max-width: 100%;
 
   &.half {
     max-height: 500px;

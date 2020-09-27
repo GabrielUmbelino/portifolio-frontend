@@ -1,6 +1,6 @@
 <script>
-import MobileMock from '~/components/project/mobile-mock'
 import WebMock from '~/components/project/web-mock'
+import MobileMock from '~/components/project/mobile-mock'
 
 export default {
   functional: true,
@@ -27,33 +27,40 @@ export default {
     }
 
     const mobileList = props.mockUrlList.map((m) => (
-      <MobileMock image={m} show-half={false} />
+      <slide>
+        <MobileMock image={m} show-half={false} />
+      </slide>
     ))
 
     const imageList = props.mockUrlList.map((m) => (
-      <WebMock image={m} show-small={false} />
+      <slide>
+        <WebMock image={m} />
+      </slide>
     ))
 
     return (
       <a-layout-content
-        class="project-header"
+        class="project-images"
         align="middle"
         style={{ background: props.backgroundColor }}
       >
-        <div>
-          <a-row>
-            <a-col xs={24}>
-              <a-carousel>{props.isMobile ? mobileList : imageList}</a-carousel>
-            </a-col>
-          </a-row>
-        </div>
+        <a-row>
+          <a-col xs={24}>
+            <div>
+              <carousel perPage={1}>
+                {props.isMobile ? mobileList : imageList}
+              </carousel>
+            </div>
+          </a-col>
+        </a-row>
       </a-layout-content>
     )
   },
 }
 </script>
 <style lang="less">
-.project-header {
+.project-images {
+  max-width: 100%;
   > div {
     max-width: @layout-header-width;
     margin: auto;
@@ -62,11 +69,17 @@ export default {
   .ant-row {
     display: flex;
     align-items: stretch;
+    .ant-col {
+      > div {
+        max-width: 100%;
+      }
+    }
   }
 
-  .ant-carousel {
+  .VueCarousel-wrapper {
     margin-top: 70px;
     margin-bottom: 70px;
+    overflow: hidden;
   }
 
   @media (max-width: 768px) {

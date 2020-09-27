@@ -1,3 +1,5 @@
+import nodeExternals from 'webpack-node-externals'
+
 export default {
   /*
    ** Nuxt rendering mode
@@ -42,7 +44,11 @@ export default {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: ['@/plugins/antd-ui', '@/plugins/vuetimeline.js'],
+  plugins: [
+    '@/plugins/antd-ui',
+    '@/plugins/vue-timeline',
+    { src: '@/plugins/vue-carousel', ssr: false },
+  ],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
@@ -107,8 +113,11 @@ export default {
         javascriptEnabled: true,
       },
     },
-    extend(config) {
+    extend(config, ctx) {
       config.resolve.alias.vue = 'vue/dist/vue.common'
+      if (ctx.isServer) {
+        config.externals = [nodeExternals({ allowlist: [/^vue-carousel/] })]
+      }
     },
   },
 }

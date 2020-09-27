@@ -22,7 +22,8 @@
     "graphql-tag": "^2.10.3",
     "nuxt": "2.14.4",
     "nuxt-i18n": "^6.12.2",
-    "strapi-sdk-javascript": "^0.3.3"
+    "strapi-sdk-javascript": "^0.3.3",
+    "vue-carousel": "^0.18.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^3.1.0",

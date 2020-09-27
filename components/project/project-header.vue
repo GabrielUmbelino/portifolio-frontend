@@ -13,6 +13,7 @@
               v-if="mockUrl && isMobile"
               :image="mockUrl"
               :name="name"
+              show-half
             />
             <WebMock v-else :image="mockUrl" :name="name" />
           </div>
@@ -128,6 +129,7 @@ export default {
       margin: 0;
       margin-right: 60px;
       margin-top: 70px;
+      max-width: 100%;
     }
 
     .details {
@@ -146,7 +148,6 @@ export default {
       .mock {
         margin-right: 20px;
       }
-
       .details {
         padding-left: 20px;
 

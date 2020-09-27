@@ -13,7 +13,7 @@
         </figure>
       </a-col>
       <a-col class="content" :xs="24" :lg="14" :xl="16">
-        <div v-if="p.details" class="details">
+        <div v-if="p.problem" class="details">
           <h4>
             {{ p.name }}
           </h4>

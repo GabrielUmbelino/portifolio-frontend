@@ -53,11 +53,13 @@
         :team-size="work.team_size"
         :happy-customers="work.happy_customers"
       />
-      <ProjectImages
-        :mock-url-list="localizedWork.mockUrlList"
-        :is-mobile="localizedWork.isProjectImagesMobile"
-        :background-color="work.backgroundColor"
-      />
+      <client-only>
+        <ProjectImages
+          :mock-url-list="localizedWork.mockUrlList"
+          :is-mobile="localizedWork.isProjectImagesMobile"
+          :background-color="work.backgroundColor"
+        />
+      </client-only>
     </a-layout>
   </div>
 </template>
