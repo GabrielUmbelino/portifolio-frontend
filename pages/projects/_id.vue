@@ -4,7 +4,7 @@
       :name="localizedWork.name"
       :background-color="work.backgroundColor"
       :repository="work.repository"
-      :mock-url="mockUrl"
+      :mock-url="projectImageUrl"
       :is-mobile="isMobile"
     />
     <a-layout class="layout">
@@ -48,15 +48,11 @@
           </a-row>
         </div>
       </a-layout-content>
-      <ProjectStats
-        :project-period="work.project_period"
-        :team-size="work.team_size"
-        :happy-customers="work.happy_customers"
-      />
+      <ProjectStats :project-stats="localizedWork.projectStats" />
       <client-only>
         <ProjectImages
           :mock-url-list="localizedWork.mockUrlList"
-          :is-mobile="localizedWork.isProjectImagesMobile"
+          :is-mobile="isMobile"
           :background-color="work.backgroundColor"
         />
       </client-only>
@@ -98,28 +94,16 @@ export default {
         return null
       }
 
-      const lang = this.$i18n.locale || this.$i18n.defaultLocale
       const categories = this.work.categories.map((category) => ({
-        description: category[`description_${lang}`],
+        description: category[`description_${this.lang}`],
       }))
-      const isProjectImagesMobile =
-        this.work.mobile_images && this.work.mobile_images.length > 0
-      let mockUrlList = []
-
-      if (isProjectImagesMobile) {
-        mockUrlList = this.work.mobile_images.map(
-          ({ url }) => `${apiUrl}${url}`
-        )
-      } else {
-        mockUrlList = this.work.images.map(({ url }) => `${apiUrl}${url}`)
-      }
 
       return {
-        name: this.work[`name_${lang}`],
-        problem: this.work[`problem_${lang}`],
         categories,
-        isProjectImagesMobile,
-        mockUrlList,
+        mockUrlList: this.mockUrlList,
+        projectStats: this.projectStats,
+        name: this.work[`name_${this.lang}`],
+        problem: this.work[`problem_${this.lang}`],
       }
     },
     isMobile() {
@@ -128,12 +112,25 @@ export default {
         this.work.mockup_image.width < this.work.mockup_image.height
       )
     },
-    mockUrl() {
+    projectImageUrl() {
       if (!this.work.mockup_image) {
         return null
       }
 
       return `${apiUrl}${this.work.mockup_image.url}`
+    },
+    mockUrlList() {
+      const images = this.isMobile ? this.work.mobile_images : this.work.images
+      return images.map(({ url }) => `${apiUrl}${url}`)
+    },
+    projectStats() {
+      return this.work.project_stats.map((stats) => ({
+        ...stats,
+        description: stats[`description_${this.lang}`],
+      }))
+    },
+    lang() {
+      return this.$i18n.locale || this.$i18n.defaultLocale
     },
   },
   head: {

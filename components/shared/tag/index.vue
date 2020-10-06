@@ -15,7 +15,7 @@ export default {
   },
   render(h, { props }) {
     return (
-      <a-tag>
+      <a-tag class="tag">
         <div>
           {props.svgIcon && <SvgIcon svg-icon={props.svgIcon} />}
           <span>{props.name}</span>

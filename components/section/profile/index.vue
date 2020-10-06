@@ -85,8 +85,10 @@ div.profile {
         text-transform: uppercase;
         margin-top: -8px;
       }
-      span {
-        font-size: 1.1rem;
+      .interests {
+        span {
+          font-size: 1.1rem;
+        }
       }
       &:last-child {
         margin-bottom: 0;

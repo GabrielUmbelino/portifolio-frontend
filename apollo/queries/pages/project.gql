@@ -35,8 +35,11 @@ query Work($id: ID!) {
       height
       width
     }
-    project_period
-    team_size
-    happy_customers
-  },
+		project_stats {
+      id
+      description_pt
+      description_en
+      number
+    }
+  }
 }

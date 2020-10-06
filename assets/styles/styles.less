@@ -8,28 +8,34 @@
   text-shadow: 0 0 6px @primary-title-shadow-color;
   font-weight: 500;
 }
+
 .secondary-title {
   font-family: 'Neoneon';
   color: @secondary-title-text-color;
   text-shadow: 0 0 6px @secondary-title-shadow-color;
   font-weight: 500;
 }
+
 .ant-btn {
   border-width: 3px;
   font-weight: bold;
   font-family: 'Titillium';
   text-transform: uppercase;
+
   &-primary {
     background-color: @btn-primary-bg;
     border-color: @btn-primary-border;
+
     &:hover {
       border-color: @btn-primary-border;
       background-color: @btn-primary-border;
     }
   }
+
   &-danger {
     background-color: @btn-danger-bg;
     border-color: @btn-danger-border;
+
     &:hover {
       border-color: @btn-danger-border;
       background-color: @btn-danger-border;
@@ -37,11 +43,18 @@
   }
 }
 
+.ant-tag {
+  border-radius: @tag-border-radius;
+  border: @tag-border;
+  padding: 4px 15px;
+}
+
 a,
 a:hover,
 a:visited {
   color: @primary-color;
 }
+
 h1,
 h2,
 h3,
@@ -51,6 +64,7 @@ h6 {
   color: @heading-color;
   user-select: none;
 }
+
 .ant-menu-horizontal > .ant-menu-item {
   border-width: 4px;
   margin-top: -3px;
