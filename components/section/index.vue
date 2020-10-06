@@ -60,7 +60,7 @@ export default {
       > .image {
         position: absolute;
         left: 17px;
-        bottom: -5px;
+        bottom: 2px;
         margin-left: @section-margin;
         background-repeat: no-repeat;
         background-position: center;

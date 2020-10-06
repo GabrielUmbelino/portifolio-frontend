@@ -24,10 +24,9 @@
         />
       </div>
     </a-col>
-    <div
-      class="image"
-      v-html="$store.state.header.content.profile_background"
-    />
+    <div class="image">
+      <img src="~/static/images/plantinha.svg" :alt="$t('profile')" />
+    </div>
   </a-row>
 </template>
 

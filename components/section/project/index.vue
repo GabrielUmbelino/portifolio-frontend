@@ -31,10 +31,9 @@
         </a-button>
       </a-col>
     </a-row>
-    <div
-      class="image"
-      v-html="$store.state.header.content.projects_background"
-    />
+    <div class="image">
+      <img src="~/static/images/abaju.svg" :alt="$t('projects')" />
+    </div>
   </div>
 </template>
 

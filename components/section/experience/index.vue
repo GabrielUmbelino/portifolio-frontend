@@ -5,10 +5,9 @@
         <ExperienceTimeline :experiencies="localizedExperiencies" />
       </div>
     </a-col>
-    <div
-      class="image"
-      v-html="$store.state.header.content.experiencies_background"
-    />
+    <div class="image">
+      <img src="~/static/images/canequinha.svg" :alt="$t('experience')" />
+    </div>
   </a-row>
 </template>
 
@@ -67,14 +66,12 @@ export default {
 <style lang="less">
 section .content {
   div.experiencies {
-    margin: auto;
+    padding-bottom: 9.25rem;
     > .image {
       right: 10px;
       left: initial;
       margin-left: 0;
       margin-right: @section-margin;
-      bottom: -7px;
-      z-index: -1;
     }
     .content {
       margin: auto;

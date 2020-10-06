@@ -11,10 +11,9 @@
         <Form @emailSended="onEmailSended" />
       </a-col>
       <a-col class="background" :xs="24" :lg="12" :xl="13">
-        <div
-          class="image"
-          v-html="$store.state.header.content.contact_background"
-        />
+        <div class="image">
+          <img src="~/static/images/nathalia.svg" :alt="$t('contact')" />
+        </div>
       </a-col>
     </a-row>
   </div>
