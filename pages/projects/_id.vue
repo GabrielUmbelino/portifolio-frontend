@@ -4,31 +4,23 @@
       :name="localizedWork.name"
       :background-color="work.backgroundColor"
       :repository="work.repository"
+      :project_link="work.project_link"
       :mock-url="projectImageUrl"
       :is-mobile="isMobile"
     />
     <a-layout class="layout">
       <a-layout-content>
         <div class="content">
-          <a-row type="flex">
-            <a-col
-              v-if="
-                localizedWork.project_roles &&
-                localizedWork.project_roles.length
-              "
-              :xs="24"
-            >
-              <Roles :roles="localizedWork.project_roles" />
+          <a-row>
+            <a-col v-if="projectRoles && projectRoles.length" :xs="24">
+              <Roles :roles="projectRoles" />
             </a-col>
             <a-col
-              v-if="
-                localizedWork.SoftwareAndResources &&
-                localizedWork.SoftwareAndResources.length
-              "
+              v-if="softwareAndResources && softwareAndResources.length"
               :xs="24"
             >
               <SoftwareAndResources
-                :software-and-resources="localizedWork.SoftwareAndResources"
+                :software-and-resources="softwareAndResources"
               />
             </a-col>
             <a-col
@@ -37,22 +29,24 @@
             >
               <Technologies :technologies="work.technologies" />
             </a-col>
-            <a-col v-if="localizedWork.problem" class="description" :xs="24">
-              <h2>
+            <a-col v-if="localizedWork.problem" class="problem" :xs="24">
+              <h4 class="subtitle">
                 {{ $t('problem') }}
-              </h2>
+              </h4>
               <p>
                 {{ localizedWork.problem }}
               </p>
             </a-col>
+            <a-col v-if="projectFeatures && projectFeatures.length" :xs="24">
+              <ProjectFeatures :project-features="projectFeatures" />
+            </a-col>
           </a-row>
         </div>
       </a-layout-content>
-      <ProjectStats :project-stats="localizedWork.projectStats" />
+      <ProjectStats :project-stats="projectStats" />
       <client-only>
         <ProjectImages
-          :mock-url-list="localizedWork.mockUrlList"
-          :is-mobile="isMobile"
+          :mock-url-list="mockUrlList"
           :background-color="work.backgroundColor"
         />
       </client-only>
@@ -70,15 +64,17 @@ import ProjectImages from '~/components/project/project-images'
 import Technologies from '~/components/shared/technologies.js'
 import SoftwareAndResources from '~/components/shared/softwareAndResources.js'
 import Roles from '~/components/shared/roles.js'
+import ProjectFeatures from '~/components/project/project-features'
 
 export default {
   components: {
-    ProjectHeader,
+    Roles,
     Technologies,
     ProjectStats,
     ProjectImages,
+    ProjectHeader,
+    ProjectFeatures,
     SoftwareAndResources,
-    Roles,
   },
   async asyncData({ store }) {
     const { pages: sections } = await post(sectionsQuery.loc.source.body)
@@ -100,8 +96,6 @@ export default {
 
       return {
         categories,
-        mockUrlList: this.mockUrlList,
-        projectStats: this.projectStats,
         name: this.work[`name_${this.lang}`],
         problem: this.work[`problem_${this.lang}`],
       }
@@ -120,13 +114,37 @@ export default {
       return `${apiUrl}${this.work.mockup_image.url}`
     },
     mockUrlList() {
-      const images = this.isMobile ? this.work.mobile_images : this.work.images
-      return images.map(({ url }) => `${apiUrl}${url}`)
+      const images = this.work.mobile_images.length
+        ? this.work.mobile_images
+        : this.work.images
+      return images.map((image) => ({
+        ...image,
+        url: `${apiUrl}${image.url}`,
+      }))
     },
     projectStats() {
       return this.work.project_stats.map((stats) => ({
-        ...stats,
+        id: stats.id,
+        number: stats.number,
         description: stats[`description_${this.lang}`],
+      }))
+    },
+    projectFeatures() {
+      return this.work.project_features.map((feature) => ({
+        id: feature.id,
+        description: feature[`description_${this.lang}`],
+      }))
+    },
+    softwareAndResources() {
+      return this.work.software_and_resources.map((sr) => ({
+        id: sr.id,
+        description: sr[`description_${this.lang}`],
+      }))
+    },
+    projectRoles() {
+      return this.work.project_roles.map((sr) => ({
+        id: sr.id,
+        description: sr[`description_${this.lang}`],
       }))
     },
     lang() {
@@ -166,17 +184,10 @@ export default {
       width: 800px;
       max-width: 100%;
       margin: auto;
-      .ant-row-flex {
+      .ant-row {
         .ant-col {
           margin-bottom: 3.125rem;
-          &.description {
-            h2 {
-              font-size: 2.125rem;
-              text-align: left;
-              font-weight: bold;
-              margin-bottom: 15px;
-              line-height: 52px;
-            }
+          &.problem {
             p {
               margin: 0;
             }

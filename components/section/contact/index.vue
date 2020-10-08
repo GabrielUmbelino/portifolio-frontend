@@ -1,6 +1,6 @@
 <template>
   <div id="contact" class="contact">
-    <a-row>
+    <a-row type="flex" align="bottom">
       <a-col class="form" :xs="24" :lg="12" :xl="11">
         <p v-if="emailSended">
           {{ $t('message_sended') }}
@@ -60,10 +60,8 @@ section > {
         z-index: 0;
         padding: 0;
         > .image {
-          right: 10px;
-          left: initial;
-          bottom: 0;
-          svg {
+          margin: 0 10px;
+          img {
             max-width: 100%;
             margin: auto;
             display: block;

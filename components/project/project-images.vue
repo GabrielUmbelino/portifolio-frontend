@@ -1,9 +1,36 @@
+<template>
+  <a-layout-content
+    v-if="mockUrlList && mockUrlList.length"
+    class="project-images"
+    align="middle"
+    :style="{ background: backgroundColor }"
+  >
+    <a-row>
+      <a-col :xs="24">
+        <div>
+          <carousel
+            navigation-enabled
+            :per-page-custom="[
+              [900, 1],
+              [1200, 2],
+              [1600, 3],
+            ]"
+          >
+            <slide v-for="m of mockUrlList" :key="m.id">
+              <WebMock v-if="m.width > m.height" :image="m.url" />
+              <MobileMock v-else :image="m.url" :show-half="false" />
+            </slide>
+          </carousel>
+        </div>
+      </a-col>
+    </a-row>
+  </a-layout-content>
+</template>
 <script>
 import WebMock from '~/components/project/web-mock'
 import MobileMock from '~/components/project/mobile-mock'
 
 export default {
-  functional: true,
   components: {
     MobileMock,
     WebMock,
@@ -13,57 +40,18 @@ export default {
       type: Array,
       default: () => [],
     },
-    isMobile: {
-      type: Boolean,
-    },
     backgroundColor: {
       type: String,
       default: '',
     },
   },
-  render(h, { props }) {
-    if (!props.mockUrlList || !props.mockUrlList.length) {
-      return
-    }
-
-    const mobileList = props.mockUrlList.map((m) => (
-      <slide>
-        <MobileMock image={m} show-half={false} />
-      </slide>
-    ))
-
-    const imageList = props.mockUrlList.map((m) => (
-      <slide>
-        <WebMock image={m} />
-      </slide>
-    ))
-
-    return (
-      <a-layout-content
-        class="project-images"
-        align="middle"
-        style={{ background: props.backgroundColor }}
-      >
-        <a-row>
-          <a-col xs={24}>
-            <div>
-              <carousel perPage={1}>
-                {props.isMobile ? mobileList : imageList}
-              </carousel>
-            </div>
-          </a-col>
-        </a-row>
-      </a-layout-content>
-    )
-  },
 }
 </script>
 <style lang="less">
 .project-images {
-  max-width: 100%;
   > div {
-    max-width: @layout-header-width;
-    margin: auto;
+    max-width: 100%;
+    margin: 0 34px;
   }
 
   .ant-row {
@@ -75,11 +63,52 @@ export default {
       }
     }
   }
+  .VueCarousel {
+    .VueCarousel-wrapper {
+      margin-top: 70px;
+      margin-bottom: 70px;
+      overflow: hidden;
+    }
 
-  .VueCarousel-wrapper {
-    margin-top: 70px;
-    margin-bottom: 70px;
-    overflow: hidden;
+    .VueCarousel-navigation {
+      &-button {
+        border-width: 3px;
+        font-weight: bold;
+        font-family: 'Titillium';
+        text-transform: uppercase;
+        border: 3px solid @btn-primary-border;
+        background-color: @btn-primary-bg;
+        color: transparent;
+        width: 40px;
+        height: 40px;
+
+        &:hover {
+          border-color: @btn-primary-border;
+          background-color: @btn-primary-border;
+        }
+        &::before {
+          content: '';
+          background-image: url('~static/images/seta.svg');
+          background-repeat: no-repeat;
+          background-position: center;
+          top: 0;
+          left: 0;
+          display: block;
+          padding: 9px 0;
+        }
+      }
+
+      &-prev {
+        margin-left: 6px;
+        &::before {
+          transform: rotateZ(180deg);
+        }
+      }
+
+      &-next {
+        margin-right: 6px;
+      }
+    }
   }
 
   @media (max-width: 768px) {

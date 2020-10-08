@@ -59,7 +59,7 @@ export default {
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      background-image: url('~static/images/mobile_mock.png');
+      background-image: url('~static/images/mobile_mock.svg');
     }
 
     img {

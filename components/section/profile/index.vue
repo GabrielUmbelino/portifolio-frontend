@@ -5,7 +5,7 @@
     </a-col>
     <a-col class="content" :xs="24" :lg="14" :xl="15">
       <div v-if="localizedProfile.interests" class="interests">
-        <h4>
+        <h4 class="subtitle">
           {{ $t('interests') }}
         </h4>
         <span>
@@ -13,15 +13,7 @@
         </span>
       </div>
       <div class="technologies">
-        <h4>
-          {{ $t('technologies') }}
-        </h4>
-        <Tag
-          v-for="t in localizedProfile.technologies"
-          :key="t.id"
-          :name="t.name"
-          :svg-icon="t.svgIcon"
-        />
+        <Technologies :technologies="localizedProfile.technologies" />
       </div>
     </a-col>
     <div class="image">
@@ -31,10 +23,10 @@
 </template>
 
 <script>
-import Tag from '~/components/shared/tag'
+import Technologies from '~/components/shared/technologies.js'
 export default {
   components: {
-    Tag,
+    Technologies,
   },
   props: {
     profile: {
@@ -78,11 +70,9 @@ div.profile {
     > div {
       max-width: 520px;
       margin-bottom: 3.125rem;
-      h4 {
+      h4.subtitle {
         font-size: 1.5rem;
-        font-weight: bold;
         text-transform: uppercase;
-        margin-top: -8px;
       }
       .interests {
         span {

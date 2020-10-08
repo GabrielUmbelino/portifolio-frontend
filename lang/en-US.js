@@ -29,4 +29,6 @@ export default {
   role_in_the_project: 'Roles in the Project',
   software_and_resources: 'Softwares and Resources',
   problem: 'Problem',
+  features: 'Features',
+  project_link: 'Project Link',
 }

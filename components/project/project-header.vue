@@ -15,7 +15,7 @@
               :name="name"
               show-half
             />
-            <WebMock v-else :image="mockUrl" :name="name" />
+            <WebMock v-else :image="mockUrl" :name="name" show-small />
           </div>
         </a-col>
         <a-col
@@ -31,9 +31,18 @@
             type="primary"
             icon="github"
             size="large"
-            @click="repository"
+            @click="openLinkNewTab(repository)"
           >
             {{ $t('see_repository') }}
+          </a-button>
+          <a-button
+            v-if="projectLink"
+            type="primary"
+            icon="link"
+            size="large"
+            @click="openLinkNewTab(projectLink)"
+          >
+            {{ $t('project_link') }}
           </a-button>
         </a-col>
       </a-row>
@@ -59,6 +68,10 @@ export default {
       required: true,
     },
     repository: {
+      type: String,
+      default: null,
+    },
+    projectLink: {
       type: String,
       default: null,
     },
@@ -89,6 +102,11 @@ export default {
       }
     },
   },
+  methods: {
+    openLinkNewTab(url) {
+      window.open(url, '_blank')
+    },
+  },
 }
 </script>
 <style lang="less">
@@ -96,7 +114,7 @@ export default {
   border-bottom: solid @grey-2 6px;
 
   > div {
-    max-width: @layout-header-width;
+    max-width: 800px;
     margin: auto;
   }
 
@@ -124,12 +142,12 @@ export default {
   &.hasMock {
     .mock {
       display: flex;
-      align-items: flex-end;
+      align-items: revert;
       justify-content: flex-end;
       margin: 0;
-      margin-right: 60px;
-      margin-top: 70px;
+      margin-top: 20px;
       max-width: 100%;
+      height: calc(100% - 20px);
     }
 
     .details {

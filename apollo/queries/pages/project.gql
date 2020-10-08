@@ -6,13 +6,14 @@ query Work($id: ID!) {
     problem_en
     problem_pt
     repository
+    project_link
     backgroundColor
     categories {
       description_en
       description_pt
     }
     technologies {
-			name
+      name
       svgIcon
     }
     mockup_image {
@@ -20,7 +21,7 @@ query Work($id: ID!) {
       height
       width
     }
-		thumbnail {
+    thumbnail {
       url
       height
       width
@@ -35,11 +36,26 @@ query Work($id: ID!) {
       height
       width
     }
-		project_stats {
+    project_stats {
       id
       description_pt
       description_en
       number
+    }
+    project_features {
+      id
+      description_pt
+      description_en
+    }
+    software_and_resources {
+      id
+      description_pt
+      description_en
+    }
+    project_roles {
+      id
+      description_pt
+      description_en
     }
   }
 }

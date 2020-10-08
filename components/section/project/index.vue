@@ -110,7 +110,6 @@ div.projects {
       h4 {
         font-size: 1.5rem;
         font-weight: bold;
-        text-transform: uppercase;
         margin-top: -8px;
         margin-bottom: 0.2rem;
       }

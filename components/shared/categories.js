@@ -11,7 +11,7 @@ export default {
 
     return (
       <div class="categories">
-        <h4>{parent.$t('kind')}</h4>
+        <h4 class="subtitle">{parent.$t('kind')}</h4>
         {props.categories.map((t) => (
           <Tag key={t.id} name={t.description} />
         ))}

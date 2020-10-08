@@ -72,6 +72,8 @@ article.gb-vue-timeline-update {
       }
       .gb-vue-timeline-update__title {
         color: @heading-color;
+        font-size: 1.5rem;
+        text-transform: initial;
       }
     }
     p.gb-vue-timeline-update__description {

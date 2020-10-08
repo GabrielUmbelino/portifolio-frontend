@@ -29,4 +29,6 @@ export default {
   role_in_the_project: 'Papéis no Projeto',
   software_and_resources: 'Softwares e Recursos',
   problem: 'Problema',
+  features: 'Funcionalidades',
+  project_link: 'Link do projeto',
 }

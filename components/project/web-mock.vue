@@ -53,7 +53,7 @@ export default {
       background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
-      background-image: url('~static/images/web_mock.png');
+      background-image: url('~static/images/web_mock.svg');
     }
 
     img {
