@@ -7,11 +7,9 @@
       <a-menu-item
         v-for="l in locales"
         :key="l.code"
-        :to="switchLocalePath(locale.code)"
+        :to="switchLocalePath(l.code)"
       >
-        <nuxt-link :to="switchLocalePath(locale.code)">{{
-          locale.name
-        }}</nuxt-link>
+        <nuxt-link :to="switchLocalePath(l.code)">{{ l.name }}</nuxt-link>
       </a-menu-item>
     </a-menu>
   </a-dropdown>
@@ -21,13 +19,13 @@
 export default {
   computed: {
     locales() {
-      if (!this.$i18n && !this.$i18n.locales.length) {
+      if (!this.$i18n.locales && !this.$i18n.locales.length) {
         return []
       }
       return this.$i18n.locales
     },
     locale() {
-      if (!this.$i18n && !this.$i18n.locales.length) {
+      if (!this.$i18n.locales && !this.$i18n.locales.length) {
         return
       }
 

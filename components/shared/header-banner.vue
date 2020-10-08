@@ -80,6 +80,7 @@ export default {
       position: relative;
       width: 214px;
       height: 214px;
+      overflow: hidden;
 
       img {
         position: absolute;
@@ -88,8 +89,7 @@ export default {
         top: 0;
         right: 0;
         bottom: 0;
-        max-width: 70%;
-        max-height: 70%;
+        max-width: 100%;
         height: auto;
         width: auto;
       }
@@ -108,6 +108,7 @@ export default {
 
     > h2 {
       font-size: 2.3rem;
+      text-transform: capitalize;
     }
 
     > span {
