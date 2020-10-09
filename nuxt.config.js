@@ -10,9 +10,9 @@ export default {
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
    */
-  generate: {
-    routes: ['/projects/1', '/projects/2'],
-  },
+  // generate: {
+  //   routes: ['/projects/1', '/projects/2'],
+  // },
   /*
    ** Headers of the page
    ** See https://nuxtjs.org/api/configuration-head
