@@ -11,14 +11,7 @@ export default {
    ** See https://nuxtjs.org/api/configuration-target
    */
   generate: {
-    routes: [
-      '/',
-      '/projects/1',
-      '/projects/2',
-      '/en',
-      '/en/projects/1',
-      '/en/projects/2',
-    ],
+    routes: ['/', '/projects/1', '/projects/2'],
   },
   target: 'server',
   /*
