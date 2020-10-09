@@ -6,9 +6,6 @@ export default {
    ** See https://nuxtjs.org/api/configuration-mode
    */
   mode: 'universal',
-  generate: {
-    routes: ['projects/1', 'projects/2'],
-  },
   /*
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
@@ -69,6 +66,7 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/apollo',
+    '@nuxtjs/router',
     '@nuxtjs/style-resources',
     [
       'nuxt-i18n',
