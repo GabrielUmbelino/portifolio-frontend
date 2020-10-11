@@ -14,10 +14,7 @@ export default {
   generate: {
     routes: async () => {
       const response = await get('works')
-      const projects = response.map((p) => p.id)
-      return new Promise((resolve) => {
-        resolve(projects.map((id) => `/projects/${id}`))
-      })
+      return ['/', ...response.map((p) => `/projects/${p.id}`)]
     },
   },
   /*
@@ -103,7 +100,8 @@ export default {
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: process.env.GRAPHQL_URL,
+        httpEndpoint:
+          process.env.GRAPHQL_URL || 'http://localhost:1337/graphql',
       },
     },
   },
