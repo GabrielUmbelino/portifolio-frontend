@@ -13,6 +13,8 @@ const post = async (query, variables = {}) => {
   return response.data
 }
 
+const get = (contentType) => strapi.request('get', `/${contentType}`)
+
 const sendEmail = async (name, email, message, baseURL) => {
   const emailSettings = await strapi.request(
     'get',
@@ -37,4 +39,4 @@ const sendEmail = async (name, email, message, baseURL) => {
   })
 }
 
-export { apiUrl, post, strapi, sendEmail }
+export { apiUrl, post, get, strapi, sendEmail }

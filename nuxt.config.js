@@ -1,4 +1,5 @@
 import nodeExternals from 'webpack-node-externals'
+import { get } from './utils/Strapi'
 
 export default {
   /*
@@ -10,9 +11,15 @@ export default {
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
    */
-  // generate: {
-  //   routes: ['/projects/1', '/projects/2'],
-  // },
+  generate: {
+    routes: async () => {
+      const response = await get('works')
+      const projects = response.map((p) => p.id)
+      return new Promise((resolve) => {
+        resolve(projects.map((id) => `/projects/${id}`))
+      })
+    },
+  },
   /*
    ** Headers of the page
    ** See https://nuxtjs.org/api/configuration-head
