@@ -8,14 +8,7 @@
     <a-row>
       <a-col :xs="24">
         <div>
-          <carousel
-            navigation-enabled
-            :per-page-custom="[
-              [900, 1],
-              [1200, 2],
-              [1600, 3],
-            ]"
-          >
+          <carousel :navigation-enabled="showNavigation" :per-page="1">
             <slide v-for="m of mockUrlList" :key="m.id">
               <WebMock v-if="m.width > m.height" :image="m.url" />
               <MobileMock v-else :image="m.url" :show-half="false" />
@@ -43,6 +36,11 @@ export default {
     backgroundColor: {
       type: String,
       default: '',
+    },
+  },
+  computed: {
+    showNavigation() {
+      return window.innerWidth > 700
     },
   },
 }
@@ -112,22 +110,21 @@ export default {
   }
 
   @media (max-width: 768px) {
-    .ant-row {
+    display: flex;
+    flex-flow: column-reverse;
+
+    > div {
       display: flex;
-      flex-flow: column-reverse;
+      flex: 1;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      padding-top: 20px;
+      margin: 0;
 
-      .ant-col {
-        display: flex;
-        flex: 1;
-        justify-content: center;
-        align-items: center;
-        padding: 0;
-        padding-top: 20px;
-
-        > .ant-carousel {
-          margin-top: 20px;
-          margin-bottom: 20px;
-        }
+      > .VueCarousel {
+        margin-top: 20px;
+        margin-bottom: 20px;
       }
     }
   }
