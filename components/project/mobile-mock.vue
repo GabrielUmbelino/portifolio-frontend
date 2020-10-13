@@ -37,6 +37,7 @@ export default {
   position: relative;
   width: fit-content;
   margin: auto;
+  margin-bottom: 0;
   max-width: 100%;
 
   &.half {
@@ -56,7 +57,7 @@ export default {
       width: 100%;
       height: 100%;
       position: absolute;
-      background-size: cover;
+      background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
       background-image: url('~static/images/mobile_mock.svg');
@@ -65,8 +66,9 @@ export default {
     img {
       height: auto;
       width: @image-width;
-      padding: 47px 0;
       margin: auto;
+      padding: 10px 0;
+      border-radius: 37px;
     }
   }
 }
