@@ -3,9 +3,7 @@ query {
     id
     description_en
     description_pt
-    order
-    icon_type
-    icon_svg
-    url
+    path
+    hash
   }
 }

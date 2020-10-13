@@ -13,9 +13,5 @@ query {
     header_action_text_en
     header_action_text_pt
     header_action_link
-    profile_background
-    experiencies_background
-    projects_background
-    contact_background
   }
 }
