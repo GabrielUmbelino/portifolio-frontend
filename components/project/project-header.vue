@@ -7,7 +7,7 @@
   >
     <div>
       <a-row>
-        <a-col v-if="mockUrl" :xl="13" :md="14" :sm="24" :xs="24">
+        <a-col v-if="mockUrl" :xl="16" :md="16" :sm="24" :xs="24">
           <div class="mock">
             <MobileMock
               v-if="mockUrl && isMobile"
@@ -15,7 +15,7 @@
               :name="name"
               show-half
             />
-            <WebMock v-else :image="mockUrl" :name="name" show-small />
+            <WebMock v-else :image="mockUrl" :name="name" />
           </div>
         </a-col>
         <a-col
@@ -87,8 +87,8 @@ export default {
     details() {
       if (this.mockUrl) {
         return {
-          xl: 11,
-          md: 10,
+          xl: 8,
+          md: 8,
           sm: 24,
           xs: 24,
         }
