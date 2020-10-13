@@ -55,8 +55,7 @@
 </template>
 
 <script>
-import { post, apiUrl } from '~/utils/Strapi'
-import projectQuery from '~/apollo/queries/pages/project.gql'
+import { post, apiUrl, get } from '~/utils/Strapi'
 import sectionsQuery from '~/apollo/queries/pages/sections.gql'
 import ProjectHeader from '~/components/project/project-header'
 import ProjectStats from '~/components/project/project-stats'
@@ -76,13 +75,17 @@ export default {
     ProjectFeatures,
     SoftwareAndResources,
   },
-  async asyncData({ store }) {
+  async asyncData({ store, payload, params }) {
     const { pages: sections } = await post(sectionsQuery.loc.source.body)
     store.commit(
       'header/setSections',
       sections.sort((a, b) => (a.order < b.order ? -1 : 1))
     )
     store.commit('header/setApiUrl', apiUrl)
+
+    return {
+      work: payload || (await get(`works/${params.id}`)),
+    }
   },
   computed: {
     localizedWork() {
@@ -157,16 +160,6 @@ export default {
         src: 'https://unpkg.com/ionicons@5.0.0/dist/ionicons.js',
       },
     ],
-  },
-  apollo: {
-    // TODO move this request to asyncData
-    work: {
-      prefetch: true,
-      query: projectQuery,
-      variables() {
-        return { id: this.$route.params.id }
-      },
-    },
   },
 }
 </script>

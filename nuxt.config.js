@@ -12,9 +12,13 @@ export default {
    ** See https://nuxtjs.org/api/configuration-target
    */
   generate: {
-    routes: async () => {
-      const response = await get('works')
-      return ['/', ...response.map((p) => `/projects/${p.id}`)]
+    routes() {
+      return get('works').then((response) =>
+        response.map((payload) => ({
+          route: `/projects/${payload.id}`,
+          payload,
+        }))
+      )
     },
   },
   /*
@@ -72,7 +76,6 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/apollo',
-    '@nuxtjs/router',
     '@nuxtjs/style-resources',
     [
       'nuxt-i18n',
