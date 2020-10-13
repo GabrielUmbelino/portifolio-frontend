@@ -13,12 +13,22 @@ export default {
    */
   generate: {
     routes() {
-      return get('works').then((response) =>
-        response.map((payload) => ({
-          route: `/projects/${payload.id}`,
-          payload,
-        }))
-      )
+      return get('works').then((response) => {
+        const routes = []
+        response.forEach((payload) =>
+          routes.push({
+            route: `/projects/${payload.id}`,
+            payload,
+          })
+        )
+        response.forEach((payload) =>
+          routes.push({
+            route: `/en/projects/${payload.id}`,
+            payload,
+          })
+        )
+        return routes
+      })
     },
   },
   /*
