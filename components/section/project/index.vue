@@ -25,7 +25,7 @@
           type="link"
           size="large"
           icon="link"
-          @click="$router.push(`/projects/${p.id}`)"
+          @click="onProjectDetails(p.id)"
         >
           Details
         </a-button>
@@ -70,6 +70,15 @@ export default {
       return apiUrl
     },
   },
+  methods: {
+    onProjectDetails(projectId) {
+      const newPath = this.localePath({
+        path: `/projects/${projectId}`,
+      })
+
+      this.$router.push(newPath)
+    },
+  },
 }
 </script>
 
@@ -87,10 +96,16 @@ div.projects {
   }
   .thumbnail {
     padding: 0;
+    border: solid 2px #dedede;
+    border-radius: 3px;
+    overflow: hidden;
+    width: fit-content;
+
     figure {
       justify-content: left;
       display: flex;
       float: right;
+
       img {
         max-height: 149px;
         max-width: 282px;
@@ -101,22 +116,27 @@ div.projects {
       }
     }
   }
+
   .content {
     padding: 0;
     padding-left: 3.3125rem;
+
     .details {
       max-width: 520px;
       margin-bottom: 0.5rem;
+
       h4 {
         font-size: 1.5rem;
         font-weight: bold;
         margin-top: -8px;
         margin-bottom: 0.2rem;
       }
+
       span {
         font-size: 1.1rem;
       }
     }
+
     .ant-btn {
       padding: 0;
       color: @btn-primary-bg;
@@ -127,14 +147,18 @@ div.projects {
   div.projects {
     padding-right: 0;
     max-width: 100%;
+
     .details {
       padding: 0.5rem 0;
     }
+
     .content {
       padding-left: 2rem;
     }
+
     .thumbnail {
       margin-bottom: @section-margin-mobile;
+
       figure {
         img {
           max-height: 149px;
