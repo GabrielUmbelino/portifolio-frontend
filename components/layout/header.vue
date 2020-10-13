@@ -12,7 +12,7 @@
             <a-menu-item
               v-for="section in localizedSections"
               :key="section.id"
-              @click="(e) => onMenuClicked(e, section.url)"
+              @click="(e) => onMenuClicked(section)"
             >
               <a-icon
                 v-if="section.icon_type"
@@ -65,14 +65,15 @@ export default {
     },
   },
   methods: {
-    onMenuClicked(e, route) {
-      if (this.$route.fullPath !== route) {
-        if (route) {
-          this.$router.push({ path: '/', hash: route })
-        } else {
-          this.$router.push('/')
-        }
-      }
+    onMenuClicked(section) {
+      const newPath = this.localePath({
+        path: section.path,
+        hash: section.hash,
+      })
+
+      this.$router.push({
+        path: newPath,
+      })
     },
   },
 }
