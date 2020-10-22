@@ -6,7 +6,7 @@
     align="middle"
   >
     <a-row>
-      <a-col class="logo" :xl="8" :md="10" :xs="24" align="middle">
+      <a-col class="logo" :xl="8" :md="8" :sm="24" :xs="24" align="middle">
         <figure>
           <img
             v-if="headerContent && headerContent.bannerImage"
@@ -16,9 +16,9 @@
           />
         </figure>
       </a-col>
-      <a-col class="details" :xl="16" :md="14" :xs="24" align="middle">
+      <a-col class="details" :xl="16" :md="16" :sm="24" :xs="24" align="middle">
         <h2 class="secondary-title">{{ localizedHeaderContent.title }}</h2>
-        <span>{{ localizedHeaderContent.description }}</span>
+        <p>{{ localizedHeaderContent.description }}</p>
         <a-button
           v-if="headerContent.header_action_link"
           type="primary"
@@ -99,24 +99,21 @@ export default {
   .details {
     align-content: center;
     padding: 0 20px;
+    text-align: left;
 
-    > * {
-      text-align: left;
-      display: block;
-      float: left;
-    }
-
-    > h2 {
+    h2 {
       font-size: 2.3rem;
       text-transform: capitalize;
     }
 
-    > span {
+    p {
       color: @text-color-dark;
     }
 
-    > .ant-btn-primary {
+    .ant-btn-primary {
       margin-top: 33px;
+      display: block;
+      float: left;
     }
   }
 }

@@ -86,4 +86,12 @@ article.gb-vue-timeline-update.gb-vue-timeline-update--is-last {
     display: none;
   }
 }
+@media (max-width: 990px) {
+  article.gb-vue-timeline-update {
+    div.gb-vue-timeline-update__center {
+      margin-right: 16px;
+      margin-left: 12px;
+    }
+  }
+}
 </style>

@@ -7,7 +7,7 @@
   >
     <div>
       <a-row>
-        <a-col v-if="mockUrl" :xl="16" :lg="16" :xs="24">
+        <a-col v-if="mockUrl" :xl="16" :lg="14" :md="24" :xs="24">
           <div class="mock">
             <MobileMock
               v-if="mockUrl && isMobile"
@@ -22,6 +22,7 @@
           class="details"
           :xl="details.xl"
           :lg="details.lg"
+          :md="details.md"
           :xs="details.xs"
         >
           <h2 class="secondary-title">{{ name }}</h2>
@@ -87,7 +88,8 @@ export default {
       if (this.mockUrl) {
         return {
           xl: 8,
-          lg: 8,
+          lg: 10,
+          md: 24,
           xs: 24,
         }
       }
@@ -150,7 +152,7 @@ export default {
     .details {
       align-items: baseline;
       padding: 150px 0;
-      padding-left: 60px;
+      padding-left: 20px;
 
       h2 {
         text-align: left;
@@ -159,6 +161,9 @@ export default {
   }
 
   @media (max-width: 999px) {
+    > div {
+      margin: auto;
+    }
     .ant-row {
       flex-flow: column-reverse;
       .ant-col {

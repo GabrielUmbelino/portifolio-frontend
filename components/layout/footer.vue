@@ -1,6 +1,6 @@
 <template>
   <a-layout-footer style="text-align: center">
-    Portifolio Boilerplate ©2020
+    Portifólio Gabriel Ferreira Umbelino ©{{ new Date().getFullYear() }}
   </a-layout-footer>
 </template>
 

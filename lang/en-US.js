@@ -26,7 +26,7 @@ export default {
   months_of_development: 'Months of Development',
   team_members: 'Team Members',
   happy_customers: 'Happy Customers',
-  role_in_the_project: 'Roles in the Project',
+  role_in_the_project: 'Roles in the project',
   software_and_resources: 'Softwares and Resources',
   problem: 'Problem',
   features: 'Features',

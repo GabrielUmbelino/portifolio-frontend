@@ -1,5 +1,5 @@
 <template>
-  <a-row class="profile">
+  <a-row class="profile" :class="{ hasVideo: profile.embededVideoUrl }">
     <a-col
       v-if="profile.embededVideoUrl"
       class="video"
@@ -18,7 +18,12 @@
         ></iframe>
       </div>
     </a-col>
-    <a-col class="content" :xs="24" :lg="14" :xl="15">
+    <a-col
+      class="content"
+      :xs="24"
+      :lg="profile.embededVideoUrl ? 14 : 24"
+      :xl="profile.embededVideoUrl ? 15 : 24"
+    >
       <div v-if="localizedProfile.interests" class="interests">
         <h4 class="subtitle">
           {{ $t('interests') }}
@@ -81,31 +86,45 @@ div.profile {
   }
   .content {
     padding: 0 1rem;
-    padding-left: 3.3125rem;
+
+    .interests {
+      padding-bottom: 2rem;
+
+      span {
+        font-size: 1.1rem;
+      }
+    }
+
     > div {
-      max-width: 520px;
-      margin-bottom: 3.125rem;
       h4.subtitle {
         font-size: 1.5rem;
         text-transform: uppercase;
       }
-      .interests {
-        span {
-          font-size: 1.1rem;
-        }
-      }
+
       &:last-child {
         margin-bottom: 0;
       }
     }
   }
-  @media (max-width: 768px) {
-    > div {
-      padding: 0.5rem 0;
-    }
-    .video {
+  .hasVideo {
+    .content {
+      padding: 0 1rem;
+      padding-left: 3.3125rem;
+
       > div {
-        justify-content: center;
+        max-width: 520px;
+        margin-bottom: 3.125rem;
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    .content {
+      padding: 0.5rem 0;
+
+      .video {
+        > div {
+          justify-content: center;
+        }
       }
     }
   }

@@ -36,6 +36,7 @@ export default {
   position: relative;
   width: fit-content;
   margin: auto;
+  margin-bottom: 0;
 
   figure {
     position: relative;

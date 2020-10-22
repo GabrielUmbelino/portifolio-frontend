@@ -1,9 +1,9 @@
 <template>
-  <a-row id="resume" class="experiencies">
+  <a-row class="experiencies">
     <a-col class="content" :lg="22" :xs="24">
       <div>
         <ExperienceTimeline :experiencies="localizedExperiencies" />
-        <a-button type="link" size="large" @click="openResume">
+        <a-button id="resume" type="link" size="large" @click="openResume">
           <ion-icon name="document"></ion-icon>
           {{ $t('see_complete_resume') }}
         </a-button>

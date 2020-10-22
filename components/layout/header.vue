@@ -6,7 +6,6 @@
           <a-menu
             v-if="menu && menu.length"
             mode="horizontal"
-            :default-selected-keys="defaultSectionId"
             :style="{ lineHeight: '64px' }"
           >
             <a-menu-item

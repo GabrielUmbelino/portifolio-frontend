@@ -6,7 +6,7 @@
     <a-layout-content>
       <a-row type="flex">
         <a-col
-          v-for="stat of props.projectStats.splice(0, 3)"
+          v-for="stat of props.projectStats"
           :key="stat.id"
           :xl="8"
           :xs="24"
