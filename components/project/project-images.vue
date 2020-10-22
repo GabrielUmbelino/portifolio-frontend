@@ -8,7 +8,7 @@
     <a-row>
       <a-col :xs="24">
         <div>
-          <carousel :navigation-enabled="showNavigation" :per-page="1">
+          <carousel :navigation-enabled="true" :per-page="1">
             <slide v-for="m of mockUrlList" :key="m.id">
               <WebMock v-if="m.width > m.height" :image="m.url" />
               <MobileMock v-else :image="m.url" :show-half="false" />
@@ -122,9 +122,13 @@ export default {
       padding-top: 20px;
       margin: 0;
 
-      > .VueCarousel {
+      .VueCarousel {
         margin-top: 20px;
         margin-bottom: 20px;
+
+        .VueCarousel-navigation {
+          display: none;
+        }
       }
     }
   }

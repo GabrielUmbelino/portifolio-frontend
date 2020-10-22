@@ -1,9 +1,0 @@
-query {
-  pages {
-    id
-    description_en
-    description_pt
-    path
-    hash
-  }
-}

@@ -1,7 +1,22 @@
 <template>
   <a-row class="profile">
-    <a-col class="video" :xs="24" :lg="10" :xl="9">
-      <div v-html="localizedProfile.presentationVideoUrl" />
+    <a-col
+      v-if="profile.embededVideoUrl"
+      class="video"
+      :xs="24"
+      :lg="10"
+      :xl="9"
+    >
+      <div>
+        <iframe
+          width="560"
+          height="315"
+          :src="profile.embededVideoUrl"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
     </a-col>
     <a-col class="content" :xs="24" :lg="14" :xl="15">
       <div v-if="localizedProfile.interests" class="interests">

@@ -55,8 +55,7 @@
 </template>
 
 <script>
-import { post, apiUrl, get } from '~/utils/Strapi'
-import sectionsQuery from '~/apollo/queries/pages/sections.gql'
+import { apiUrl, get, post } from '~/utils/Strapi'
 import ProjectHeader from '~/components/project/project-header'
 import ProjectStats from '~/components/project/project-stats'
 import ProjectImages from '~/components/project/project-images'
@@ -64,6 +63,7 @@ import Technologies from '~/components/shared/technologies.js'
 import SoftwareAndResources from '~/components/shared/softwareAndResources.js'
 import Roles from '~/components/shared/roles.js'
 import ProjectFeatures from '~/components/project/project-features'
+import contentQuery from '~/apollo/queries/pages/content.gql'
 
 export default {
   components: {
@@ -76,11 +76,9 @@ export default {
     SoftwareAndResources,
   },
   async asyncData({ store, payload, params }) {
-    const { pages: sections } = await post(sectionsQuery.loc.source.body)
-    store.commit(
-      'header/setSections',
-      sections.sort((a, b) => (a.order < b.order ? -1 : 1))
-    )
+    const { headerContent: content } = await post(contentQuery.loc.source.body)
+
+    store.commit('header/setContent', content)
     store.commit('header/setApiUrl', apiUrl)
 
     return {

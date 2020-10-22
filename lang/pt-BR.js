@@ -31,4 +31,6 @@ export default {
   problem: 'Problema',
   features: 'Funcionalidades',
   project_link: 'Link do projeto',
+  see_complete_resume: 'Ver currículo completo',
+  present: 'Presente',
 }

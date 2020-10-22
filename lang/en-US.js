@@ -31,4 +31,6 @@ export default {
   problem: 'Problem',
   features: 'Features',
   project_link: 'Project Link',
+  see_complete_resume: 'See complete resume',
+  present: 'Present',
 }
