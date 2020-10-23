@@ -26,7 +26,11 @@ export default {
   months_of_development: 'Meses de desenvolvimento',
   team_members: 'Membros da equipe',
   happy_customers: 'Clientes Felizes',
-  role_in_the_project: 'Papéis no Projeto',
+  role_in_the_project: 'Papéis no projeto',
   software_and_resources: 'Softwares e Recursos',
   problem: 'Problema',
+  features: 'Funcionalidades',
+  project_link: 'Link do projeto',
+  see_complete_resume: 'Ver currículo completo',
+  present: 'Presente',
 }

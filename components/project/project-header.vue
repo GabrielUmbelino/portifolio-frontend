@@ -7,7 +7,7 @@
   >
     <div>
       <a-row>
-        <a-col v-if="mockUrl" :xl="13" :md="14" :sm="24" :xs="24">
+        <a-col v-if="mockUrl" :xl="16" :lg="14" :md="24" :xs="24">
           <div class="mock">
             <MobileMock
               v-if="mockUrl && isMobile"
@@ -21,8 +21,8 @@
         <a-col
           class="details"
           :xl="details.xl"
+          :lg="details.lg"
           :md="details.md"
-          :sm="details.sm"
           :xs="details.xs"
         >
           <h2 class="secondary-title">{{ name }}</h2>
@@ -31,9 +31,18 @@
             type="primary"
             icon="github"
             size="large"
-            @click="repository"
+            @click="openLinkNewTab(repository)"
           >
             {{ $t('see_repository') }}
+          </a-button>
+          <a-button
+            v-if="projectLink"
+            type="primary"
+            icon="link"
+            size="large"
+            @click="openLinkNewTab(projectLink)"
+          >
+            {{ $t('project_link') }}
           </a-button>
         </a-col>
       </a-row>
@@ -62,6 +71,10 @@ export default {
       type: String,
       default: null,
     },
+    projectLink: {
+      type: String,
+      default: null,
+    },
     mockUrl: {
       type: String,
       default: null,
@@ -74,9 +87,9 @@ export default {
     details() {
       if (this.mockUrl) {
         return {
-          xl: 11,
-          md: 10,
-          sm: 24,
+          xl: 8,
+          lg: 10,
+          md: 24,
           xs: 24,
         }
       }
@@ -89,6 +102,11 @@ export default {
       }
     },
   },
+  methods: {
+    openLinkNewTab(url) {
+      window.open(url, '_blank')
+    },
+  },
 }
 </script>
 <style lang="less">
@@ -96,13 +114,12 @@ export default {
   border-bottom: solid @grey-2 6px;
 
   > div {
-    max-width: @layout-header-width;
+    max-width: 800px;
     margin: auto;
   }
 
   .ant-row {
     display: flex;
-    align-items: stretch;
   }
 
   .details {
@@ -124,18 +141,18 @@ export default {
   &.hasMock {
     .mock {
       display: flex;
-      align-items: flex-end;
+      align-items: revert;
       justify-content: flex-end;
       margin: 0;
-      margin-right: 60px;
-      margin-top: 70px;
+      margin-top: 20px;
       max-width: 100%;
+      height: calc(100% - 20px);
     }
 
     .details {
       align-items: baseline;
       padding: 150px 0;
-      padding-left: 60px;
+      padding-left: 20px;
 
       h2 {
         text-align: left;
@@ -144,25 +161,11 @@ export default {
   }
 
   @media (max-width: 999px) {
-    &.hasMock {
-      .mock {
-        margin-right: 20px;
-      }
-      .details {
-        padding-left: 20px;
-
-        h2 {
-          text-align: center;
-        }
-      }
+    > div {
+      margin: auto;
     }
-  }
-
-  @media (max-width: 768px) {
     .ant-row {
-      display: flex;
       flex-flow: column-reverse;
-
       .ant-col {
         display: flex;
         flex: 1;
@@ -174,6 +177,18 @@ export default {
         > .mock {
           margin: 0;
           margin-top: 20px;
+        }
+      }
+    }
+    &.hasMock {
+      .mock {
+        margin-right: 20px;
+      }
+      .details {
+        padding-left: 20px;
+
+        h2 {
+          text-align: center;
         }
       }
     }

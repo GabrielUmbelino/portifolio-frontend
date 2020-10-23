@@ -11,6 +11,10 @@ export default {
     const svgComponent = {
       template: props.svgIcon,
     }
+    if (!props.svgIcon.includes('<')) {
+      return <ion-icon name={props.svgIcon}></ion-icon>
+    }
+
     return <a-icon component={svgComponent} />
   },
 }

@@ -1,6 +1,6 @@
 <template>
   <div id="contact" class="contact">
-    <a-row>
+    <a-row type="flex" align="bottom">
       <a-col class="form" :xs="24" :lg="12" :xl="11">
         <p v-if="emailSended">
           {{ $t('message_sended') }}
@@ -11,10 +11,9 @@
         <Form @emailSended="onEmailSended" />
       </a-col>
       <a-col class="background" :xs="24" :lg="12" :xl="13">
-        <div
-          class="image"
-          v-html="$store.state.header.content.contact_background"
-        />
+        <div class="image">
+          <img src="~/static/images/nathalia.svg" :alt="$t('contact')" />
+        </div>
       </a-col>
     </a-row>
   </div>
@@ -61,10 +60,8 @@ section > {
         z-index: 0;
         padding: 0;
         > .image {
-          right: 10px;
-          left: initial;
-          bottom: 0;
-          svg {
+          margin: 0 10px;
+          img {
             max-width: 100%;
             margin: auto;
             display: block;

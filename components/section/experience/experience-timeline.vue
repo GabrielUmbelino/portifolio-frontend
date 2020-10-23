@@ -15,8 +15,8 @@ export default {
     return props.experiencies.map((e, i) => (
       <vue-timeline-update
         light={props.theme}
-        dateString={e.period}
-        date={new Date(e.start_date)}
+        dateString={e.period || ''}
+        date={new Date(e.end_date)}
         title={e.company}
         description={e.description}
         icon=""
@@ -72,6 +72,8 @@ article.gb-vue-timeline-update {
       }
       .gb-vue-timeline-update__title {
         color: @heading-color;
+        font-size: 1.5rem;
+        text-transform: initial;
       }
     }
     p.gb-vue-timeline-update__description {
@@ -82,6 +84,14 @@ article.gb-vue-timeline-update {
 article.gb-vue-timeline-update.gb-vue-timeline-update--is-last {
   .gb-vue-timeline-update__line {
     display: none;
+  }
+}
+@media (max-width: 990px) {
+  article.gb-vue-timeline-update {
+    div.gb-vue-timeline-update__center {
+      margin-right: 16px;
+      margin-left: 12px;
+    }
   }
 }
 </style>

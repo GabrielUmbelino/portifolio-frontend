@@ -1,48 +1,24 @@
-<script>
-export default {
-  functional: true,
-  props: {
-    projectPeriod: {
-      type: Number,
-      required: true,
-    },
-    teamSize: {
-      type: Number,
-      required: true,
-    },
-    happyCustomers: {
-      type: Number,
-      required: true,
-    },
-  },
-  render(h, { props, parent }) {
-    if (!props.projectPeriod || !props.teamSize || !props.happyCustomers) {
-      return
-    }
-
-    return (
-      <a-layout class="project-stats">
-        <a-layout-content>
-          <a-row type="flex">
-            <a-col xl={8} xs={24}>
-              <h3 class="primary-title">{props.projectPeriod}</h3>
-              <span> {parent.$t('months_of_development')}</span>
-            </a-col>
-            <a-col xl={8} xs={24}>
-              <h3 class="primary-title">{props.teamSize}</h3>
-              <span> {parent.$t('team_members')}</span>
-            </a-col>
-            <a-col xl={8} xs={24}>
-              <h3 class="primary-title">{props.happyCustomers}</h3>
-              <span> {parent.$t('happy_customers')}</span>
-            </a-col>
-          </a-row>
-        </a-layout-content>
-      </a-layout>
-    )
-  },
-}
-</script>
+<template functional>
+  <a-layout
+    v-if="props.projectStats && props.projectStats.length"
+    class="project-stats"
+  >
+    <a-layout-content>
+      <a-row type="flex">
+        <a-col
+          v-for="stat of props.projectStats"
+          :key="stat.id"
+          :xl="8"
+          :xs="24"
+          :class="`stat-${stat.id}`"
+        >
+          <h3 class="primary-title">{{ stat.number }}</h3>
+          <span> {{ stat.description }}</span>
+        </a-col>
+      </a-row>
+    </a-layout-content>
+  </a-layout>
+</template>
 <style lang="less">
 .project-stats {
   background-color: @heading-color;

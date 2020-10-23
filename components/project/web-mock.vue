@@ -23,12 +23,12 @@ export default {
 }
 </script>
 <style lang="less">
-@image-small-width: 300px;
+@image-small-width: 320px;
 @image-width: 500px;
 @mock-width: @image-width + 40px;
 @mock-small-width: @image-width + 30px;
-@mock-padding: 22px 36px 51px 36px;
-@mock-padding-small: 17px 14px 42px 14px;
+@mock-padding: 12px 12px 116px 12px;
+@mock-padding-small: 7px 8px 74px 8px;
 
 .web-mock {
   overflow: hidden;
@@ -36,6 +36,7 @@ export default {
   position: relative;
   width: fit-content;
   margin: auto;
+  margin-bottom: 0;
 
   figure {
     position: relative;
@@ -53,7 +54,7 @@ export default {
       background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
-      background-image: url('~static/images/web_mock.png');
+      background-image: url('~static/images/web_mock.svg');
     }
 
     img {
@@ -64,7 +65,7 @@ export default {
     }
   }
 
-  @media (max-width: 999px) {
+  @media (max-width: 540px) {
     figure {
       width: @mock-small-width;
       img {

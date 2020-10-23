@@ -1,4 +1,5 @@
 import nodeExternals from 'webpack-node-externals'
+import { get } from './utils/Strapi'
 
 export default {
   /*
@@ -10,7 +11,26 @@ export default {
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
    */
-  target: 'server',
+  generate: {
+    routes() {
+      return get('works').then((response) => {
+        const routes = []
+        response.forEach((payload) =>
+          routes.push({
+            route: `/projects/${payload.id}`,
+            payload,
+          })
+        )
+        response.forEach((payload) =>
+          routes.push({
+            route: `/en/projects/${payload.id}`,
+            payload,
+          })
+        )
+        return routes
+      })
+    },
+  },
   /*
    ** Headers of the page
    ** See https://nuxtjs.org/api/configuration-head
@@ -31,9 +51,6 @@ export default {
   env: {
     API_URL: process.env.API_URL,
     GRAPHQL_URL: process.env.GRAPHQL_URL,
-  },
-  generate: {
-    fallback: 'index.html',
   },
   /*
    ** Global CSS
@@ -69,6 +86,7 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/apollo',
+    '@nuxtjs/style-resources',
     [
       'nuxt-i18n',
       {
@@ -91,12 +109,12 @@ export default {
         lazy: true,
       },
     ],
-    ['@nuxtjs/style-resources'],
   ],
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: 'http://localhost:1337/graphql',
+        httpEndpoint:
+          process.env.GRAPHQL_URL || 'http://localhost:1337/graphql',
       },
     },
   },

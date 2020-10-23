@@ -1,11 +1,31 @@
 <template>
-  <a-row class="profile">
-    <a-col class="video" :xs="24" :lg="10" :xl="9">
-      <div v-html="localizedProfile.presentationVideoUrl" />
+  <a-row class="profile" :class="{ hasVideo: profile.embededVideoUrl }">
+    <a-col
+      v-if="profile.embededVideoUrl"
+      class="video"
+      :xs="24"
+      :lg="10"
+      :xl="9"
+    >
+      <div>
+        <iframe
+          width="560"
+          height="315"
+          :src="profile.embededVideoUrl"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
     </a-col>
-    <a-col class="content" :xs="24" :lg="14" :xl="15">
+    <a-col
+      class="content"
+      :xs="24"
+      :lg="profile.embededVideoUrl ? 14 : 24"
+      :xl="profile.embededVideoUrl ? 15 : 24"
+    >
       <div v-if="localizedProfile.interests" class="interests">
-        <h4>
+        <h4 class="subtitle">
           {{ $t('interests') }}
         </h4>
         <span>
@@ -13,29 +33,20 @@
         </span>
       </div>
       <div class="technologies">
-        <h4>
-          {{ $t('technologies') }}
-        </h4>
-        <Tag
-          v-for="t in localizedProfile.technologies"
-          :key="t.id"
-          :name="t.name"
-          :svg-icon="t.svgIcon"
-        />
+        <Technologies :technologies="localizedProfile.technologies" />
       </div>
     </a-col>
-    <div
-      class="image"
-      v-html="$store.state.header.content.profile_background"
-    />
+    <div class="image">
+      <img src="~/static/images/plantinha.svg" :alt="$t('profile')" />
+    </div>
   </a-row>
 </template>
 
 <script>
-import Tag from '~/components/shared/tag'
+import Technologies from '~/components/shared/technologies.js'
 export default {
   components: {
-    Tag,
+    Technologies,
   },
   props: {
     profile: {
@@ -75,31 +86,45 @@ div.profile {
   }
   .content {
     padding: 0 1rem;
-    padding-left: 3.3125rem;
-    > div {
-      max-width: 520px;
-      margin-bottom: 3.125rem;
-      h4 {
-        font-size: 1.5rem;
-        font-weight: bold;
-        text-transform: uppercase;
-        margin-top: -8px;
-      }
+
+    .interests {
+      padding-bottom: 2rem;
+
       span {
         font-size: 1.1rem;
       }
+    }
+
+    > div {
+      h4.subtitle {
+        font-size: 1.5rem;
+        text-transform: uppercase;
+      }
+
       &:last-child {
         margin-bottom: 0;
       }
     }
   }
-  @media (max-width: 768px) {
-    > div {
-      padding: 0.5rem 0;
-    }
-    .video {
+  .hasVideo {
+    .content {
+      padding: 0 1rem;
+      padding-left: 3.3125rem;
+
       > div {
-        justify-content: center;
+        max-width: 520px;
+        margin-bottom: 3.125rem;
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    .content {
+      padding: 0.5rem 0;
+
+      .video {
+        > div {
+          justify-content: center;
+        }
       }
     }
   }

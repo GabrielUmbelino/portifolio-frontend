@@ -4,31 +4,23 @@
       :name="localizedWork.name"
       :background-color="work.backgroundColor"
       :repository="work.repository"
-      :mock-url="mockUrl"
+      :project_link="work.project_link"
+      :mock-url="projectImageUrl"
       :is-mobile="isMobile"
     />
     <a-layout class="layout">
       <a-layout-content>
         <div class="content">
-          <a-row type="flex">
-            <a-col
-              v-if="
-                localizedWork.project_roles &&
-                localizedWork.project_roles.length
-              "
-              :xs="24"
-            >
-              <Roles :roles="localizedWork.project_roles" />
+          <a-row>
+            <a-col v-if="projectRoles && projectRoles.length" :xs="24">
+              <Roles :roles="projectRoles" />
             </a-col>
             <a-col
-              v-if="
-                localizedWork.SoftwareAndResources &&
-                localizedWork.SoftwareAndResources.length
-              "
+              v-if="softwareAndResources && softwareAndResources.length"
               :xs="24"
             >
               <SoftwareAndResources
-                :software-and-resources="localizedWork.SoftwareAndResources"
+                :software-and-resources="softwareAndResources"
               />
             </a-col>
             <a-col
@@ -37,26 +29,24 @@
             >
               <Technologies :technologies="work.technologies" />
             </a-col>
-            <a-col v-if="localizedWork.problem" class="description" :xs="24">
-              <h2>
+            <a-col v-if="localizedWork.problem" class="problem" :xs="24">
+              <h4 class="subtitle">
                 {{ $t('problem') }}
-              </h2>
+              </h4>
               <p>
                 {{ localizedWork.problem }}
               </p>
             </a-col>
+            <a-col v-if="projectFeatures && projectFeatures.length" :xs="24">
+              <ProjectFeatures :project-features="projectFeatures" />
+            </a-col>
           </a-row>
         </div>
       </a-layout-content>
-      <ProjectStats
-        :project-period="work.project_period"
-        :team-size="work.team_size"
-        :happy-customers="work.happy_customers"
-      />
+      <ProjectStats :project-stats="projectStats" />
       <client-only>
         <ProjectImages
-          :mock-url-list="localizedWork.mockUrlList"
-          :is-mobile="localizedWork.isProjectImagesMobile"
+          :mock-url-list="mockUrlList"
           :background-color="work.backgroundColor"
         />
       </client-only>
@@ -65,32 +55,35 @@
 </template>
 
 <script>
-import { post, apiUrl } from '~/utils/Strapi'
-import projectQuery from '~/apollo/queries/pages/project.gql'
-import sectionsQuery from '~/apollo/queries/pages/sections.gql'
+import { apiUrl, get, post } from '~/utils/Strapi'
 import ProjectHeader from '~/components/project/project-header'
 import ProjectStats from '~/components/project/project-stats'
 import ProjectImages from '~/components/project/project-images'
 import Technologies from '~/components/shared/technologies.js'
 import SoftwareAndResources from '~/components/shared/softwareAndResources.js'
 import Roles from '~/components/shared/roles.js'
+import ProjectFeatures from '~/components/project/project-features'
+import contentQuery from '~/apollo/queries/pages/content.gql'
 
 export default {
   components: {
-    ProjectHeader,
+    Roles,
     Technologies,
     ProjectStats,
     ProjectImages,
+    ProjectHeader,
+    ProjectFeatures,
     SoftwareAndResources,
-    Roles,
   },
-  async asyncData({ store }) {
-    const { pages: sections } = await post(sectionsQuery.loc.source.body)
-    store.commit(
-      'header/setSections',
-      sections.sort((a, b) => (a.order < b.order ? -1 : 1))
-    )
+  async asyncData({ store, payload, params }) {
+    const { headerContent: content } = await post(contentQuery.loc.source.body)
+
+    store.commit('header/setContent', content)
     store.commit('header/setApiUrl', apiUrl)
+
+    return {
+      work: payload || (await get(`works/${params.id}`)),
+    }
   },
   computed: {
     localizedWork() {
@@ -98,28 +91,14 @@ export default {
         return null
       }
 
-      const lang = this.$i18n.locale || this.$i18n.defaultLocale
       const categories = this.work.categories.map((category) => ({
-        description: category[`description_${lang}`],
+        description: category[`description_${this.lang}`],
       }))
-      const isProjectImagesMobile =
-        this.work.mobile_images && this.work.mobile_images.length > 0
-      let mockUrlList = []
-
-      if (isProjectImagesMobile) {
-        mockUrlList = this.work.mobile_images.map(
-          ({ url }) => `${apiUrl}${url}`
-        )
-      } else {
-        mockUrlList = this.work.images.map(({ url }) => `${apiUrl}${url}`)
-      }
 
       return {
-        name: this.work[`name_${lang}`],
-        problem: this.work[`problem_${lang}`],
         categories,
-        isProjectImagesMobile,
-        mockUrlList,
+        name: this.work[`name_${this.lang}`],
+        problem: this.work[`problem_${this.lang}`],
       }
     },
     isMobile() {
@@ -128,12 +107,49 @@ export default {
         this.work.mockup_image.width < this.work.mockup_image.height
       )
     },
-    mockUrl() {
+    projectImageUrl() {
       if (!this.work.mockup_image) {
         return null
       }
 
       return `${apiUrl}${this.work.mockup_image.url}`
+    },
+    mockUrlList() {
+      const images = this.work.mobile_images.length
+        ? this.work.mobile_images
+        : this.work.images
+      return images.map((image) => ({
+        ...image,
+        url: `${apiUrl}${image.url}`,
+      }))
+    },
+    projectStats() {
+      return this.work.project_stats.map((stats) => ({
+        id: stats.id,
+        number: stats.number,
+        description: stats[`description_${this.lang}`],
+      }))
+    },
+    projectFeatures() {
+      return this.work.project_features.map((feature) => ({
+        id: feature.id,
+        description: feature[`description_${this.lang}`],
+      }))
+    },
+    softwareAndResources() {
+      return this.work.software_and_resources.map((sr) => ({
+        id: sr.id,
+        description: sr[`description_${this.lang}`],
+      }))
+    },
+    projectRoles() {
+      return this.work.project_roles.map((sr) => ({
+        id: sr.id,
+        description: sr[`description_${this.lang}`],
+      }))
+    },
+    lang() {
+      return this.$i18n.locale || this.$i18n.defaultLocale
     },
   },
   head: {
@@ -142,16 +158,6 @@ export default {
         src: 'https://unpkg.com/ionicons@5.0.0/dist/ionicons.js',
       },
     ],
-  },
-  apollo: {
-    // TODO move this request to asyncData
-    work: {
-      prefetch: true,
-      query: projectQuery,
-      variables() {
-        return { id: this.$route.params.id }
-      },
-    },
   },
 }
 </script>
@@ -169,17 +175,10 @@ export default {
       width: 800px;
       max-width: 100%;
       margin: auto;
-      .ant-row-flex {
+      .ant-row {
         .ant-col {
           margin-bottom: 3.125rem;
-          &.description {
-            h2 {
-              font-size: 2.125rem;
-              text-align: left;
-              font-weight: bold;
-              margin-bottom: 15px;
-              line-height: 52px;
-            }
+          &.problem {
             p {
               margin: 0;
             }

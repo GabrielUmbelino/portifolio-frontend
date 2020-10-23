@@ -21,7 +21,7 @@ export default {
 .section {
   position: relative;
   height: auto;
-  margin: @section-margin auto;
+  margin: @section-outer-margin auto 0 auto;
   max-width: 1270px;
   &:last-child {
     margin-bottom: (@section-margin / 2);
@@ -31,7 +31,7 @@ export default {
     background-color: @layout-sider-background;
     width: calc(100px + 50%);
     position: absolute;
-    margin-top: -@section-margin;
+    margin-top: -@section-outer-margin;
     margin-left: -50%;
     top: 0;
     left: 0;
@@ -59,9 +59,9 @@ export default {
       padding-bottom: @section-margin;
       > .image {
         position: absolute;
-        left: 17px;
-        bottom: -5px;
-        margin-left: @section-margin;
+        left: 10px;
+        bottom: 2px;
+        margin-left: @section-outer-margin;
         background-repeat: no-repeat;
         background-position: center;
         display: block;

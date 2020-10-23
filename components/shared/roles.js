@@ -5,13 +5,13 @@ export default {
   },
   functional: true,
   render(h, { props, parent }) {
-    if (!props.categories || !props.categories.length) {
+    if (!props.roles || !props.roles.length) {
       return
     }
 
     return (
       <div class="role">
-        <h4>{parent.$t('role_in_the_project')}</h4>
+        <h4 class="subtitle">{parent.$t('role_in_the_project')}</h4>
         {props.roles.map((t) => (
           <Tag key={t.id} name={t.description} />
         ))}

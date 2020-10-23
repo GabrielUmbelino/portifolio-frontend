@@ -4,27 +4,17 @@
       <a-row type="flex" justify="space-between">
         <a-col class="gutter-row menu-items" :xs="20" align="left">
           <a-menu
-            v-if="sections && sections.length"
+            v-if="menu && menu.length"
             mode="horizontal"
-            :default-selected-keys="defaultSectionId"
             :style="{ lineHeight: '64px' }"
           >
             <a-menu-item
-              v-for="section in localizedSections"
-              :key="section.id"
-              @click="(e) => onMenuClicked(e, section.url)"
+              v-for="m in menu"
+              :key="m.id"
+              @click="(e) => onMenuClicked(m)"
             >
-              <a-icon
-                v-if="section.icon_type"
-                :type="section.icon_type"
-                theme="filled"
-              />
-
-              <SvgIcon
-                v-else-if="section.icon_svg"
-                :svg-icon="section.icon_svg"
-              />
-              {{ section.description }}
+              <ion-icon v-if="m.icon_name" :name="m.icon_name"></ion-icon>
+              {{ m.description }}
             </a-menu-item>
           </a-menu>
         </a-col>
@@ -37,42 +27,40 @@
 </template>
 <script>
 import LanguageSwitcher from '~/components/shared/language-switcher'
-import SvgIcon from '~/components/shared/tag/svg-icon'
 
 export default {
   components: {
     LanguageSwitcher,
-    SvgIcon,
   },
   computed: {
-    sections() {
-      return this.$store.state.header.sections
-    },
-    localizedSections() {
-      if (!this.sections || !this.sections.length) {
+    menu() {
+      const { menu } = this.$store.state.header.content
+      if (!menu || !menu.length) {
         return []
       }
 
       const lang = this.$i18n.locale || this.$i18n.defaultLocale
-      return this.sections.map((section) => ({
-        ...section,
-        description: section[`description_${lang}`],
+      return menu.map((m) => ({
+        ...m,
+        description: m[`description_${lang}`],
       }))
     },
     defaultSectionId() {
-      const [firstSection] = this.localizedSections
-      return [firstSection.id]
+      return this.menu
+        .filter(({ path, hash }) => `${path}${hash}` === this.$route.fullPath)
+        .map((m) => m.id)
     },
   },
   methods: {
-    onMenuClicked(e, route) {
-      if (this.$route.fullPath !== route) {
-        if (route) {
-          this.$router.push({ path: '/', hash: route })
-        } else {
-          this.$router.push('/')
-        }
-      }
+    onMenuClicked(section) {
+      const newPath = this.localePath({
+        path: section.path,
+        hash: section.hash,
+      })
+
+      this.$router.push({
+        path: newPath,
+      })
     },
   },
 }

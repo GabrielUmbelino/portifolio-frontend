@@ -11,7 +11,7 @@ export default {
 
     return (
       <div class="technologies">
-        <h4>{parent.$t('technologies')}</h4>
+        <h4 class="subtitle">{parent.$t('technologies')}</h4>
         {props.technologies.map((t) => (
           <Tag key={t.id} name={t.name} svg-icon={t.svgIcon} />
         ))}

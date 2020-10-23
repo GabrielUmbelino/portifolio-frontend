@@ -1,11 +1,11 @@
 query {
   profile {
     id # Or _id if you are using MongoDB
-		interests_en
+    interests_en
     interests_pt
-    presentationVideoUrl
+    embededVideoUrl
     technologies {
-			name
+      name
       svgIcon
     }
   }

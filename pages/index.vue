@@ -31,7 +31,6 @@ import Contact from '~/components/section/contact'
 import profileQuery from '~/apollo/queries/pages/profile.gql'
 import projectsQuery from '~/apollo/queries/pages/projects.gql'
 import experienciesQuery from '~/apollo/queries/pages/experiencies.gql'
-import sectionsQuery from '~/apollo/queries/pages/sections.gql'
 import contentQuery from '~/apollo/queries/pages/content.gql'
 
 export default {
@@ -47,13 +46,8 @@ export default {
     const { profile } = await post(profileQuery.loc.source.body)
     const { experiencies } = await post(experienciesQuery.loc.source.body)
     const { works: projects } = await post(projectsQuery.loc.source.body)
-    const { pages: sections } = await post(sectionsQuery.loc.source.body)
     const { headerContent: content } = await post(contentQuery.loc.source.body)
 
-    store.commit(
-      'header/setSections',
-      sections.sort((a, b) => (a.order < b.order ? -1 : 1))
-    )
     store.commit('header/setContent', content)
     store.commit('header/setApiUrl', apiUrl)
 
