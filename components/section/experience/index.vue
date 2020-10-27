@@ -1,5 +1,5 @@
 <template>
-  <a-row class="experiencies">
+  <a-row v-if="experiencies && experiencies.length" class="experiencies">
     <a-col class="content" :lg="22" :xs="24">
       <div>
         <ExperienceTimeline :experiencies="localizedExperiencies" />
@@ -16,8 +16,15 @@
 </template>
 
 <script>
+import vue from 'vue'
+import VueMoment from 'vue-moment'
+import moment from 'moment'
+import humanizeDuration from 'humanize-duration'
 import ExperienceTimeline from '~/components/section/experience/experience-timeline'
 import { apiUrl } from '~/utils/Strapi'
+
+vue.use(VueMoment, { moment })
+
 export default {
   components: {
     ExperienceTimeline,
@@ -34,15 +41,17 @@ export default {
         return []
       }
       const lang = this.$i18n.locale || this.$i18n.defaultLocale
+      const locale = this.$i18n.locale === 'pt' ? 'pt-br' : 'en-us'
+      this.$moment.locale(locale)
+
       return this.experiencies
         .map((experience) => {
-          const isOlderThanNow =
-            new Date(experience.end_date).getTime() < new Date().getTime()
-
           return {
             ...experience,
-            end_date: experience.end_date,
-            period: !isOlderThanNow && this.$t('present'),
+            period: this.timeToPeriod(
+              experience.start_date,
+              experience.end_date
+            ),
             description: experience[`description_${lang}`],
             job_title: experience[`job_title_${lang}`],
           }
@@ -56,6 +65,32 @@ export default {
       const resumeBR = '/uploads/CV-PT-Gabriel-Umbelino_825135ae6f.pdf'
       const resume = this.$i18n.locale === 'pt' ? resumeBR : resumeEN
       return window.open(apiUrl + resume, '_blank')
+    },
+    timeToPeriod(startDateTime, endDateTime) {
+      const startDate = this.$moment(startDateTime)
+      const endDate = this.$moment(endDateTime)
+      const startYear = startDate.format('YYYY')
+      const endYear = endDate.format('YYYY')
+      const period = this.$moment.duration(endDate.diff(startDate))
+
+      const periodFormatted = humanizeDuration(period, {
+        largest: 2,
+        units: ['y', 'mo'],
+        language: this.$i18n.locale === 'pt' ? 'pt' : 'en',
+        round: true,
+        conjunction: ` ${this.$t('and')} `,
+        serialComma: false,
+      })
+
+      const isOlderThanNow = endDate.diff(this.$moment())
+
+      if (isOlderThanNow > 0) {
+        return `${startYear} - ${this.$t('present')} (${periodFormatted})`
+      } else if (isOlderThanNow === 0) {
+        return `${startYear} - ${this.$t('present')}`
+      }
+
+      return `${startYear} - ${endYear} (${periodFormatted})`
     },
   },
 }

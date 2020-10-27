@@ -27,17 +27,24 @@ export default {
 .ant-tag {
   margin-right: 0.9rem;
   margin-bottom: 0.45rem;
+  height: 36px;
   > * {
     min-height: 20px;
     display: block;
     float: left;
     line-height: 14px;
   }
-  .anticon {
-    padding: 3px 3px;
+  .anticon,
+  .md.hydrated {
+    height: 22px;
+    svg {
+      margin: 2px auto;
+    }
   }
+
   span {
-    padding: 3px 3px;
+    padding: 2px 3px;
+    line-height: 18px;
   }
 }
 </style>

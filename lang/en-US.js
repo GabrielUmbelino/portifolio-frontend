@@ -21,6 +21,7 @@ export default {
   problem_sending_message: 'Problem to send message',
   message_sent_successfully: 'Mensagem sent successfully!',
   see_project: 'See Project',
+  project: 'Project',
   see_repository: 'See Repository',
   kind: 'Kind',
   months_of_development: 'Months of Development',
@@ -33,4 +34,6 @@ export default {
   project_link: 'Project Link',
   see_complete_resume: 'See complete resume',
   present: 'Present',
+  gabriels_portifolio: "Gabriel Ferreira Umbelino's Portifolio",
+  and: 'and',
 }

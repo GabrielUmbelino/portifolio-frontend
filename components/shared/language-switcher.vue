@@ -1,7 +1,8 @@
 <template>
   <a-dropdown>
     <a class="ant-dropdown-link" @click="(e) => e.preventDefault()">
-      {{ locale.name }} <a-icon type="down" />
+      {{ locale.name }}
+      <ion-icon slot="icon" name="caret-down-outline"></ion-icon>
     </a>
     <a-menu slot="overlay">
       <a-menu-item
@@ -36,3 +37,17 @@ export default {
   },
 }
 </script>
+
+<style lang="less">
+.language-switcher {
+  a.ant-dropdown-link {
+    color: @text-color;
+    font-weight: 500;
+    font-family: 'Cabin';
+    .hydrated {
+      color: @primary-color;
+      margin: 0 0 -2px 2px;
+    }
+  }
+}
+</style>

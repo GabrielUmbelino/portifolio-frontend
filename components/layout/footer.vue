@@ -1,6 +1,6 @@
 <template>
   <a-layout-footer style="text-align: center">
-    Portifólio Gabriel Ferreira Umbelino ©{{ new Date().getFullYear() }}
+    {{ $t('gabriels_portifolio') }} ©{{ new Date().getFullYear() }}
   </a-layout-footer>
 </template>
 

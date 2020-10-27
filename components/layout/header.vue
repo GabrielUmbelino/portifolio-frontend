@@ -81,6 +81,11 @@ export default {
     height: 100%;
     .ant-menu-horizontal {
       border: none;
+      .ant-menu-item {
+        .md.hydrated {
+          margin-bottom: -2.5px;
+        }
+      }
     }
   }
 }

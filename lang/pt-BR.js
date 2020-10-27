@@ -21,6 +21,7 @@ export default {
   problem_sending_message: 'Problema ao enviar mensagem',
   message_sent_successfully: 'Mensagem enviada com sucesso!',
   see_project: 'Ver Projeto',
+  project: 'Projeto',
   see_repository: 'Ver Repositório',
   kind: 'Tipo',
   months_of_development: 'Meses de desenvolvimento',
@@ -33,4 +34,6 @@ export default {
   project_link: 'Link do projeto',
   see_complete_resume: 'Ver currículo completo',
   present: 'Presente',
+  gabriels_portifolio: 'Portifólio Gabriel Ferreira Umbelino',
+  and: 'e',
 }

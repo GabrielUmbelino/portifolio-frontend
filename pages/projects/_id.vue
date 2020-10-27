@@ -152,12 +152,17 @@ export default {
       return this.$i18n.locale || this.$i18n.defaultLocale
     },
   },
-  head: {
-    script: [
-      {
-        src: 'https://unpkg.com/ionicons@5.0.0/dist/ionicons.js',
-      },
-    ],
+  head() {
+    return {
+      title: this.localizedWork.name,
+      description: this.localizedWork.description,
+      meta: [{ property: 'og:image', content: this.projectImageUrl }],
+      script: [
+        {
+          src: 'https://unpkg.com/ionicons@5.0.0/dist/ionicons.js',
+        },
+      ],
+    }
   },
 }
 </script>

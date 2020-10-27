@@ -49,6 +49,6 @@ describe('Project Features', () => {
         projectFeatures: [],
       },
     })
-    expect(wrapper.isEmpty()).toBe(true)
+    expect(wrapper.exists()).toBe(true)
   })
 })

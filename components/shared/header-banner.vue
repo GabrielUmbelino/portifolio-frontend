@@ -104,6 +104,7 @@ export default {
     h2 {
       font-size: 2.3rem;
       text-transform: capitalize;
+      margin-bottom: 0;
     }
 
     p {

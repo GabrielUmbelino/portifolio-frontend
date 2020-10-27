@@ -36,11 +36,11 @@
             {{ $t('see_repository') }}
           </a-button>
           <a-button
-            v-if="projectLink"
+            v-if="project_link"
             type="primary"
             icon="link"
             size="large"
-            @click="openLinkNewTab(projectLink)"
+            @click="openLinkNewTab(project_link)"
           >
             {{ $t('project_link') }}
           </a-button>
@@ -71,7 +71,7 @@ export default {
       type: String,
       default: null,
     },
-    projectLink: {
+    project_link: {
       type: String,
       default: null,
     },

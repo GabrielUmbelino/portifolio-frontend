@@ -55,14 +55,35 @@ export default {
       profile,
       experiencies,
       projects,
+      content,
     }
   },
-  head: {
-    script: [
-      {
-        src: 'https://unpkg.com/ionicons@5.0.0/dist/ionicons.js',
-      },
-    ],
+  computed: {
+    ogImage() {
+      if (!this.content || !this.content.bannerImage) {
+        return ''
+      }
+      return `${apiUrl}${this.content.bannerImage.url}`
+    },
+    description() {
+      const lang = this.$i18n.locale || this.$i18n.defaultLocale
+      if (!this.profile) {
+        return ''
+      }
+
+      return this.profile[`interests_${lang}`]
+    },
+  },
+  head() {
+    return {
+      title: this.$t('gabriels_portifolio'),
+      meta: [{ property: 'og:image', content: this.ogImage }],
+      script: [
+        {
+          src: 'https://unpkg.com/ionicons@5.0.0/dist/ionicons.js',
+        },
+      ],
+    }
   },
 }
 </script>
