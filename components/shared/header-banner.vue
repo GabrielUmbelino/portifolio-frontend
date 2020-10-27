@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     navigateToActionLink() {
-      this.$router.push({ path: '/' + this.headerContent.header_action_text })
+      this.$router.push({ path: '/' + this.headerContent.header_action_link })
     },
   },
 }
