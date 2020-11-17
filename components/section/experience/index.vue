@@ -71,7 +71,10 @@ export default {
       const endDate = this.$moment(endDateTime)
       const startYear = startDate.format('YYYY')
       const endYear = endDate.format('YYYY')
-      const period = this.$moment.duration(endDate.diff(startDate))
+      const isOlderThanNow = endDate.diff(this.$moment())
+      const period = isOlderThanNow
+        ? this.$moment.duration(this.$moment().diff(startDate))
+        : this.$moment.duration(endDate.diff(startDate))
 
       const periodFormatted = humanizeDuration(period, {
         largest: 2,
@@ -81,8 +84,6 @@ export default {
         conjunction: ` ${this.$t('and')} `,
         serialComma: false,
       })
-
-      const isOlderThanNow = endDate.diff(this.$moment())
 
       if (isOlderThanNow > 0) {
         return `${startYear} - ${this.$t('present')} (${periodFormatted})`
