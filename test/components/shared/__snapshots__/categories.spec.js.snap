@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Project Stats Do not render when categories are [] 1`] = `<!---->`;
+
+exports[`Project Stats Do not render when categories are null 1`] = `<!---->`;
+
+exports[`Project Stats Do not render when categories are undefined 1`] = `<!---->`;
+
+exports[`Project Stats Render categories with values 1`] = `
+<div
+  class="categories"
+>
+  <h4
+    class="subtitle"
+  >
+    Gabriel tomando um pau dos testes
+  </h4>
+  <span
+    class="ant-tag tag"
+  >
+    <span>
+      Foo Bar
+    </span>
+  </span>
+</div>
+`;
