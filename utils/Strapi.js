@@ -1,6 +1,7 @@
 import Strapi from 'strapi-sdk-javascript/build/main'
-const apiUrl = process.env.API_URL || 'http://localhost:1337'
-const strapi = new Strapi(apiUrl)
+const localApiUrl = process.env.API_URL || 'http://localhost:1337'
+const apiUrl = 'https://portifolio-gabrielu.herokuapp.com'
+const strapi = new Strapi(localApiUrl)
 
 const post = async (query, variables = {}) => {
   const response = await strapi.request('post', '/graphql', {

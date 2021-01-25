@@ -21,7 +21,7 @@ import VueMoment from 'vue-moment'
 import moment from 'moment'
 import humanizeDuration from 'humanize-duration'
 import ExperienceTimeline from '~/components/section/experience/experience-timeline'
-import { apiUrl } from '~/utils/Strapi'
+import { apiUrl } from '~/utils/Strapi.js'
 
 vue.use(VueMoment, { moment })
 
