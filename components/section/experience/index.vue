@@ -10,7 +10,7 @@
       </div>
     </a-col>
     <div class="image">
-      <img src="~/static/images/canequinha.svg" :alt="$t('experience')" />
+      <img src="~/static/images/canequinha_dark.svg" :alt="$t('experience')" />
     </div>
   </a-row>
 </template>

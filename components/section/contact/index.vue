@@ -12,7 +12,7 @@
       </a-col>
       <a-col class="background" :xs="24" :lg="12" :xl="13">
         <div class="image">
-          <img src="~/static/images/nathalia.svg" :alt="$t('contact')" />
+          <img src="~/static/images/nathalia_dark.svg" :alt="$t('contact')" />
         </div>
       </a-col>
     </a-row>
