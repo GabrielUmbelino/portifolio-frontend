@@ -17,11 +17,13 @@ const post = async (query, variables = {}) => {
 const get = (contentType) => strapi.request('get', `/${contentType}`)
 
 const sendEmail = async (name, email, message, baseURL) => {
-  const emailSettings = await strapi.request(
+  const mailStrapi = new Strapi(apiUrl)
+
+  const emailSettings = await mailStrapi.request(
     'get',
     `/email/settings/production`
   )
-  return await strapi.request('post', '/email', {
+  return await mailStrapi.request('post', '/email', {
     baseURL,
     data: {
       to: emailSettings.config.sendmail_default_from,
