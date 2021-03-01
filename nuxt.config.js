@@ -7,7 +7,7 @@ export default {
    ** See https://nuxtjs.org/api/configuration-mode
    */
   mode: 'universal',
-  target: 'server',
+  target: 'static',
   /*
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
