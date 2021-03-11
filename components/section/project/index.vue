@@ -32,7 +32,7 @@
       </a-col>
     </a-row>
     <div class="image">
-      <img src="~/static/images/abaju_dark.svg" :alt="$t('projects')" />
+      <img src="~/static/images/abaju.svg" :alt="$t('projects')" />
     </div>
   </div>
 </template>

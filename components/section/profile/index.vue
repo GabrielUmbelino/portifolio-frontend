@@ -37,7 +37,7 @@
       </div>
     </a-col>
     <div class="image">
-      <img src="~/static/images/plantinha_dark.svg" :alt="$t('profile')" />
+      <img src="~/static/images/plantinha.svg" :alt="$t('profile')" />
     </div>
   </a-row>
 </template>
